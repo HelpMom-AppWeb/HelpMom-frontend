@@ -1,5 +1,4 @@
-# Vue 3 + Vite
+## HELP MOM by WebExperts
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+HelpMom es una plataforma digital diseñada para acompañar y cuidar a madres gestantes y primerizas en cada etapa de su embarazo y en los primeros meses de vida del bebé. Su nombre, una fusión de las palabras “Help” (ayuda) y
+“Mom” (mamá), refleja nuestro propósito: ofrecer apoyo integral a través de atención médica personalizada desde la comodidad del hogar.
