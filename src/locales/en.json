@@ -1,12 +1,12 @@
 {
-  "appointments": {
-    "title": "Medical Appointments",
-    "doctor": "Doctor",
-    "specialty": "Specialty",
-    "date": "Date",
-    "time": "Time",
-    "description": "Description",
-    "schedule": "Schedule Appointment",
-    "cancel": "Cancel"
+  "option": {
+    "home": "Home",
+    "about": "About",
+    "categories": "Categories"
+  },
+  "authoring-phrase": {
+    "intro": "Made with",
+    "use": "using",
+    "author": "by {brand} Developer Team"
   }
 }
