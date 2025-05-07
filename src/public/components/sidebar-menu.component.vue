@@ -4,21 +4,22 @@
 
     <Sidebar v-model:visible="visible" position="left" class="custom-sidebar">
       <div class="profile-section">
+
         <img src="/src/assets/logo.jpeg" class="avatar" alt="avatar" />
       </div>
 
       <div class="menu-group">
-        <p class="section-title">MENU</p>
+        <p class="section-title">  MENU</p>
         <router-link to="/dashboard" class="menu-item" :class="{ active: isActive('/dashboard') }">
-          <IconDashboard class="mr-2" /> Dashboard
+          <IconDashboard class="mr-2" />   Dashboard
         </router-link>
         <router-link to="/profile" class="menu-item" :class="{ active: isActive('/profile') }">
-          <IconProfile class="mr-2" /> Profile
+          <IconProfile class="mr-2" />    Profile
         </router-link>
       </div>
 
       <div class="menu-group">
-        <p class="section-title">ANALYTICS</p>
+        <p class="section-title">  ANALYTICS</p>
         <router-link to="/health" class="menu-item" :class="{ active: isActive('/health') }">
           <IconHealth class="mr-2" /> Health Monitoring
         </router-link>
