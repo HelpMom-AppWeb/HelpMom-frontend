@@ -143,22 +143,22 @@ export default defineComponent({
       <div class="info-panels">
         <div class="info-panel">
           <h3>Information about heart rate</h3>
-          <p>{{ healthData.heartRate }}</p>
+          <p>Heart rate is the speed of the heartbeat measured by the number of contractions of the heart per minute. A normal resting heart rate for adults ranges from 60 to 100 beats per minute.</p>
         </div>
 
         <div class="info-panel">
           <h3>Information about temperature</h3>
-          <p>{{ healthData.temperature }}</p>
+          <p>Body temperature is a measure of the body's ability to generate and get rid of heat. Normal body temperature ranges from 97.8°F (36.5°C) to 99°F (37.2°C).</p>
         </div>
 
         <div class="info-panel">
           <h3>Information about weight</h3>
-          <p>{{ healthData.weight }}</p>
+          <p>Body weight is a measurement of the force exerted by gravity on an object. Weight is commonly measured in pounds in the US and kilograms in most other countries.</p>
         </div>
 
         <div class="info-panel">
           <h3>Information about oxygen saturation</h3>
-          <p>{{ healthData.oxygen }}</p>
+          <p>Oxygen saturation is a measure of how much oxygen the blood is carrying as a percentage of the maximum it could carry. Normal SpO2 levels are between 95% and 100%.</p>
         </div>
       </div>
     </div>
