@@ -1,16 +1,14 @@
+<!-- src/App.vue -->
 <template>
   <div id="app">
-    <!-- Language switcher visible siempre -->
-
-
-    <!-- Puedes mover esto según tu diseño general -->
-    <HealthMonitoring />
+    <sidebar-menu></sidebar-menu>
+    <router-view />
   </div>
 </template>
 
 <script>
-//import LanguageSwitcher from "./public/components/language-switcher.component.vue";
-import HealthMonitoring from "./health-monitoring/pages/health-monitoring.component.vue" // Ajusta el path si es necesario
+
+import SidebarMenu from "./public/components/sidebar-menu.component.vue";
 
 export default {
   name: 'app',
@@ -30,5 +28,5 @@ export default {
       this.drawer = !this.drawer;
     }
   }
-};
+}
 </script>

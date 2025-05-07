@@ -1,5 +1,7 @@
 import HomeComponent from "../public/pages/home.component.vue";
 import {createRouter, createWebHistory} from "vue-router";
+import DashboardComponent from "../public/pages/dashboard.component.vue";
+
 
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
 const HealthMonitoringComponent = () => import('../health-monitoring/pages/health-monitoring.component.vue')
@@ -7,6 +9,7 @@ const HealthMonitoringComponent = () => import('../health-monitoring/pages/healt
 const routes = [
     { path: '/home',            name: 'home',       component: HomeComponent,           meta: { title: 'Home' } },
     { path: '/',                name: 'default',    redirect: '/home'  },
+    {path: '/dashboard',        name: 'dashboard', component: DashboardComponent, meta: { title: 'Dashboard' }},
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: PageNotFoundComponent,   meta: { title: 'Page not found' } },
 ];
 
