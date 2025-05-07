@@ -98,8 +98,8 @@ export default {
   margin: 1rem;
 }
 
-.custom-sidebar .p-sidebar {
-  width: 4000px; /* o cualquier ancho deseado */
+.custom-sidebar{
+  width: 4000px;
 }
 
 .profile-section {
