@@ -1,11 +1,21 @@
+<!-- src/App.vue -->
 <template>
   <div id="app">
-    <router-view></router-view>
+    <sidebar-menu></sidebar-menu>
+    <router-view />
   </div>
 </template>
 
 <script>
+
+import SidebarMenu from "./public/components/sidebar-menu.component.vue";
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    SidebarMenu
+
+
+  }
 }
 </script>
