@@ -1,0 +1,12 @@
+{
+  "appointments": {
+    "title": "Citas Médicas",
+    "doctor": "Médico",
+    "specialty": "Especialidad",
+    "date": "Fecha",
+    "time": "Hora",
+    "description": "Descripción",
+    "schedule": "Programar Cita",
+    "cancel": "Cancelar"
+  }
+}
