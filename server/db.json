@@ -1,0 +1,21 @@
+{
+  "appointments": [
+    {
+      "id": 1,
+      "doctor": "Dr. Smith",
+      "specialty": "Pediatría",
+      "date": "2025-05-25",
+      "time": "10:00",
+      "description": "Regular checkup",
+      "doctorId": 1
+    },
+    {
+      "id": 2,
+      "doctor": "Dr. Johnson",
+      "specialty": "Ginecología",
+      "date": "2025-06-06",
+      "time": "14:30",
+      "description": "Consulta de rutina"
+    }
+  ]
+}

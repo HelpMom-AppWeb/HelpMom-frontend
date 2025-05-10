@@ -1,0 +1,12 @@
+{
+  "appointments": {
+    "title": "Medical Appointments",
+    "doctor": "Doctor",
+    "specialty": "Specialty",
+    "date": "Date",
+    "time": "Time",
+    "description": "Description",
+    "schedule": "Schedule Appointment",
+    "cancel": "Cancel"
+  }
+}

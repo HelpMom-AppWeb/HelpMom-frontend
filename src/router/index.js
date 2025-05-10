@@ -1,11 +1,11 @@
 import HomeComponent from "../public/pages/home.component.vue";
 import {createRouter, createWebHistory} from "vue-router";
+import AppointmentComponent from "../appointment/pages/appointment.component.vue";
 
-const AboutComponent = () => import('../public/pages/about.component.vue');
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
 const routes = [
     { path: '/home',            name: 'home',       component: HomeComponent,           meta: { title: 'Home' } },
-    { path: '/about',           name: 'about',      component: AboutComponent,          meta: { title: 'About us' } },
+    { path: '/appointments', name: 'appointments', component: AppointmentComponent, meta: { title: 'Medical Appointments' } },
     { path: '/',                name: 'default',    redirect: '/home'  },
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: PageNotFoundComponent,   meta: { title: 'Page not found' } },
 ];
