@@ -49,10 +49,10 @@ const calendarOptions = ref({
       summary: 'Detalles de la cita',
       detail: `
         Doctor: ${info.event.extendedProps.doctor}
-        Especialidad: ${info.event.extendedProps.specialty}
-        Fecha: ${info.event.start.toLocaleDateString()}
-        Hora: ${info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-        Descripción: ${info.event.extendedProps.description || 'N/A'}
+        Specialty: ${info.event.extendedProps.specialty}
+        Date: ${info.event.start.toLocaleDateString()}
+        Time: ${info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+        Description: ${info.event.extendedProps.description || 'N/A'}
       `,
       life: 5000
     });
