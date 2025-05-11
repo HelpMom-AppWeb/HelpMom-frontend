@@ -8,9 +8,9 @@ const appointments = ref([]);
 const showForm = ref(false);
 const selectedDate = ref(new Date());
 const doctors = ref([
-  { id: 1, name: "Dr. Smith", specialty: "Pediatría" },
-  { id: 2, name: "Dr. Johnson", specialty: "Ginecología" },
-  { id: 3, name: "Dr. Williams", specialty: "Cardiología" }
+  { id: 1, name: "Dr. Smith", specialty: "Pediatrics" },
+  { id: 2, name: "Dr. Johnson", specialty: "Gynecology" },
+  { id: 3, name: "Dr. Williams", specialty: "Cardiology" }
 ]);
 
 const fetchAppointments = async () => {

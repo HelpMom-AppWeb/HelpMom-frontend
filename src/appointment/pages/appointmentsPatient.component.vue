@@ -91,16 +91,36 @@ const fetchAppointments = async () => {
       detail: 'Error al cargar citas',
       life: 5000
     });
-    // Cargar datos dummy si falla la API
     appointments.value = [
       {
-        id: 1,
-        doctor: "Dr. Smith",
-        specialty: "Pediatría",
-        date: "2025-05-15",
-        time: "10:00",
-        description: "Control anual",
-        start: "2025-05-15T10:00:00"
+        "id": 1,
+        "doctor": "Dr. Smith",
+        "specialty": "Pediatrics",
+        "date": "2025-05-15",
+        "time": "10:00",
+        "description": "Anual control",
+        "patientId": 1,
+        "patientName": "Juan Pérez"
+      },
+      {
+        "id": 1,
+        "doctor": "Dr. Johnson",
+        "specialty": "Gynecology",
+        "date": "2025-05-20",
+        "time": "14:30",
+        "description": "Consulta de rutina",
+        "patientId": 1,
+        "patientName": "Juan Pérez"
+      },
+      {
+        "id": 1,
+        "doctor": "Dr. Williams",
+        "specialty": "Cardiology",
+        "date": "2025-06-10",
+        "time": "11:00",
+        "description": "Electrocardiograma",
+        "patientId": 1,
+        "patientName": "Juan Pérez"
       }
     ];
   } finally {
