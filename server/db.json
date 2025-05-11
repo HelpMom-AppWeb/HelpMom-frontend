@@ -7,15 +7,20 @@
       "date": "2025-05-25",
       "time": "10:00",
       "description": "Regular checkup",
-      "doctorId": 1
+      "doctorId": 1,
+      "patientId": 1,
+      "patientName": "Juan Pérez"
     },
     {
       "id": 2,
       "doctor": "Dr. Johnson",
       "specialty": "Ginecología",
-      "date": "2025-06-06",
+      "date": "2025-05-16",
       "time": "14:30",
-      "description": "Consulta de rutina"
+      "description": "Consulta de rutina",
+      "doctorId": 2,
+      "patientId": 2,
+      "patientName": "María García"
     }
   ]
 }
