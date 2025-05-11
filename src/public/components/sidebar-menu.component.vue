@@ -30,7 +30,7 @@
         <router-link to="/chat" class="menu-item" :class="{ active: isActive('/chat') }">
           <IconChat class="mr-2" /> Chat
         </router-link>
-        <router-link to="/appointments" class="menu-item" :class="{ active: isActive('/appointments') }">
+        <router-link to="/all-appointments" class="menu-item" :class="{ active: isActive('/all-appointments') }">
           <IconCalendar class="mr-2" /> Appointments
         </router-link>
       </div>

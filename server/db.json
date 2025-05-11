@@ -1,0 +1,20 @@
+{
+  "healthData": [
+    {
+      "id": 1,
+      "heartRate": "72",
+      "temperature": "36.5",
+      "weight": "8.5",
+      "oxygen": "98"
+    }
+  ],
+  "medications": [],
+  "messages": [
+    {
+      "id": 1,
+      "user": "Ana",
+      "text": "Hola!",
+      "timestamp": 1715382000000
+    }
+  ]
+}

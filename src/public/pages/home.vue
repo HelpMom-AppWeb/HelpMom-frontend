@@ -5,10 +5,7 @@ export default {
 </script>
 
 <template>
-  <div class="w-full">
-    <h1> Welcome</h1>
-    <p>Welcome to HelpMom</p>
-  </div>
+  <h1>HOME</h1>
 </template>
 
 <style scoped>

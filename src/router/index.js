@@ -1,15 +1,28 @@
-import HomeComponent from "../public/pages/home.component.vue";
+import HomeComponent from "../public/pages/home.vue";
 import {createRouter, createWebHistory} from "vue-router";
-import DashboardComponent from "../public/pages/dashboard.component.vue";
-//import AppointmentComponent from "../appointment/pages/appointment.component.vue";
-//import AppointmentsPatient from '../appointment/pages/appointmentsPatient.component.vue';
+import AppointmentComponent from "../appointment/pages/appointment.component.vue";
+import AppointmentsPatient from '../appointment/pages/appointmentsPatient.component.vue';
+import AllAppointmentsComponent from "../appointment/pages/all-appointments.vue";
+
+//import DashboardComponent from "../public/pages/dashboard.component.vue";
+//import DashboardComponent from "../public/pages/dashboard.component.vue";
 
 
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
+const ChatComponent = () => import('../chat/pages/chat.vue');
+
+const HealthMonitoringComponent = () => import('../health-monitoring/pages/health-monitoring.component.vue')
+
 const routes = [
+    { path: '/home',            name: 'home',       component: HomeComponent,         meta: { title: 'Home' } },
+    { path: '/chat',            name: 'chat',       component: ChatComponent,         meta: { title: 'Chat' } },
+    { path: '/',                name: 'default',    redirect: '/home' },
+    { path: '/:pathMatch(.*)*', name: 'not-found',  component: PageNotFoundComponent, meta: { title: 'Page not found' } },
     { path: '/home',            name: 'home',       component: HomeComponent,           meta: { title: 'Home' } },
-   // { path: '/appointments', name: 'appointments', component: AppointmentComponent, meta: { title: 'Medical Appointments' } },
-    //{ path: '/my-appointments',  name: 'patient-appointments', component: AppointmentsPatient, meta: { title: 'My appointments' } },
+    { path: '/appointments', name: 'appointments', component: AppointmentComponent, meta: { title: 'Medical Appointments' } },
+    { path: '/my-appointments',  name: 'patient-appointments', component: AppointmentsPatient, meta: { title: 'My appointments' } },
+    { path: '/all-appointments', name: 'all-appointments', component: AllAppointmentsComponent, meta: { title: 'All Appointments'}},
+    { path: '/health', name: 'health', component: HealthMonitoringComponent, meta: {title: 'Health Component'}},
     { path: '/',                name: 'default',    redirect: '/home'  },
     {path: '/dashboard',        name: 'dashboard', component: DashboardComponent, meta: { title: 'Dashboard' }},
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: PageNotFoundComponent,   meta: { title: 'Page not found' } },
