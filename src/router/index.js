@@ -2,7 +2,7 @@ import HomeComponent from "../public/pages/home.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import AppointmentComponent from "../appointment/pages/appointment.component.vue";
 import AppointmentsPatient from '../appointment/pages/appointmentsPatient.component.vue';
-import AllAppointmentsComponent from "../public/pages/home.vue";
+import AllAppointmentsComponent from "../appointment/pages/all-appointments.vue";
 
 //import DashboardComponent from "../public/pages/dashboard.component.vue";
 //import DashboardComponent from "../public/pages/dashboard.component.vue";
