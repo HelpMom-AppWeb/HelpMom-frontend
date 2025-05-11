@@ -1,4 +1,3 @@
 {
-  "/appointments": "/appointments",
-  "/appointments/:id": "/appointments/:id"
+  "/api/v1/*": "/$1"
 }

@@ -13,9 +13,22 @@ import SidebarMenu from "./public/components/sidebar-menu.component.vue";
 export default {
   name: 'App',
   components: {
-    SidebarMenu
-
-
+    SidebarMenu,
+    HealthMonitoring
+  },
+  data() {
+    return {
+      drawer: false,
+      items: [
+        { label: 'option.home', to: '/home' }
+      ]
+    };
+  },
+  methods: {
+    toggleDrawer() {
+      this.drawer = !this.drawer;
+    }
   }
+
 }
 </script>

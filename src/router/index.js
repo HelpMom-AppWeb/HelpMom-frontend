@@ -4,15 +4,17 @@ import AppointmentComponent from "../appointment/pages/appointment.component.vue
 import AppointmentsPatient from '../appointment/pages/appointmentsPatient.component.vue';
 
 import DashboardComponent from "../public/pages/dashboard.component.vue";
+import DashboardComponent from "../public/pages/dashboard.component.vue";
 
 
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
+const HealthMonitoringComponent = () => import('../health-monitoring/pages/health-monitoring.component.vue')
+
 const routes = [
     { path: '/home',            name: 'home',       component: HomeComponent,           meta: { title: 'Home' } },
     { path: '/appointments', name: 'appointments', component: AppointmentComponent, meta: { title: 'Medical Appointments' } },
     { path: '/my-appointments',  name: 'patient-appointments', component: AppointmentsPatient, meta: { title: 'My appointments' } },
     { path: '/',                name: 'default',    redirect: '/home'  },
-    {path: '/dashboard',        name: 'dashboard', component: DashboardComponent, meta: { title: 'Dashboard' }},
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: PageNotFoundComponent,   meta: { title: 'Page not found' } },
 ];
 
