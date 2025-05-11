@@ -1,0 +1,7 @@
+{
+  "title": "Patient-Doctor Chat",
+  "placeholder": "Type your message...",
+  "send": "Send",
+  "sender_patient": "Patient",
+  "sender_doctor": "Doctor"
+}
