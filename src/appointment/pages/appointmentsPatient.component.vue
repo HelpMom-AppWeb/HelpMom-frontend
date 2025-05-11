@@ -68,23 +68,46 @@ const filterDate = ref();
 const calendarView = ref(true);
 const patientId = ref(1);
 
+const dummyAppointments = [
+  {
+    id: 1,
+    doctor: "Dr. Smith",
+    specialty: "Pediatría",
+    date: "2025-05-15",
+    time: "10:00",
+    description: "Control anual",
+    patientId: 1,
+    patientName: "Juan Pérez"
+  },
+  {
+    id: 2,
+    doctor: "Dr. Johnson",
+    specialty: "Ginecología",
+    date: "2025-05-20",
+    time: "14:30",
+    description: "Consulta de rutina",
+    patientId: 1,
+    patientName: "Juan Pérez"
+  }
+];
 
 const fetchAppointments = async () => {
   try {
     loading.value = true;
     const response = await axios.get('http://localhost:3000/appointments', {
-      params: {
-        patientId: patientId.value
-      }
+      params: { patientId: patientId.value }
     });
 
-    appointments.value = response.data.map(app => ({
-      ...app,
-      start: `${app.date}T${app.time}:00` // Asegurar formato correcto
-    }));
+    appointments.value = response.data.length > 0
+        ? response.data.map(app => ({
+          ...app,
+          start: `${app.date}T${app.time}:00`
+        }))
+        : dummyAppointments;
 
   } catch (error) {
     console.error('Error:', error);
+    appointments.value = dummyAppointments;
     toast.add({
       severity: 'error',
       summary: 'Error',
@@ -259,6 +282,7 @@ onMounted(fetchAppointments);
 }
 
 .appointment-card {
+  background: #ff98a8;
   transition: transform 0.2s;
 }
 
@@ -278,7 +302,7 @@ onMounted(fetchAppointments);
 }
 
 .detail i {
-  color: var(#fff3f3);
+  color: var(#070707);
 }
 
 
