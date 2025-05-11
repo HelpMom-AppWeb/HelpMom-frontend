@@ -1,10 +1,13 @@
-import { createApp } from 'vue'
+
+
 import './style.css'
 import App from './app.vue'
 import {PrimeVue} from '@primevue/core';
-import 'primeflex/primeflex.css';
+import 'primeflex/primeflex.min.css';
 import 'primeicons/primeicons.css';
 import Material from '@primeuix/themes/material';
+import { createApp } from 'vue'
+
 import {
     Button,
     Card,

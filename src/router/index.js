@@ -1,7 +1,7 @@
 import HomeComponent from "../public/pages/home.component.vue";
 import {createRouter, createWebHistory} from "vue-router";
 
-const AboutComponent = () => import('../public/pages/about.component.vue');
+const AboutComponent = () => import('../pages/about.component.vue');
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
 const routes = [
     { path: '/home',            name: 'home',       component: HomeComponent,           meta: { title: 'Home' } },
