@@ -9,14 +9,16 @@
 <script>
 
 import SidebarMenu from "./public/components/sidebar-menu.component.vue";
+import HealthMonitoringComponent from "./health-monitoring/pages/health-monitoring.component.vue";
 
 export default {
   name: 'App',
   components: {
     SidebarMenu,
-    HealthMonitoring
+    HealthMonitoringComponent,
   },
-  data() {
+
+  /*data() {
     return {
       drawer: false,
       items: [
@@ -28,7 +30,7 @@ export default {
     toggleDrawer() {
       this.drawer = !this.drawer;
     }
-  }
+  }*/
 
 }
 </script>

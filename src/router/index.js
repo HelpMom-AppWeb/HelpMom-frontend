@@ -1,14 +1,15 @@
-import HomeComponent from "../public/pages/home.component.vue";
+import HomeComponent from "../public/pages/home.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import AppointmentComponent from "../appointment/pages/appointment.component.vue";
 import AppointmentsPatient from '../appointment/pages/appointmentsPatient.component.vue';
+import AllAppointmentsComponent from "../public/pages/home.vue";
 
-import DashboardComponent from "../public/pages/dashboard.component.vue";
-import DashboardComponent from "../public/pages/dashboard.component.vue";
+//import DashboardComponent from "../public/pages/dashboard.component.vue";
+//import DashboardComponent from "../public/pages/dashboard.component.vue";
 
 
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
-const HealthMonitoringComponent = () => import('../health-monitoring/pages/health-monitoring.component.vue')
+//const HealthMonitoringComponent = () => import('../health-monitoring/pages/health-monitoring.component.vue')
 
 const routes = [
     { path: '/home',            name: 'home',       component: HomeComponent,           meta: { title: 'Home' } },
