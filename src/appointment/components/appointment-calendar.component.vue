@@ -18,14 +18,11 @@ const emit = defineEmits(['date-selected']);
 const calendarOptions = ref({
   plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
   initialView: 'dayGridMonth',
-  initialDate: new Date(),
-
   headerToolbar: {
     left: 'prev,next today',
     center: 'title',
     right: 'dayGridMonth,timeGridWeek,timeGridDay'
   },
-  editable: true,
   selectable: true,
   selectMirror: true,
   dayMaxEvents: true,
@@ -39,7 +36,10 @@ const calendarOptions = ref({
       title: `${appointment.doctor} - ${appointment.specialty}`,
       start: `${appointment.date}T${appointment.time}`,
       extendedProps: {
-        description: appointment.description
+        description: appointment.description,
+        doctor: appointment.doctor,
+        specialty: appointment.specialty,
+        patientName: appointment.patientName
       }
     }));
   }),

@@ -66,57 +66,60 @@ const appointments = ref([]);
 const loading = ref(true);
 const filterDate = ref();
 const calendarView = ref(true);
-const patientId = ref(1); // En producción, obtener del sistema de autenticación
+const patientId = ref(1);
+
 
 const fetchAppointments = async () => {
   try {
-
-    appointments.value = [{
-      id: 1,
-      doctor: "Dr. Prueba",
-      specialty: "Cardiología",
-      date: "2025-05-25",
-      time: "11:00",
-      description: "Cita de prueba estática",
-      start: "2025-05-25T11:00:00"
-    }];
-
     loading.value = true;
     const response = await axios.get('http://localhost:3000/appointments', {
       params: {
-        patientId: patientId.value,
-        _sort: 'date,time',
-        _order: 'asc'
+        patientId: patientId.value
       }
     });
 
-    if (!response.data || !Array.isArray(response.data)) {
-      throw new Error('Formato de datos inválido');
-    }
-
-    appointments.value = response.data.map(app => {
-      if (!app.date || !app.time) {
-        console.warn('Cita con formato inválido:', app);
-        return null;
-      }
-      return {
-        ...app,
-        start: `${app.date}T${app.time.includes(':') ? app.time : app.time + ':00'}`
-      };
-    }).filter(Boolean);
+    appointments.value = response.data.map(app => ({
+      ...app,
+      start: `${app.date}T${app.time}:00` // Asegurar formato correcto
+    }));
 
   } catch (error) {
-    console.error('Error completo:', error);
+    console.error('Error:', error);
     toast.add({
       severity: 'error',
       summary: 'Error',
-      detail: `Error al cargar citas: ${error.message}`,
+      detail: 'Error al cargar citas',
       life: 5000
     });
+    // Cargar datos dummy si falla la API
+    appointments.value = [
+      {
+        id: 1,
+        doctor: "Dr. Smith",
+        specialty: "Pediatría",
+        date: "2025-05-15",
+        time: "10:00",
+        description: "Control anual",
+        start: "2025-05-15T10:00:00"
+      }
+    ];
   } finally {
     loading.value = false;
   }
 };
+
+const filteredAppointments = computed(() => {
+  if (!filterDate.value) return appointments.value;
+
+  const month = filterDate.value.getMonth() + 1;
+  const year = filterDate.value.getFullYear();
+
+  return appointments.value.filter(app => {
+    const appDate = new Date(app.date);
+    return appDate.getMonth() + 1 === month &&
+        appDate.getFullYear() === year;
+  });
+});
 
 const calendarOptions = {
   plugins: [dayGridPlugin],
@@ -127,20 +130,20 @@ const calendarOptions = {
     right: ''
   },
   events: computed(() => {
-    return appointments.value.map(app => ({
+    return filteredAppointments.value.map(app => ({
       id: app.id,
-      title: `${app.specialty} - Dr. ${app.doctor.split(' ')[1]}`,
+      title: `${app.specialty} - ${app.doctor}`,
       start: app.start,
       extendedProps: {
         description: app.description,
-        fullDoctor: app.doctor
+        doctor: app.doctor
       }
     }));
   }),
   eventClick: (info) => {
     toast.add({
       severity: 'info',
-      summary: `Cita con ${info.event.extendedProps.fullDoctor}`,
+      summary: `Cita con ${info.event.extendedProps.doctor}`,
       detail: `
         Fecha: ${info.event.start.toLocaleDateString('es-ES')}
         Hora: ${info.event.start.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'})}
@@ -151,9 +154,20 @@ const calendarOptions = {
   }
 };
 
+const filterByDate = () => {
+  // El filtrado ya se maneja en la computed property filteredAppointments
+};
+
+const resetFilter = () => {
+  filterDate.value = null;
+};
+
+const formatDate = (dateString) => {
+  return new Date(dateString).toLocaleDateString('es-ES');
+};
+
 onMounted(fetchAppointments);
 </script>
-
 
 <style scoped>
 .patient-appointments {
