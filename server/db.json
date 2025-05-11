@@ -4,10 +4,9 @@
       "id": 1,
       "doctor": "Dr. Smith",
       "specialty": "Pediatría",
-      "date": "2025-05-25",
+      "date": "2025-05-15",
       "time": "10:00",
-      "description": "Regular checkup",
-      "doctorId": 1,
+      "description": "Control anual",
       "patientId": 1,
       "patientName": "Juan Pérez"
     },
@@ -15,12 +14,21 @@
       "id": 2,
       "doctor": "Dr. Johnson",
       "specialty": "Ginecología",
-      "date": "2025-05-16",
+      "date": "2025-05-20",
       "time": "14:30",
       "description": "Consulta de rutina",
-      "doctorId": 2,
-      "patientId": 2,
-      "patientName": "María García"
+      "patientId": 1,
+      "patientName": "Juan Pérez"
+    },
+    {
+      "id": 3,
+      "doctor": "Dr. Williams",
+      "specialty": "Cardiología",
+      "date": "2025-06-10",
+      "time": "11:00",
+      "description": "Electrocardiograma",
+      "patientId": 1,
+      "patientName": "Juan Pérez"
     }
   ]
 }

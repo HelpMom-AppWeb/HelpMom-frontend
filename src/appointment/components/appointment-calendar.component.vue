@@ -18,6 +18,8 @@ const emit = defineEmits(['date-selected']);
 const calendarOptions = ref({
   plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
   initialView: 'dayGridMonth',
+  initialDate: new Date(),
+
   headerToolbar: {
     left: 'prev,next today',
     center: 'title',
@@ -66,24 +68,11 @@ const calendarOptions = ref({
 
 <style>
 .calendar-container {
-  background: #FDEDF0;
+  background: #ffe7ef;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.fc {
-  max-width: 100%;
-}
 
-.fc-event {
-  cursor: pointer;
-  font-size: 0.85em;
-  padding: 2px 5px;
-  margin-bottom: 2px;
-}
-
-.fc-daygrid-event {
-  white-space: normal;
-}
 </style>
