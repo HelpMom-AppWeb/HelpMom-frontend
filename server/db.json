@@ -8,5 +8,13 @@
       "oxygen": "98"
     }
   ],
-  "medications": []
+  "medications": [],
+  "messages": [
+    {
+      "id": 1,
+      "user": "Ana",
+      "text": "Hola!",
+      "timestamp": 1715382000000
+    }
+  ]
 }
