@@ -63,10 +63,10 @@ import IconCalendar from "../../assets/IconCalendar.vue";
 import IconNotification from "../../assets/IconNotification.vue";
 import IconSettings from "../../assets/IconSettings.vue";
 import IconLogout from "../../assets/IconLogout.vue";
-
 export default {
   name: 'sidebar-menu',
   components: {
+
     IconLogout,
     IconSettings,
     IconNotification,

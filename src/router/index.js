@@ -20,13 +20,10 @@ const routes = [
     { path: '/home',            name: 'home',       component: HomeComponent,         meta: { title: 'Home' } },
     { path: '/chat',            name: 'chat',       component: ChatComponent,         meta: { title: 'Chat' } },
     { path: '/',                name: 'default',    redirect: '/home' },
-    { path: '/:pathMatch(.*)*', name: 'not-found',  component: PageNotFoundComponent, meta: { title: 'Page not found' } },
-    { path: '/home',            name: 'home',       component: HomeComponent,           meta: { title: 'Home' } },
     { path: '/appointments', name: 'appointments', component: AppointmentComponent, meta: { title: 'Medical Appointments' } },
     { path: '/my-appointments',  name: 'patient-appointments', component: AppointmentsPatient, meta: { title: 'My appointments' } },
     { path: '/all-appointments', name: 'all-appointments', component: AllAppointmentsComponent, meta: { title: 'All Appointments'}},
     { path: '/health', name: 'health', component: HealthMonitoringComponent, meta: {title: 'Health Component'}},
-    { path: '/',                name: 'default',    redirect: '/home'  },
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: PageNotFoundComponent,   meta: { title: 'Page not found' } },
     { path: '/medications', name: 'medications', component: MedicationsComponent, meta: { title: 'Medications' }}
 ];

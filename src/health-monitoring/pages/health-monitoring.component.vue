@@ -5,6 +5,7 @@ import IconTemperature from "../../assets/IconTemperature.vue";
 import IconWeight from "../../assets/IconWeight.vue";
 import IconOxygen from "../../assets/IconOxygen.vue";
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   components: {
@@ -62,6 +63,13 @@ export default defineComponent({
       showAddMedicationForm.value = false;
     };
 
+    const router = useRouter();
+
+    const goToMedications = () => {
+      router.push({ name: 'medications' });
+    };
+
+
     return {
       IconHeart,
       IconTemperature,
@@ -76,7 +84,8 @@ export default defineComponent({
       showAddMedicationForm,
       medications,
       newMedication,
-      addMedication
+      addMedication,
+      goToMedications,
     };
   }
 });
@@ -134,11 +143,12 @@ export default defineComponent({
         </div>
 
         <div class="metric-actions">
-          <button class="action-button medication-list" @click="showMedicationModal = true">
+          <button class="action-button medication-list"  @click="goToMedications">
             List of medications
           </button>
         </div>
       </div>
+
 
       <div class="info-panels">
         <div class="info-panel">
