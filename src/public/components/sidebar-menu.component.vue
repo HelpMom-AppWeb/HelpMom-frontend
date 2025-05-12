@@ -91,6 +91,7 @@ export default {
 
 <style scoped>
 .sidebar-container {
+  background-color: var(--color-primary-light);
   position: relative;
 }
 
