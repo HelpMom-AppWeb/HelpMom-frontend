@@ -33,6 +33,9 @@
         <router-link to="/all-appointments" class="menu-item" :class="{ active: isActive('/all-appointments') }">
           <IconCalendar class="mr-2" /> Appointments
         </router-link>
+        <router-link to="/patient-management" class="menu-item" :class="{ active: isActive('/patient-management') }">
+          <i class="pi pi-list-check mr-2"></i> Patient Management
+        </router-link>
       </div>
 
       <div class="menu-group">
@@ -66,7 +69,6 @@ import IconLogout from "../../assets/IconLogout.vue";
 export default {
   name: 'sidebar-menu',
   components: {
-
     IconLogout,
     IconSettings,
     IconNotification,

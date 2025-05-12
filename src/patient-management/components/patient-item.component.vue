@@ -44,7 +44,7 @@ export default {
               <Button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
                       label="Appointments"></Button>
             </router-link>
-            <router-link to="/medication">
+            <router-link to="/medications">
               <Button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
                       label="Medication"></Button>
             </router-link>

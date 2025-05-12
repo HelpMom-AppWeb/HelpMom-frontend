@@ -5,12 +5,9 @@ import AppointmentsPatient from '../appointment/pages/appointmentsPatient.compon
 import AllAppointmentsComponent from "../appointment/pages/all-appointments.vue";
 import PatientManagementComponent from "../patient-management/pages/patient-management.component.vue";
 import AddPatientComponent from "../patient-management/pages/add-patient.component.vue";
-import AboutComponent from "../patient-management/pages/about.component.vue";
 
 //import DashboardComponent from "../public/pages/dashboard.component.vue";
 //import DashboardComponent from "../public/pages/dashboard.component.vue";
-
-const AboutComponent = () => import('../pages/about.component.vue');
 
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
 const ChatComponent = () => import('../chat/pages/chat.vue');
