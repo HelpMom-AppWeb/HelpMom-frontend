@@ -7,12 +7,12 @@
       "phone": "555-1234",
       "baby": {
           "id": "1111",
-          "mother-id": "1",
+          "motherId": "1",
           "name": "Andres Cardenas Valenzuela",
-          "birth-date": "2025-05-01",
+          "birthDate": "2025-05-01",
           "gender": "Male"
       },
-      "assigned-doctor": "Maria Perez"
+      "assignedDoctor": "Maria Perez"
     },
     {
       "id": "2",
@@ -21,12 +21,12 @@
       "phone": "555-5678",
       "baby": {
           "id": "2222",
-          "mother-id": "2",
+          "motherId": "2",
           "name": "Romani Ramirez Lopez",
-          "birth-date": "2025-04-29",
+          "birthDate": "2025-04-29",
           "gender": "Male"
       },
-      "assigned-doctor": "Maria Perez"
+      "assignedDoctor": "Maria Perez"
     },
     {
       "id": "3",
@@ -35,12 +35,12 @@
       "phone": "555-8765",
       "baby": {
           "id": "3333",
-          "mother-id": "3",
+          "motherId": "3",
           "name": "Valentina Vasquez Machado",
-          "birth-date": "2025-04-29",
+          "birthDate": "2025-04-29",
           "gender": "Female"
       },
-      "assigned-doctor": "Maria Perez"
+      "assignedDoctor": "Maria Perez"
     },
     {
       "id": "4",
@@ -49,12 +49,12 @@
       "phone": "999788888",
       "baby": {
           "id": "4444",
-          "mother-id": "4",
+          "motherId": "4",
           "name": "Mateo Alvarez Oliva",
-          "birth-date": "2025-04-29",
+          "birthDate": "2025-04-29",
           "gender": "Male"
       },
-      "assigned-doctor": "Maria Perez"
+      "assignedDoctor": "Maria Perez"
     }
   ]
 }
