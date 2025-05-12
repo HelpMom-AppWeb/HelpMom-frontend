@@ -7,11 +7,14 @@ import AllAppointmentsComponent from "../appointment/pages/all-appointments.vue"
 //import DashboardComponent from "../public/pages/dashboard.component.vue";
 //import DashboardComponent from "../public/pages/dashboard.component.vue";
 
+const AboutComponent = () => import('../pages/about.component.vue');
 
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
 const ChatComponent = () => import('../chat/pages/chat.vue');
 
 const HealthMonitoringComponent = () => import('../health-monitoring/pages/health-monitoring.component.vue')
+
+const MedicationsComponent = () => import('../medications/pages/medications.component.vue');
 
 const routes = [
     { path: '/home',            name: 'home',       component: HomeComponent,         meta: { title: 'Home' } },
@@ -25,6 +28,7 @@ const routes = [
     { path: '/health', name: 'health', component: HealthMonitoringComponent, meta: {title: 'Health Component'}},
     { path: '/',                name: 'default',    redirect: '/home'  },
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: PageNotFoundComponent,   meta: { title: 'Page not found' } },
+    { path: '/medications', name: 'medications', component: MedicationsComponent, meta: { title: 'Medications' }}
 ];
 
 const router = createRouter({
