@@ -5,7 +5,7 @@ import {PrimeVue} from '@primevue/core';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import Material from '@primeuix/themes/material';
-
+import Vue3Apexcharts from "vue3-apexcharts";
 
 import {
     Button,
@@ -29,6 +29,8 @@ createApp(App)
     .use(ConfirmationService)
     .use(DialogService)
     .use(ToastService)
+    .use(Vue3Apexcharts)
+    .component("apexchart", Vue3Apexcharts)
     .component('pv-button', Button)
     .component('pv-card', Card)
     .component('pv-column', Column)

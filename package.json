@@ -17,13 +17,15 @@
     "@primevue/core": "^4.3.3",
     "@primevue/forms": "^4.3.4",
     "@primevue/themes": "^4.3.4",
+    "apexcharts": "^4.7.0",
     "axios": "^1.9.0",
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",
     "primevue": "^4.3.4",
     "vue": "^3.5.13",
     "vue-i18n": "^10.0.7",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "vue3-apexcharts": "^1.8.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",

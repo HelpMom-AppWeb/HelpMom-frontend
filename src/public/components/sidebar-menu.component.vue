@@ -10,7 +10,7 @@
 
       <div class="menu-group">
         <p class="section-title">  MENU</p>
-        <router-link to="/dashboard" class="menu-item" :class="{ active: isActive('/dashboard') }">
+        <router-link to="/home" class="menu-item" :class="{ active: isActive('/home') }">
           <IconDashboard class="mr-2" />   Dashboard
         </router-link>
         <router-link to="/profile" class="menu-item" :class="{ active: isActive('/profile') }">
