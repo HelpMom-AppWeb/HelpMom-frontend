@@ -87,37 +87,53 @@ const fetchAppointments = async () => {
       params: { patientId: patientId.value }
     });
 
-    appointments.value = response.data.length > 0
-        ? response.data
-        : dummyAppointments;
-
+    if (response.data && response.data.length > 0) {
+      appointments.value = response.data;
+    } else {
+      // Si no hay datos o la API falla, usar datos dummy
+      appointments.value = dummyAppointments;
+      toast.add({
+        severity: 'info',
+        summary: 'Info',
+        detail: 'Using demo data as no appointments were found',
+        life: 5000
+      });
+    }
   } catch (error) {
     console.error('Error:', error);
     appointments.value = dummyAppointments;
     toast.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Error loading appointments',
+      severity: 'warn',
+      summary: 'Warning',
+      detail: 'Using demo data due to connection issues',
       life: 5000
     });
-    appointments.value = [
-
-    ];
   } finally {
     loading.value = false;
   }
 };
 
+
 const deleteAppointment = async (id) => {
   try {
-    await axios.delete(`http://localhost:3000/appointments/${id}`);
-    toast.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Appointment deleted successfully',
-      life: 5000
-    });
-    fetchAppointments();
+    if (appointments.value === dummyAppointments) {
+      appointments.value = appointments.value.filter(app => app.id !== id);
+      toast.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Appointment deleted successfully (demo mode)',
+        life: 5000
+      });
+    } else {
+      await axios.delete(`http://localhost:3000/appointments/${id}`);
+      toast.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Appointment deleted successfully',
+        life: 5000
+      });
+      await fetchAppointments();
+    }
   } catch (error) {
     console.error('Error deleting appointment:', error);
     toast.add({
@@ -128,7 +144,6 @@ const deleteAppointment = async (id) => {
     });
   }
 };
-
 const confirmDelete = (appointment) => {
   confirm.require({
     message: `Are you sure you want to delete your appointment with ${appointment.doctor} on ${formatDate(appointment.date)}?`,
@@ -161,7 +176,13 @@ const resetFilter = () => {
 };
 
 const formatDate = (dateString) => {
-  return new Date(dateString).toLocaleDateString('es-ES');
+  const date = new Date(dateString);
+  return date.toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+
 };
 
 onMounted(fetchAppointments);
@@ -208,13 +229,12 @@ onMounted(fetchAppointments);
 
 .appointment-card {
   background: #FFB6C1;
-  transition: transform 0.2s;
-  border: 1px solid #e0e0e0;
-}
-
-.appointment-card,
-.appointment-card * {
-  color: #000000 !important;
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  color: #2c3e50;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .appointment-card:hover {
