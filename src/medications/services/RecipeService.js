@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Recipe } from '../../domain/entities/Recipe';
-import { Medication } from '../../domain/entities/Medication';
-import { Note } from '../../domain/entities/Note';
+import { Recipe } from '../domain/entities/Recipe.js';
+import { Medication } from '../domain/entities/Medication.js';
+import { Note } from '../domain/entities/Note.js';
 
 export class RecipeService {
     constructor(recipeRepository) {
