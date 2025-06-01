@@ -1,36 +1,33 @@
 <script>
-import InputText from "primevue/inputtext";
-import Button from "primevue/button"
 import { Form } from '@primevue/forms';
 import Message  from 'primevue/message'
 
-
 export default {
   name: "add-patient",
-  components: {InputText, Button, Form}
+  components: {Form, Message},
 }
 </script>
 
 <template>
-  <div >
+  <div>
     <p>a</p>
     <Form>
       <div class="flex flex-col gap-4 w-full h-10rem">
         <div class="flex flex-col gap-1">
           <label for="patientName">Personal Name</label>
-          <InputText name="patientName" type="text" />
+          <pv-input-text name="patientName" type="text" />
           <Message v-if="$form.patientName?.invalid" severity="error" size="small" variant="simple">{{ $form.patientName.error?.message }}</Message>
         </div>
 
         <div class="flex flex-col gap-1">
           <label for="email">Email</label>
-          <InputText name="email" type="text" />
+          <pv-input-text name="email" type="text" />
           <Message v-if="$form.email?.invalid" severity="error" size="small" variant="simple">{{ $form.email.error?.message }}</Message>
         </div>
       </div>
-      <Button type="Save" severity="success" label="Save" />
+      <pv-button type="Save" severity="success" label="Save" />
 
-      <Button type="Cancel" severity="success" label="Cancel" />
+      <pv-button type="Cancel" severity="success" label="Cancel" />
     </Form>
   </div>
 </template>

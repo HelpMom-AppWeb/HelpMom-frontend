@@ -27,7 +27,7 @@ export default {
             {{ patient.name }}
           </div>
           <div class="flex gap-4 mt-1">
-            <router-link to="/about">
+            <router-link to="/patient-management/patients/patient-info">
               <Button
                   style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
                   label="About"></Button>
