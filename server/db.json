@@ -69,32 +69,25 @@
   "medications": [],
   "messages": [
     {
-      "id": 1,
-      "from": "Ana Machado",
-      "text": "Hola!",
-      "timestamp": 1715382000000,
-      "patientId": "3"
-    },
-    {
-      "id": 2,
-      "from": "doctor",
-      "text": "Hola Ana, ¿cómo estás?",
-      "timestamp": 1715385600000,
-      "patientId": "3"
-    },
-    {
-      "from": "doctor",
-      "text": "aeaaa",
-      "timestamp": 1748748975787,
-      "patientId": "1",
-      "id": 3
-    },
-    {
       "from": "doctor",
       "text": "adwafaqgweag",
       "timestamp": 1748749101392,
       "patientId": "2",
       "id": 4
+    },
+    {
+      "from": "doctor",
+      "text": "dawdwadwa",
+      "timestamp": 1748793903358,
+      "patientId": "1",
+      "id": 5
+    },
+    {
+      "from": "doctor",
+      "text": "aedwadwad",
+      "timestamp": 1748805517374,
+      "patientId": "4",
+      "id": 6
     }
   ]
 }

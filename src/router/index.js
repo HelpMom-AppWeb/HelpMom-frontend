@@ -17,17 +17,21 @@ const HealthMonitoringComponent = () => import('../health-monitoring/pages/healt
 const MedicationsComponent = () => import('../medications/pages/medications.component.vue');
 
 const routes = [
-    { path: '/home',            name: 'home',       component: HomeComponent,         meta: { title: 'Home' } },
-    { path: '/chat/:patientId', name: 'Chat', component: ChatComponent, props: true, meta: { title: 'Chat' } },
-    { path: '/',                name: 'default',    redirect: '/home' },
+    { path: '/home', name: 'home', component: HomeComponent, meta: { title: 'Home' } },
+
+
+    { path: '/chat/:patientId?', name: 'Chat', component: ChatComponent, props: true, meta: { title: 'Chat' } },
+
+    { path: '/', name: 'default', redirect: '/home' },
     { path: '/appointments', name: 'appointments', component: AppointmentComponent, meta: { title: 'Medical Appointments' } },
-    { path: '/my-appointments',  name: 'patient-appointments', component: AppointmentsPatient, meta: { title: 'My appointments' } },
-    { path: '/all-appointments', name: 'all-appointments', component: AllAppointmentsComponent, meta: { title: 'All Appointments'}},
-    { path: '/health', name: 'health', component: HealthMonitoringComponent, meta: {title: 'Health Component'}},
-    { path: '/:pathMatch(.*)*', name: 'not-found',  component: PageNotFoundComponent,   meta: { title: 'Page not found' } },
-    { path: '/medications', name: 'medications', component: MedicationsComponent, meta: { title: 'Medications' }},
-    { path: '/patient-management', name: 'patient-management', component: PatientManagementComponent, meta: { title: 'Patient Management'}},
+    { path: '/my-appointments', name: 'patient-appointments', component: AppointmentsPatient, meta: { title: 'My appointments' } },
+    { path: '/all-appointments', name: 'all-appointments', component: AllAppointmentsComponent, meta: { title: 'All Appointments'} },
+    { path: '/health', name: 'health', component: HealthMonitoringComponent, meta: {title: 'Health Component'} },
+    { path: '/medications', name: 'medications', component: MedicationsComponent, meta: { title: 'Medications' } },
+    { path: '/patient-management', name: 'patient-management', component: PatientManagementComponent, meta: { title: 'Patient Management'} },
+    { path: '/:pathMatch(.*)*', name: 'not-found', component: PageNotFoundComponent, meta: { title: 'Page not found' } },
 ];
+
 
 const router = createRouter({
     history: createWebHistory(import.meta.BASE_URL),
