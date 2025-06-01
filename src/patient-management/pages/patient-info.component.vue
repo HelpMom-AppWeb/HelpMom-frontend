@@ -1,11 +1,7 @@
 <script>
-import InputText from 'primevue/inputtext'
 
 export default {
   name: "patient-info",
-  components: {
-    InputText
-  },
   data() {
     return {
       patient:
@@ -29,31 +25,31 @@ export default {
 </script>
 
 <template>
-  <div>
-  <div class="flex flex-wrap gap-3 m-6  ">
-    <div class="w-full md:w-6">
+  <div class="w-full">
+  <div class="grid gap-3 m-6 border">
+    <div class="col-12 md:col-6">
       <label for="personal-name" class="block text-900 font-medium mb-2">Personal Name</label>
-      <InputText id="personal-name" v-model="patient.name" disabled placeholder="Patient Name" type="text" class="w-full" />
+      <pv-input-text id="personal-name" v-model="patient.name" disabled placeholder="Patient Name" type="text" class="w-full" />
     </div>
-    <div class="w-full md:w-6">
+    <div class="col-12 md:col-6">
       <label for="personal-email" class="block text-900 font-medium mb-2">Personal Email</label>
-      <InputText id="personal-email" v-model="patient.email" disabled placeholder="Patient Email" type="text" class="w-full" />
+      <pv-input-text id="personal-email" v-model="patient.email" disabled placeholder="Patient Email" type="text" class="w-full" />
     </div>
-    <div class="w-full md:w-6">
+    <div class="col-12 md:col-6">
       <label for="personal-phone" class="block text-900 font-medium mb-2">Personal Phone</label>
-      <InputText id="personal-phone" v-model="patient.phone" disabled placeholder="Patient Phone" type="text" class="w-full" />
+      <pv-input-text id="personal-phone" v-model="patient.phone" disabled placeholder="Patient Phone" type="text" class="w-full" />
     </div>
-    <div class="w-full md:w-6">
+    <div class="col-12 md:col-6">
       <label for="baby-name" class="block text-900 font-medium mb-2">Baby Name</label>
-      <InputText id="baby-name" v-model="patient.baby.name" disabled placeholder="Baby's Name" type="text" class="w-full" />
+      <pv-input-text id="baby-name" v-model="patient.baby.name" disabled placeholder="Baby's Name" type="text" class="w-full" />
     </div>
-    <div class="w-full md:w-6">
+    <div class="col-12 md:col-6">
       <label for="baby-birth-date" class="block text-900 font-medium mb-2">Baby's Birth Date</label>
-      <InputText id="baby-birth-date" v-model="patient.baby.birthDate" disabled placeholder="Baby's Birth Date" type="text" class="w-full" />
+      <pv-input-text id="baby-birth-date" v-model="patient.baby.birthDate" disabled placeholder="Baby's Birth Date" type="text" class="w-full" />
     </div>
-    <div class="w-full md:w-6">
+    <div class="col-12 md:col-6">
       <label for="assigned-doctor" class="block text-900 font-medium mb-2">Assigned Doctor</label>
-      <InputText id="assigned-doctor" v-model="patient.assignedDoctor" disabled placeholder="Assigned Doctor" type="text" class="w-full" />
+      <pv-input-text id="assigned-doctor" v-model="patient.assignedDoctor" disabled placeholder="Assigned Doctor" type="text" class="w-full" />
     </div>
   </div>
   <router-link to="/patient-management/patients">

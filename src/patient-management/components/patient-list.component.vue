@@ -1,10 +1,9 @@
 <script>
 import PatientItem from "./patient-item.component.vue";
-import Button from "primevue/button";
 
 export default {
   name: "patient-list",
-  components: {Button, PatientItem},
+  components: {PatientItem},
   props: {
     patients: {
       type: Array,
