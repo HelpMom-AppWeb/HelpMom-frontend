@@ -94,9 +94,6 @@ export default {
   position: relative;
 }
 
-.menu-button {
-  margin: 1rem;
-}
 
 .custom-sidebar{
   width: 4000px;
