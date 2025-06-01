@@ -8,7 +8,7 @@ defineProps({
   }
 });
 
-const emit = defineEmits(['add-medication', 'add-note']);
+const emit = defineEmits(['add-medication', 'add-note', 'delete-medication']);
 
 const handleAddMedication = (recipeId) => {
   emit('add-medication', recipeId);
@@ -16,6 +16,10 @@ const handleAddMedication = (recipeId) => {
 
 const handleAddNote = (recipeId, noteText) => {
   emit('add-note', recipeId, noteText);
+};
+
+const handleDeleteMedication = (recipeId, medicationIndex) => {
+  emit('delete-medication', recipeId, medicationIndex);
 };
 </script>
 
@@ -27,15 +31,7 @@ const handleAddNote = (recipeId, noteText) => {
       :recipe="recipe"
       @add-medication="handleAddMedication"
       @add-note="handleAddNote"
+      @delete-medication="handleDeleteMedication"
     />
   </div>
 </template>
-
-<style scoped>
-.recipe-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-</style>
