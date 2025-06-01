@@ -18,7 +18,7 @@ const MedicationsComponent = () => import('../medications/pages/medications.comp
 
 const routes = [
     { path: '/home',            name: 'home',       component: HomeComponent,         meta: { title: 'Home' } },
-    { path: '/chat',            name: 'chat',       component: ChatComponent,         meta: { title: 'Chat' } },
+    { path: '/chat/:patientId', name: 'Chat', component: ChatComponent, props: true, meta: { title: 'Chat' } },
     { path: '/',                name: 'default',    redirect: '/home' },
     { path: '/appointments', name: 'appointments', component: AppointmentComponent, meta: { title: 'Medical Appointments' } },
     { path: '/my-appointments',  name: 'patient-appointments', component: AppointmentsPatient, meta: { title: 'My appointments' } },
