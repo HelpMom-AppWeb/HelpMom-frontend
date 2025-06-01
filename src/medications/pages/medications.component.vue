@@ -1,8 +1,7 @@
 <script setup>
-import { ref, onMounted } from 'vue';
 import AddRecipeButton from "../components/AddRecipeButton.vue";
 import RecipeList from "../components/RecipeList.vue";
-
+import { ref, onMounted } from "vue";
 
 const recipes = ref([]);
 
@@ -32,12 +31,29 @@ const addNote = (recipeId, noteText) => {
     recipe.notes.push({ id: Date.now(), text: noteText });
   }
 };
+
+const deleteMedication = (recipeId, medicationIndex) => {
+  const recipe = recipes.value.find((r) => r.id === recipeId);
+  if (recipe) {
+    recipe.medications.splice(medicationIndex, 1);
+  }
+};
+
+const deleteRecipe = (recipeId) => {
+  recipes.value = recipes.value.filter((recipe) => recipe.id !== recipeId);
+};
 </script>
 
 <template>
   <div class="container">
-    <h1>List of Recipes</h1>
-    <RecipeList :recipes="recipes" @add-medication="addMedication" @add-note="addNote" />
+    <h1>Medications</h1>
+    <RecipeList
+      :recipes="recipes"
+      @add-medication="addMedication"
+      @add-note="addNote"
+      @delete-medication="deleteMedication"
+      @delete-recipe="deleteRecipe"
+    />
     <AddRecipeButton @add-recipe="addNewRecipe" />
   </div>
 </template>
