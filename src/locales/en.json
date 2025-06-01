@@ -1,12 +1,207 @@
 {
-  "option": {
-    "home": "Home",
-    "about": "About",
-    "categories": "Categories"
+  "sidebar": {
+    "patient": {
+      "menu": {
+        "label": "Menu",
+        "dashboard": "Dashboard",
+        "profile": "Profile"
+      },
+      "analytics": {
+        "label": "Analytics",
+        "healthMonitoring": "Health Monitoring"
+      },
+      "schedule": {
+        "label": "Schedule",
+        "chat": "Chat",
+        "appointments": "Appointments"
+      },
+      "help": {
+        "label": "Help",
+        "notifications": "Notifications",
+        "settings": "Settings"
+      },
+      "logout": "Logout"
+    },
+    "doctor": {
+      "menu": {
+        "label": "Menu",
+        "dashboard": "Dashboard",
+        "profile": "Profile"
+      },
+      "patientMenu": {
+        "label": "Patients",
+        "patientList": "Patient List"
+      },
+      "help": {
+        "label": "Help",
+        "notifications": "Notifications",
+        "settings": "Settings"
+      },
+      "logout": "Logout"
+    }
   },
-  "authoring-phrase": {
-    "intro": "Made with",
-    "use": "using",
-    "author": "by {brand} Developer Team"
+  "pageNotFound": {
+    "title": "Page Not Found",
+    "message1": "The path ",
+    "message2": " is not available.",
+    "backToHome": "Back to Home"
+  },
+  "dashboard": {
+    "babyWeight": {
+      "label": "Fetal Development",
+      "weightData": "Estimated weight (g)",
+      "weekAxis": "Week of gestation",
+      "weightAxis": "Weight (g)"
+    },
+    "babyHeartRate": {
+      "label": "Fetal Heart Rate",
+      "heartRateData": "Heart rate (bpm)",
+      "weekAxis": "Week of gestation",
+      "heartRateAxis": "Beats per minute"
+    },
+    "babyParameters": {
+      "label": "Parameter Summary",
+      "parameterData": "Week 24",
+      "weightAxis": "Weight (g)",
+      "heartRateAxis": "Heart Rate (bpm)",
+      "lengthAxis": "Length (cm)"
+    }
+  },
+  "healthMonitoring": {
+    "title": "Health Monitoring",
+    "updateValues": "Update Values",
+    "metrics": {
+      "heartRate": {
+        "label": "Heart Rate",
+        "unit": "pulse/min",
+        "info": "Heart rate is the speed of the heartbeat measured by the number of contractions of the heart per minute. A normal resting heart rate for adults ranges from 60 to 100 beats per minute."
+      },
+      "temperature": {
+        "label": "Temperature",
+        "unit": "degrees C",
+        "info": "Body temperature is a measure of the body's ability to generate and get rid of heat. Normal body temperature ranges from 97.8°F (36.5°C) to 99°F (37.2°C)."
+      },
+      "weight": {
+        "label": "Weight",
+        "unit": "grams",
+        "info": "Body weight is a measurement of the force exerted by gravity on an object. Weight is commonly measured in pounds in the US and kilograms in most other countries."
+      },
+      "oxygen": {
+        "label": "Oxygen Saturation",
+        "unit": "%",
+        "info": "Oxygen saturation is a measure of how much oxygen the blood is carrying as a percentage of the maximum it could carry. Normal SpO2 levels are between 95% and 100%."
+      }
+    },
+    "actions": {
+      "medications": "List of medications"
+    },
+    "modals": {
+      "updateHealthData": {
+        "title": "Update Health Data",
+        "fields": {
+          "heartRate": "Heart Rate (pulse/min)",
+          "temperature": "Temperature (°C)",
+          "weight": "Weight (pounds)",
+          "oxygen": "Oxygen Saturation (%)"
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "save": "Save Changes"
+        }
+      },
+      "medications": {
+        "title": "Medications",
+        "addMedication": "Add Medication"
+      },
+      "addMedication": {
+        "title": "Add New Medication",
+        "fields": {
+          "name": "Medication Name",
+          "dosage": "Dosage",
+          "schedule": "Schedule"
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "save": "Save Medication"
+        }
+      }
+    },
+    "recipes": {
+      "title": "List of Recipes",
+      "addMedication": "Add Medication",
+      "addRecipe": "Add New Recipe",
+      "notePrompt": "Enter a Note",
+      "newNote": "New Note",
+      "recipeCard": {
+        "columns": {
+          "name": "Medication/Concentration",
+          "quantity": "Quantity",
+          "dose": "Dose",
+          "administration": "Administration",
+          "frequency": "Frequency",
+          "duration": "Duration"
+        },
+        "medicationName": "Medication Name",
+        "medicationDose": "Dose",
+        "medicationAdministration": "Administration",
+        "medicationFrequency": "Frequency",
+        "medicationDuration": "Duration"
+      }
+    }
+  },
+  "chat": {
+    "placeholder": "Write a message..."
+  },
+  "appointments": {
+    "welcomeTitle": "Welcome",
+    "welcomeMessage": "Welcome to HelpMom",
+    "goToAppointments": "Go to Appointments",
+    "myAppointments": "My Appointments",
+    "medicalAppointments": "Medical Appointments",
+    "myMedicalAppointments": { 
+      "title": "My Medical Appointments",
+      "filter": "Filter by Month",
+      "listView": "List View",
+      "calendarView": "Calendar View",
+      "showAll": "Show All"
+    },
+    "appointmentForm": {
+      "title": "Schedule an Appointment",
+      "labels": {
+        "specialty": "Specialty",
+        "doctor": "Doctor",
+        "date": "Date",
+        "time": "Time",
+        "description": "Description"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "save": "Schedule Appointment"
+      },
+      "placeholders": {
+        "specialty": "Select a Specialty",
+        "doctor": "Select a Doctor",
+        "description": "Brief description of the reason for the appointment"
+      }
+    }
+  },
+  "patientManagement": {
+    "title": "Patient List",
+    "buttons": {
+      "addPatient": "Add Patient",
+      "aboutPatient": "Information",
+      "chat": "Chat",
+      "health": "Monitoring",
+      "appointments": "Appointments",
+      "medications": "Medications"
+    },
+    "patientInformation": {
+      "name": "Personal Name",
+      "email": "Personal Email",
+      "phone": "Personal Phone",
+      "babyName": "Baby Name",
+      "babyBirthDate": "Baby Birth Date",
+      "assignedDoctor": "Assigned Doctor"
+    }
   }
 }
