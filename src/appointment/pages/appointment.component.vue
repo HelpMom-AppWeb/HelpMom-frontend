@@ -7,11 +7,7 @@ import AppointmentForm from '../components/appointment-form.component.vue';
 const appointments = ref([]);
 const showForm = ref(false);
 const selectedDate = ref(new Date());
-const doctors = ref([
-  { id: 1, name: "Dr. Smith", specialty: "Pediatrics" },
-  { id: 2, name: "Dr. Johnson", specialty: "Gynecology" },
-  { id: 3, name: "Dr. Williams", specialty: "Cardiology" }
-]);
+const doctors = ref([]);
 
 const fetchAppointments = async () => {
   try {

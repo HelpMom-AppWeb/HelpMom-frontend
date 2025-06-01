@@ -1,10 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 
 const props = defineProps({
-  selectedDate: Date,
-  doctors: Array
+  selectedDate: Date
 });
 
 const emit = defineEmits(['appointment-created', 'cancel']);
@@ -17,15 +16,41 @@ const form = ref({
   description: ''
 });
 
+const doctors = ref([]);
+const loading = ref(false);
+const error = ref(null);
+
+// Cargar doctores desde db.json
+const fetchDoctors = async () => {
+  try {
+    loading.value = true;
+    error.value = null;
+    const response = await axios.get('http://localhost:3000/doctors');
+    doctors.value = response.data;
+  } catch (err) {
+    console.error('Error al cargar doctores:', err);
+    error.value = 'Failed to load doctors. Please try again later.';
+    doctors.value = [];
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(() => {
+  fetchDoctors();
+});
+
+// Obtener especialidades únicas
 const specialties = computed(() => {
   const uniqueSpecialties = new Set();
-  props.doctors.forEach(doctor => uniqueSpecialties.add(doctor.specialty));
+  doctors.value.forEach(doctor => uniqueSpecialties.add(doctor.specialty));
   return Array.from(uniqueSpecialties);
 });
 
+// Filtrar doctores por especialidad seleccionada
 const filteredDoctors = computed(() => {
-  if (!form.value.specialty) return props.doctors;
-  return props.doctors.filter(doctor => doctor.specialty === form.value.specialty);
+  if (!form.value.specialty) return doctors.value;
+  return doctors.value.filter(doctor => doctor.specialty === form.value.specialty);
 });
 
 const timeSlots = ref([
@@ -36,7 +61,11 @@ const timeSlots = ref([
 
 const submitAppointment = async () => {
   try {
-    const selectedDoctor = props.doctors.find(d => d.id == form.value.doctorId);
+    const selectedDoctor = doctors.value.find(d => d.id == form.value.doctorId);
+
+    if (!selectedDoctor) {
+      throw new Error('Please select a valid doctor');
+    }
 
     const appointmentData = {
       doctor: selectedDoctor.name,
@@ -44,13 +73,15 @@ const submitAppointment = async () => {
       date: form.value.date,
       time: form.value.time,
       description: form.value.description,
-      doctorId: form.value.doctorId
+      doctorId: form.value.doctorId,
+      patientId: 1 // Esto debería venir de la autenticación en una app real
     };
 
     await axios.post('http://localhost:3000/appointments', appointmentData);
     emit('appointment-created');
   } catch (error) {
     console.error('Error creating appointment:', error);
+    alert('Error creating appointment: ' + error.message);
   }
 };
 </script>
