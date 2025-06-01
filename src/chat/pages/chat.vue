@@ -17,7 +17,7 @@
       <input
           v-model="newMessage"
           @keyup.enter="sendMessage"
-          placeholder="Type your message..."
+          :placeholder="$t('chat.placeholder')"
       />
       <button @click="sendMessage">➤</button>
     </div>
