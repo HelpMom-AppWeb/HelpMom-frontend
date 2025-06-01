@@ -1,76 +1,35 @@
-<script setup>
-  import { ref, onMounted } from 'vue';
-  import RecipeList from './public/components/RecipeList.vue';
-  import AddRecipeButton from './public/components/AddRecipeButton.vue';
+<template>
+  <div id="app">
+    <sidebar-menu></sidebar-menu>
+    <router-view />
+  </div>
+</template>
 
-  const recipes = ref([]);
+<script>
 
-  onMounted(() => {
-    recipes.value = [];
-  });
+import SidebarMenu from "./public/components/sidebar-menu.component.vue";
+import HealthMonitoringComponent from "./health-monitoring/pages/health-monitoring.component.vue";
 
-  const addNewRecipe = () => {
-    const newRecipe = {
-      id: Date.now(),
-      medications: [],
-      notes: []
+export default {
+  name: 'App',
+  components: {
+    SidebarMenu,
+    HealthMonitoringComponent,
+  },
+
+  /*data() {
+    return {
+      drawer: false,
+      items: [
+        { label: 'option.home', to: '/home' }
+      ]
     };
-    recipes.value.push(newRecipe);
-  };
-
-  const addMedication = (recipeId) => {
-    const recipe = recipes.value.find((r) => r.id === recipeId);
-    if (recipe) {
-      recipe.medications.push({});
+  },
+  methods: {
+    toggleDrawer() {
+      this.drawer = !this.drawer;
     }
-  };
+  }*/
 
-  const addNote = (recipeId, noteText) => {
-    const recipe = recipes.value.find((r) => r.id === recipeId);
-    if (recipe) {
-      recipe.notes.push({ id: Date.now(), text: noteText });
-    }
-  };
-
-  const deleteMedication = (recipeId, medicationIndex) => {
-    const recipe = recipes.value.find((r) => r.id === recipeId);
-    if (recipe) {
-      recipe.medications.splice(medicationIndex, 1);
-    }
-  };
-
-  const deleteRecipe = (recipeId) => {
-    recipes.value = recipes.value.filter((recipe) => recipe.id !== recipeId);
-  };
-  </script>
-
-  <template>
-    <div class="container">
-      <h1>List of Recipes</h1>
-      <RecipeList
-        :recipes="recipes"
-        @add-medication="addMedication"
-        @add-note="addNote"
-        @delete-medication="deleteMedication"
-        @delete-recipe="deleteRecipe"
-      />
-      <AddRecipeButton @add-recipe="addNewRecipe" />
-    </div>
-  </template>
-
-  <style>
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-  }
-  </style>
+}
+</script>

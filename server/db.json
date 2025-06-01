@@ -70,9 +70,31 @@
   "messages": [
     {
       "id": 1,
-      "user": "Ana",
+      "from": "Ana Machado",
       "text": "Hola!",
-      "timestamp": 1715382000000
+      "timestamp": 1715382000000,
+      "patientId": "3"
+    },
+    {
+      "id": 2,
+      "from": "doctor",
+      "text": "Hola Ana, ¿cómo estás?",
+      "timestamp": 1715385600000,
+      "patientId": "3"
+    },
+    {
+      "from": "doctor",
+      "text": "aeaaa",
+      "timestamp": 1748748975787,
+      "patientId": "1",
+      "id": 3
+    },
+    {
+      "from": "doctor",
+      "text": "adwafaqgweag",
+      "timestamp": 1748749101392,
+      "patientId": "2",
+      "id": 4
     }
   ]
 }

@@ -1,7 +1,7 @@
 <script>
 import Button from 'primevue/button';
-import {Card} from "primevue";
-import {Patient} from "../model/patient.entity.js";
+import { Card } from "primevue";
+import { Patient } from "../model/patient.entity.js";
 
 export default {
   name: "patient-item",
@@ -30,23 +30,35 @@ export default {
             <router-link to="/about">
               <Button
                   style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                  label="About"></Button>
+                  label="About"
+              />
             </router-link>
-            <router-link to="/chat">
-              <Button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                      label="Chat"></Button>
+
+            <!-- CHAT: se pasa patientId por params -->
+            <router-link :to="{ name: 'Chat', params: { patientId: patient.id } }">
+              <Button
+                  style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
+                  label="Chat"
+              />
             </router-link>
+
             <router-link to="/health">
-              <Button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                      label="Health"></Button>
+              <Button
+                  style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
+                  label="Health"
+              />
             </router-link>
             <router-link to="/appointments">
-              <Button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                      label="Appointments"></Button>
+              <Button
+                  style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
+                  label="Appointments"
+              />
             </router-link>
             <router-link to="/medications">
-              <Button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                      label="Medication"></Button>
+              <Button
+                  style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
+                  label="Medication"
+              />
             </router-link>
           </div>
         </div>
