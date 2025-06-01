@@ -1,6 +1,7 @@
 <!-- src/App.vue -->
 <template>
   <div id="app">
+    <pv-toast/>
     <sidebar-menu></sidebar-menu>
     <router-view />
   </div>
