@@ -1,14 +1,14 @@
 <template>
   <div class="patient-appointments">
-    <h1 class="page-title">My Medical Appointments</h1>
+    <h1 class="page-title">{{ $t("appointments.myMedicalAppointments.title") }}</h1>
 
     <div class="controls">
       <div class="filter-controls">
         <Calendar v-model="filterDate" view="month" dateFormat="yy-mm-dd" :showIcon="true"
-                  @date-select="filterByDate" placeholder="Filter by month" selectionMode="single" />
-        <Button label="Mostrar todas" @click="resetFilter" class="p-button-text" />
+                  @date-select="filterByDate" :placeholder="$t('appointments.myMedicalAppointments.filter')" selectionMode="single" />
+        <Button :label="$t('appointments.myMedicalAppointments.showAll')" @click="resetFilter" class="p-button-text" />
       </div>
-      <ToggleButton v-model="calendarView" onLabel="Calendar View" offLabel="List View"
+      <ToggleButton v-model="calendarView" :onLabel="$t('appointments.myMedicalAppointments.calendarView')" :offLabel="$t('appointments.myMedicalAppointments.listView')"
                     onIcon="pi pi-calendar" offIcon="pi pi-list" />
     </div>
 

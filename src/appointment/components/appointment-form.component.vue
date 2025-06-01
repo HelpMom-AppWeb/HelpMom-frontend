@@ -57,13 +57,13 @@ const submitAppointment = async () => {
 
 <template>
   <div class="appointment-form">
-    <h2>Schedule New Appointment</h2>
+    <h2>{{ $t("appointments.appointmentForm.title")}}</h2>
 
     <form @submit.prevent="submitAppointment">
       <div class="form-group">
-        <label>Specialty</label>
+        <label>{{ $t("appointments.appointmentForm.labels.specialty")}}</label>
         <select v-model="form.specialty" required>
-          <option value="">Select a specialty</option>
+          <option value="">{{ $t("appointments.appointmentForm.placeholders.specialty")}}</option>
           <option v-for="specialty in specialties" :key="specialty" :value="specialty">
             {{ specialty }}
           </option>
@@ -71,9 +71,9 @@ const submitAppointment = async () => {
       </div>
 
       <div class="form-group">
-        <label>Doctor</label>
+        <label>{{ $t("appointments.appointmentForm.labels.doctor")}}</label>
         <select v-model="form.doctorId" required :disabled="!form.specialty">
-          <option value="">Select a doctor</option>
+          <option value="">{{ $t("appointments.appointmentForm.placeholders.doctor")}}</option>
           <option v-for="doctor in filteredDoctors" :key="doctor.id" :value="doctor.id">
             {{ doctor.name }} ({{ doctor.specialty }})
           </option>
@@ -81,12 +81,12 @@ const submitAppointment = async () => {
       </div>
 
       <div class="form-group">
-        <label>Date</label>
+        <label>{{ $t("appointments.appointmentForm.labels.date")}}</label>
         <input type="date" v-model="form.date" required>
       </div>
 
       <div class="form-group">
-        <label>Time</label>
+        <label>{{ $t("appointments.appointmentForm.labels.time")}}</label>
         <select v-model="form.time" required>
           <option v-for="time in timeSlots" :key="time" :value="time">
             {{ time }}
@@ -95,13 +95,13 @@ const submitAppointment = async () => {
       </div>
 
       <div class="form-group">
-        <label>Description</label>
-        <textarea v-model="form.description" placeholder="Brief description of the reason for the appointment"></textarea>
+        <label>{{ $t("appointments.appointmentForm.labels.description")}}</label>
+        <textarea v-model="form.description" :placeholder="$t('appointments.appointmentForm.placeholders.description')"></textarea>
       </div>
 
       <div class="form-actions">
-        <button type="button" class="cancel" @click="emit('cancel')">Cancel</button>
-        <button type="submit" class="submit">Schedule Appointment</button>
+        <button type="button" class="cancel" @click="emit('cancel')">{{ $t("appointments.appointmentForm.buttons.cancel")}}</button>
+        <button type="submit" class="submit">{{ $t("appointments.appointmentForm.buttons.save")}}</button>
       </div>
     </form>
   </div>
