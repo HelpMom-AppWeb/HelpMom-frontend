@@ -7,11 +7,7 @@ import AppointmentForm from '../components/appointment-form.component.vue';
 const appointments = ref([]);
 const showForm = ref(false);
 const selectedDate = ref(new Date());
-const doctors = ref([
-  { id: 1, name: "Dr. Smith", specialty: "Pediatrics" },
-  { id: 2, name: "Dr. Johnson", specialty: "Gynecology" },
-  { id: 3, name: "Dr. Williams", specialty: "Cardiology" }
-]);
+const doctors = ref([]);
 
 const fetchAppointments = async () => {
   try {
@@ -25,6 +21,10 @@ const fetchAppointments = async () => {
 const handleDateSelect = (date) => {
   selectedDate.value = date;
   showForm.value = true;
+};
+
+const onDateClick = (info) => {
+  emit('date-selected', info.dateStr);
 };
 
 const handleAppointmentCreated = () => {
@@ -47,7 +47,6 @@ onMounted(() => {
           :selectedDate="selectedDate"
           @date-selected="handleDateSelect"
       />
-
       <AppointmentForm
           v-if="showForm"
           :selectedDate="selectedDate"
@@ -55,9 +54,14 @@ onMounted(() => {
           @appointment-created="handleAppointmentCreated"
           @cancel="showForm = false"
       />
+      <fullCalendar
+          :options="calendarOptions"
+          @dateClick="onDateClick"
+      />
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .appointment-page {
