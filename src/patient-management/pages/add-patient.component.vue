@@ -17,13 +17,13 @@ export default {
     <Form>
       <div class="flex flex-col gap-4 w-full h-10rem">
         <div class="flex flex-col gap-1">
-          <label for="patientName">Personal Name</label>
+          <label for="patientName">{{ $t("patientManagement.patientInformation.name") }}</label>
           <InputText name="patientName" type="text" />
           <Message v-if="$form.patientName?.invalid" severity="error" size="small" variant="simple">{{ $form.patientName.error?.message }}</Message>
         </div>
 
         <div class="flex flex-col gap-1">
-          <label for="email">Email</label>
+          <label for="email">{{ $t("patientManagement.patientInformation.email") }}</label>
           <InputText name="email" type="text" />
           <Message v-if="$form.email?.invalid" severity="error" size="small" variant="simple">{{ $form.email.error?.message }}</Message>
         </div>

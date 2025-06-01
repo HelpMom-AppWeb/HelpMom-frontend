@@ -89,7 +89,7 @@ export default {
 
 <template>
   <div class="flex flex-column gap-3 p-7">
-    <p>Patient List</p>
+    <p>{{ $t("patientManagement.title") }}</p>
     <div class="">
       <patient-list v-model:patients="patients"></patient-list>
     </div>
