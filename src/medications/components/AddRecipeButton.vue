@@ -2,7 +2,7 @@
     <div class="add-recipe-container">
       <button class="add-recipe-btn" @click="$emit('add-recipe')">
         <div class="btn-content">
-          <span>Add New Recipe</span>
+          <span>{{$t("healthMonitoring.recipes.addRecipe") }}</span>
           <div class="plus-icon">+</div>
         </div>
       </button>

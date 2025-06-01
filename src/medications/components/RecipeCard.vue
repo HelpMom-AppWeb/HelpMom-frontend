@@ -1,5 +1,8 @@
 <script setup>
       import AddNoteButton from './AddNoteButton.vue';
+      import { useI18n } from "vue-i18n";
+
+      const { t } = useI18n();
 
       const props = defineProps({
         recipe: {
@@ -11,7 +14,7 @@
       const emit = defineEmits(['add-note', 'update-medication', 'add-medication']);
 
       const handleAddNote = () => {
-        const noteText = prompt('Ingrese una nota:', 'Nueva nota');
+        const noteText = prompt(t("healthMonitoring.recipes.notePrompt"), t("healthMonitoring.recipes.newNote") );
         if (noteText) {
           emit('add-note', props.recipe.id, noteText);
         }
@@ -33,12 +36,12 @@
           <table>
             <thead>
               <tr>
-                <th>Medication/Concentration</th>
-                <th>Quantity</th>
-                <th>Dose</th>
-                <th>Vía</th>
-                <th>Frequency</th>
-                <th>Duration</th>
+                <th>{{$t("healthMonitoring.recipes.recipeCard.columns.name") }}</th>
+                <th>{{$t("healthMonitoring.recipes.recipeCard.columns.quantity") }}</th>
+                <th>{{$t("healthMonitoring.recipes.recipeCard.columns.dose") }}</th>
+                <th>{{$t("healthMonitoring.recipes.recipeCard.columns.administration") }}</th>
+                <th>{{$t("healthMonitoring.recipes.recipeCard.columns.frequency") }}</th>
+                <th>{{$t("healthMonitoring.recipes.recipeCard.columns.duration") }}</th>
               </tr>
             </thead>
             <tbody>
@@ -48,7 +51,7 @@
                     type="text"
                     :value="medication.name"
                     @input="handleMedicationChange(index, 'name', $event.target.value)"
-                    placeholder="Name of medication"
+                    :placeholder="$t('healthMonitoring.recipes.recipeCard.medicationName')"
                   />
                 </td>
                 <td>
@@ -57,6 +60,7 @@
                     :value="medication.quantity"
                     @input="handleMedicationChange(index, 'quantity', Number($event.target.value))"
                     min="0"
+                    placeholder="0"
                   />
                 </td>
                 <td>
@@ -64,7 +68,7 @@
                     type="text"
                     :value="medication.dose"
                     @input="handleMedicationChange(index, 'dose', $event.target.value)"
-                    placeholder="Dose"
+                    :placeholder="$t('healthMonitoring.recipes.recipeCard.medicationDose')"
                   />
                 </td>
                 <td>
@@ -72,7 +76,7 @@
                     type="text"
                     :value="medication.route"
                     @input="handleMedicationChange(index, 'route', $event.target.value)"
-                    placeholder="Vía"
+                    :placeholder="$t('healthMonitoring.recipes.recipeCard.medicationAdministration')"
                   />
                 </td>
                 <td>
@@ -80,7 +84,7 @@
                     type="text"
                     :value="medication.frequency"
                     @input="handleMedicationChange(index, 'frequency', $event.target.value)"
-                    placeholder="Frequency"
+                    :placeholder="$t('healthMonitoring.recipes.recipeCard.medicationFrequency')"
                   />
                 </td>
                 <td>
@@ -88,7 +92,7 @@
                     type="text"
                     :value="medication.duration"
                     @input="handleMedicationChange(index, 'duration', $event.target.value)"
-                    placeholder="Duration"
+                    :placeholder="$t('healthMonitoring.recipes.recipeCard.medicationDuration')"
                   />
                 </td>
               </tr>
@@ -96,7 +100,7 @@
           </table>
 
           <button class="add-medication-btn" @click="handleAddMedication">
-            Add Medication
+            {{$t("healthMonitoring.recipes.addMedication") }}
           </button>
 
           <div v-if="recipe.notes.length > 0" class="notes">
