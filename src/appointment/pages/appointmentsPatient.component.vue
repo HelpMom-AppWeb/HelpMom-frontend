@@ -31,9 +31,7 @@
             </div>
           </div>
         </template>
-        <template #footer>
-          <Button label="Delete" icon="pi pi-trash" class="p-button-danger" @click="confirmDelete(appointment)" />
-        </template>
+
       </Card>
     </div>
   </div>
@@ -116,7 +114,11 @@ const fetchAppointments = async () => {
 
 const deleteAppointment = async (id) => {
   try {
-    if (appointments.value === dummyAppointments) {
+    // Verificar si estamos usando datos dummy
+    const isUsingDummyData = appointments.value === dummyAppointments;
+
+    if (isUsingDummyData) {
+      // Filtrar el array para eliminar la cita (demo mode)
       appointments.value = appointments.value.filter(app => app.id !== id);
       toast.add({
         severity: 'success',
@@ -125,6 +127,7 @@ const deleteAppointment = async (id) => {
         life: 5000
       });
     } else {
+      // Eliminar la cita del backend real
       await axios.delete(`http://localhost:3000/appointments/${id}`);
       toast.add({
         severity: 'success',
@@ -132,6 +135,7 @@ const deleteAppointment = async (id) => {
         detail: 'Appointment deleted successfully',
         life: 5000
       });
+      // Actualizar la lista de citas
       await fetchAppointments();
     }
   } catch (error) {
