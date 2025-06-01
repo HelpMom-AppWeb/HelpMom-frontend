@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-  <pv-select-button v-model="$i18n.locale" :options="languages">
+  <pv-select-button v-model="$i18n.locale" :options="languages" class="p-5">
     <template #option="slotProps">
       {{ slotProps.option.toUpperCase()}}
     </template>
