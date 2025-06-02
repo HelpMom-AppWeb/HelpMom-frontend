@@ -3,54 +3,57 @@
 
 
     <Sidebar v-model:visible="visible" position="left" class="custom-sidebar">
+
+      <language-switcher/>
+
       <div class="profile-section">
 
         <img src="/src/assets/logo.jpeg" class="avatar" alt="avatar" />
       </div>
 
       <div class="menu-group">
-        <p class="section-title">  MENU</p>
+        <p class="section-title">  {{ $t("sidebar.patient.menu.label") }}</p>
         <router-link to="/home" class="menu-item" :class="{ active: isActive('/home') }">
-          <IconDashboard class="mr-2" />   Dashboard
+          <IconDashboard class="mr-2" />   {{ $t("sidebar.patient.menu.dashboard") }}
         </router-link>
         <router-link to="/profile" class="menu-item" :class="{ active: isActive('/profile') }">
-          <IconProfile class="mr-2" />    Profile
+          <IconProfile class="mr-2" />    {{ $t("sidebar.patient.menu.profile") }}
         </router-link>
       </div>
 
       <div class="menu-group">
-        <p class="section-title">  ANALYTICS</p>
+        <p class="section-title">  {{ $t("sidebar.patient.analytics.label") }}</p>
         <router-link to="/health" class="menu-item" :class="{ active: isActive('/health') }">
-          <IconHealth class="mr-2" /> Health Monitoring
+          <IconHealth class="mr-2" /> {{ $t("sidebar.patient.analytics.healthMonitoring") }}
         </router-link>
       </div>
 
       <div class="menu-group">
-        <p class="section-title">SCHEDULE</p>
+        <p class="section-title">{{ $t("sidebar.patient.schedule.label") }}</p>
         <router-link to="/chat" class="menu-item" :class="{ active: isActive('/chat') }">
-          <IconChat class="mr-2" /> Chat
+          <IconChat class="mr-2" /> {{ $t("sidebar.patient.schedule.chat") }}
         </router-link>
         <router-link to="/all-appointments" class="menu-item" :class="{ active: isActive('/all-appointments') }">
-          <IconCalendar class="mr-2" /> Appointments
+          <IconCalendar class="mr-2" /> {{ $t("sidebar.patient.schedule.appointments") }}
         </router-link>
-        <router-link to="/patient-management" class="menu-item" :class="{ active: isActive('/patient-management') }">
-          <i class="pi pi-list-check mr-2"></i> Patient Management
+        <router-link to="/patient-management/patients" class="menu-item" :class="{ active: isActive('/patient-management/patients') }">
+          <i class="pi pi-list-check mr-2"></i> {{ $t("sidebar.doctor.patientMenu.patientList") }}
         </router-link>
       </div>
 
       <div class="menu-group">
-        <p class="section-title">HELP</p>
+        <p class="section-title">{{ $t("sidebar.patient.help.label") }}</p>
         <router-link to="/notifications" class="menu-item" :class="{ active: isActive('/notifications') }">
-          <IconNotification class="mr-2" /> Notifications
+          <IconNotification class="mr-2" /> {{ $t("sidebar.patient.help.notifications") }}
         </router-link>
         <router-link to="/settings" class="menu-item" :class="{ active: isActive('/settings') }">
-          <IconSettings class="mr-2" /> Settings
+          <IconSettings class="mr-2" /> {{ $t("sidebar.patient.help.settings") }}
         </router-link>
       </div>
 
       <div class="logout">
         <a class="menu-item logout-btn" href="#">
-          <IconLogout class="mr-2" /> LogOut
+          <IconLogout class="mr-2" /> {{ $t("sidebar.patient.logout") }}
         </a>
       </div>
     </Sidebar>
@@ -66,6 +69,7 @@ import IconCalendar from "../../assets/IconCalendar.vue";
 import IconNotification from "../../assets/IconNotification.vue";
 import IconSettings from "../../assets/IconSettings.vue";
 import IconLogout from "../../assets/IconLogout.vue";
+import LanguageSwitcher from "./language-switcher.component.vue";
 export default {
   name: 'sidebar-menu',
   components: {
@@ -76,7 +80,8 @@ export default {
     IconChat,
     IconHealth,
     IconProfile,
-    IconDashboard
+    IconDashboard,
+    LanguageSwitcher
   },
   data() {
     return {

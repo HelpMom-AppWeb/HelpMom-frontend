@@ -1,10 +1,9 @@
 <script>
 import PatientItem from "./patient-item.component.vue";
-import Button from "primevue/button";
 
 export default {
   name: "patient-list",
-  components: {Button, PatientItem},
+  components: {PatientItem},
   props: {
     patients: {
       type: Array,
@@ -20,8 +19,8 @@ export default {
   </div>
 
   <div style="position: fixed; bottom: 50px; right: 90px;">
-    <router-link to="/about">
-      <Button label="Agregar paciente"
+    <router-link to="/patient-management/patients/add-patient">
+      <pv-button label="Agregar paciente"
               style="background-color: #BDFFB3; border-color: #000000; color: #000000;
               width: 200px; height: 80px; border-radius: 20px"
               icon="pi pi-plus" iconPos="right" />
