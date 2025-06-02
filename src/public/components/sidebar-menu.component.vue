@@ -36,7 +36,7 @@
         <router-link to="/all-appointments" class="menu-item" :class="{ active: isActive('/all-appointments') }">
           <IconCalendar class="mr-2" /> {{ $t("sidebar.patient.schedule.appointments") }}
         </router-link>
-        <router-link to="/patient-management" class="menu-item" :class="{ active: isActive('/patient-management') }">
+        <router-link to="/patient-management/patients" class="menu-item" :class="{ active: isActive('/patient-management/patients') }">
           <i class="pi pi-list-check mr-2"></i> {{ $t("sidebar.doctor.patientMenu.patientList") }}
         </router-link>
       </div>
