@@ -3,10 +3,12 @@ import InputText from "primevue/inputtext";
 import Button from "primevue/button"
 import { Form } from '@primevue/forms';
 import Message  from 'primevue/message'
+import {$t} from "@primeuix/styled";
 
 
 export default {
   name: "add-patient",
+  methods: {$t},
   components: {InputText, Button, Form}
 }
 </script>
