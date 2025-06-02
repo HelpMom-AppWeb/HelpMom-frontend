@@ -17,7 +17,7 @@ import {
     Dialog, DialogService, Drawer,
     FileUpload, FloatLabel, IconField, InputIcon, InputNumber, InputText, Menu, Rating, Row,
     Select,
-    SelectButton, Tag, Textarea, Toast, ToastService, Toolbar
+    SelectButton, Tag, Textarea, Toast, ToastService, Toolbar, Message
 } from "primevue";
 import i18n from "./i18n.js";
 import router from "./router/index.js";
@@ -54,4 +54,5 @@ createApp(App)
     .component('pv-textarea', Textarea)
     .component('pv-toolbar', Toolbar)
     .component('pv-toast', Toast)
+    .component('pv-message', Message)
     .mount('#app')
