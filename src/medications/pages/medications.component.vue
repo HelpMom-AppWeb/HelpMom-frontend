@@ -36,7 +36,7 @@ const addNote = (recipeId, noteText) => {
 
 <template>
   <div class="container">
-    <h1>List of Recipes</h1>
+    <h1>{{$t("healthMonitoring.recipes.title") }}</h1>
     <RecipeList :recipes="recipes" @add-medication="addMedication" @add-note="addNote" />
     <AddRecipeButton @add-recipe="addNewRecipe" />
   </div>

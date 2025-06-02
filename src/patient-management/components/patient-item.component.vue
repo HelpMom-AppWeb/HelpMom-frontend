@@ -30,23 +30,23 @@ export default {
             <router-link to="/about">
               <Button
                   style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                  label="About"></Button>
+                  :label="$t('patientManagement.buttons.aboutPatient')"></Button>
             </router-link>
             <router-link to="/chat">
               <Button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                      label="Chat"></Button>
+                      :label="$t('patientManagement.buttons.chat')"></Button>
             </router-link>
             <router-link to="/health">
               <Button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                      label="Health"></Button>
+                      :label="$t('patientManagement.buttons.health')"></Button>
             </router-link>
             <router-link to="/appointments">
               <Button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                      label="Appointments"></Button>
+                      :label="$t('patientManagement.buttons.appointments')"></Button>
             </router-link>
             <router-link to="/medications">
               <Button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                      label="Medication"></Button>
+                      :label="$t('patientManagement.buttons.medications')"></Button>
             </router-link>
           </div>
         </div>

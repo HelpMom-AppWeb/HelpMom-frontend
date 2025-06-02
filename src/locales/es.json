@@ -1,12 +1,207 @@
 {
-  "option": {
-    "home": "Home",
-    "about": "About",
-    "categories": "Categories"
+  "sidebar": {
+    "patient": {
+      "menu": {
+        "label": "Menú",
+        "dashboard": "Inicio",
+        "profile": "Perfil"
+      },
+      "analytics": {
+        "label": "Analíticas",
+        "healthMonitoring": "Monitoreo de salud"
+      },
+      "schedule": {
+        "label": "Agenda",
+        "chat": "Chat",
+        "appointments": "Citas"
+      },
+      "help": {
+        "label": "Ayuda",
+        "notifications": "Notificaciones",
+        "settings": "Configuración"
+      },
+      "logout": "Cerrar sesión"
+    },
+    "doctor": {
+      "menu": {
+        "label": "Menú",
+        "dashboard": "Inicio",
+        "profile": "Perfil"
+      },
+      "patientMenu": {
+        "label": "Pacientes",
+        "patientList": "Lista de pacientes"
+      },
+      "help": {
+        "label": "Ayuda",
+        "notifications": "Notificaciones",
+        "settings": "Configuración"
+      },
+      "logout": "Cerrar sesión"
+    }
   },
-  "authoring-phrase": {
-    "intro": "Made with",
-    "use": "using",
-    "author": "by {brand} Developer Team"
+  "pageNotFound": {
+    "title": "Página no encontrada",
+    "message1": "La ruta ",
+    "message2": " no está disponible.",
+    "backToHome": "Volver al inicio"
+  },
+  "dashboard": {
+    "babyWeight": {
+      "label": "Desarrollo fetal",
+      "weightData": "Peso estimado (g)",
+      "weekAxis": "Semana de gestación",
+      "weightAxis": "Peso (g)"
+    },
+    "babyHeartRate": {
+      "label": "Frecuencia cardíaca fetal",
+      "heartRateData": "Frecuencia cardíaca (bpm)",
+      "weekAxis": "Semana de gestación",
+      "heartRateAxis": "Latidos por minuto"
+    },
+    "babyParameters": {
+      "label": "Resumen de parámetros",
+      "parameterData": "Semana 24",
+      "weightAxis": "Peso (g)",
+      "heartRateAxis": "Frecuencia cardíaca (bpm)",
+      "lengthAxis": "Longitud (cm)"
+    }
+  },
+  "healthMonitoring": {
+    "title": "Monitoreo de salud",
+    "updateValues": "Actualizar valores",
+    "metrics": {
+      "heartRate": {
+        "label": "Frecuencia cardíaca",
+        "unit": "latidos/min",
+        "info": "La frecuencia cardíaca es la velocidad del latido del corazón medida por el número de contracciones del corazón por minuto. Un ritmo cardíaco en reposo normal para adultos varía entre 60 y 100 latidos por minuto."
+      },
+      "temperature": {
+        "label": "Temperatura",
+        "unit": "grados C",
+        "info": "La temperatura corporal es una medida de la capacidad del cuerpo para generar y eliminar calor. La temperatura corporal normal oscila entre 36.5°C y 37.2°C."
+      },
+      "weight": {
+        "label": "Peso",
+        "unit": "gramos",
+        "info": "El peso corporal es una medición de la fuerza ejercida por la gravedad sobre un objeto. En EE.UU. se mide comúnmente en libras, mientras que en la mayoría de los otros países se usa kilogramos."
+      },
+      "oxygen": {
+        "label": "Saturación de oxígeno",
+        "unit": "%",
+        "info": "La saturación de oxígeno es una medida de cuánta cantidad de oxígeno transporta la sangre en porcentaje del máximo que puede llevar. Los niveles normales de SpO2 están entre 95% y 100%."
+      }
+    },
+    "actions": {
+      "medications": "Lista de medicamentos"
+    },
+    "modals": {
+      "updateHealthData": {
+        "title": "Actualizar datos de salud",
+        "fields": {
+          "heartRate": "Frecuencia cardíaca (latidos/min)",
+          "temperature": "Temperatura (°C)",
+          "weight": "Peso (libras)",
+          "oxygen": "Saturación de oxígeno (%)"
+        },
+        "buttons": {
+          "cancel": "Cancelar",
+          "save": "Guardar cambios"
+        }
+      },
+      "medications": {
+        "title": "Medicamentos",
+        "addMedication": "Agregar medicamento"
+      },
+      "addMedication": {
+        "title": "Agregar nuevo medicamento",
+        "fields": {
+          "name": "Nombre del medicamento",
+          "dosage": "Dosis",
+          "schedule": "Horario"
+        },
+        "buttons": {
+          "cancel": "Cancelar",
+          "save": "Guardar medicamento"
+        }
+      }
+    },
+    "recipes": {
+      "title": "Lista de recetas",
+      "addMedication": "Agregar medicamento",
+      "addRecipe": "Agregar nueva receta",
+      "notePrompt": "Ingrese una nota",
+      "newNote": "Nueva nota",
+      "recipeCard": {
+        "columns": {
+          "name": "Medicamento/Concentración",
+          "quantity": "Cantidad",
+          "dose": "Dosis",
+          "administration": "Administración",
+          "frequency": "Frecuencia",
+          "duration": "Duración"
+        },
+        "medicationName": "Nombre del medicamento",
+        "medicationDose": "Dosis",
+        "medicationAdministration": "Administración",
+        "medicationFrequency": "Frecuencia",
+        "medicationDuration": "Duración"
+      }
+    }
+  },
+  "chat": {
+    "placeholder": "Escriba un mensaje..."
+  },
+  "appointments": {
+    "welcomeTitle": "Bienvenido",
+    "welcomeMessage": "Bienvenido a HelpMom",
+    "goToAppointments": "Ir a citas",
+    "myAppointments": "Mis citas",
+    "medicalAppointments": "Citas médicas",
+    "myMedicalAppointments": {
+      "title": "Mis citas médicas",
+      "filter": "Filtrar por mes",
+      "listView": "Vista de lista",
+      "calendarView": "Vista de calendario",
+      "showAll": "Mostrar todas"
+    },
+    "appointmentForm": {
+      "title": "Agendar una cita",
+      "labels": {
+        "specialty": "Especialidad",
+        "doctor": "Doctor",
+        "date": "Fecha",
+        "time": "Hora",
+        "description": "Descripción"
+      },
+      "buttons": {
+        "cancel": "Cancelar",
+        "save": "Agendar cita"
+      },
+      "placeholders": {
+        "specialty": "Seleccione una especialidad",
+        "doctor": "Seleccione un doctor",
+        "description": "Breve descripción del motivo de la cita"
+      }
+    }
+  },
+  "patientManagement": {
+    "title": "Lista de pacientes",
+    "buttons": {
+      "addPatient": "Agregar paciente",
+      "aboutPatient": "Información",
+      "chat": "Chat",
+      "health": "Monitoreo",
+      "appointments": "Citas",
+      "medications": "Medicamentos"
+    },
+    "patientInformation": {
+      "name": "Nombre personal",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "babyName": "Nombre del bebé",
+      "babyBirthDate": "Fecha de nacimiento del bebé",
+      "assignedDoctor": "Doctor asignado"
+    }
   }
 }

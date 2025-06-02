@@ -39,7 +39,7 @@ onMounted(() => {
 
 <template>
   <div class="appointment-page">
-    <h1 class="page-title">Medical Appointments</h1>
+    <h1 class="page-title">{{ $t("appointments.medicalAppointments") }}</h1>
 
     <div class="appointment-container">
       <AppointmentCalendar
