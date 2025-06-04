@@ -105,17 +105,19 @@ export default {
 }
 
 .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 0.4rem;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  min-width: 150px;
-  padding: 0.5rem 0;
+  .dropdown-menu {
+    position: fixed;
+    bottom: 4rem;
+    left: 1rem;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 150px;
+    padding: 0.5rem 0;
+  }
+
 }
 
 .language-option {
