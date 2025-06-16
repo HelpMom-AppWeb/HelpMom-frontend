@@ -162,6 +162,13 @@
       "timestamp": 1748981541750,
       "patientId": "",
       "id": 2
+    },
+    {
+      "from": "doctor",
+      "text": "dawdwadwadwad",
+      "timestamp": 1750043175518,
+      "patientId": "1",
+      "id": 3
     }
   ]
 }

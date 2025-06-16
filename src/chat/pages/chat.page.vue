@@ -1,6 +1,5 @@
 <script>
-import axios from 'axios';
-import { watch } from 'vue';
+import { ChatService } from '../services/chat.service';
 
 export default {
   props: {
@@ -25,9 +24,9 @@ export default {
       async handler(newId) {
         this.selectedPatientId = newId;
         if (newId) {
-          await this.fetchMessages();
+          await this.loadMessages();
         } else {
-          await this.fetchPatients();
+          await this.loadPatients();
         }
       }
     }
@@ -39,37 +38,31 @@ export default {
     document.addEventListener('click', this.closeMenuOutside);
   },
   methods: {
-    async fetchPatients() {
-      const res = await axios.get('http://localhost:3000/patients');
-      this.patients = res.data;
+    async loadPatients() {
+      this.patients = await ChatService.getPatients();
     },
-    async fetchMessages() {
-      const res = await axios.get('http://localhost:3000/messages');
-      this.messages = res.data.filter(msg => msg.patientId === this.selectedPatientId);
-
-      const patientRes = await axios.get(`http://localhost:3000/patients/${this.selectedPatientId}`);
-      this.patientName = patientRes.data.name;
+    async loadMessages() {
+      this.messages = await ChatService.getMessages(this.selectedPatientId);
+      const patient = await ChatService.getPatient(this.selectedPatientId);
+      this.patientName = patient.name;
     },
     async sendMessage() {
       if (!this.newMessage.trim()) return;
-
-      const message = {
+      await ChatService.sendMessage({
         from: 'doctor',
         text: this.newMessage,
         timestamp: Date.now(),
         patientId: this.selectedPatientId
-      };
-
-      await axios.post('http://localhost:3000/messages', message);
+      });
       this.newMessage = '';
-      await this.fetchMessages();
+      await this.loadMessages();
     },
     toggleMenu(id) {
       this.menuOpen = this.menuOpen === id ? null : id;
     },
     async deleteMessage(id) {
       try {
-        await axios.delete(`http://localhost:3000/messages/${id}`);
+        await ChatService.deleteMessage(id);
         this.messages = this.messages.filter(msg => msg.id !== id);
         this.menuOpen = null;
       } catch (error) {
@@ -99,7 +92,6 @@ export default {
       <span v-else>Selecciona un paciente para iniciar chat</span>
     </div>
 
-    <!-- Lista de pacientes -->
     <div v-if="!selectedPatientId" class="patient-list">
       <ul>
         <li v-for="p in patients" :key="p.id" class="patient-item">
@@ -109,7 +101,6 @@ export default {
       </ul>
     </div>
 
-    <!-- Mensajes -->
     <div v-else class="chat-body">
       <div
           v-for="msg in messages"
@@ -133,7 +124,6 @@ export default {
       </div>
     </div>
 
-    <!-- Input solo si hay paciente -->
     <div v-if="selectedPatientId" class="chat-input">
       <input
           v-model="newMessage"
@@ -293,5 +283,4 @@ export default {
   border-radius: 12px;
   font-size: 18px;
   cursor: pointer;
-}
-</style>
+}</style>

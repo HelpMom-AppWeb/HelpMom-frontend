@@ -6,10 +6,10 @@ import AllAppointmentsComponent from "../appointment/pages/all-appointments.vue"
 import PatientManagementComponent from "../patient-management/pages/patient-management.component.vue";
 import AddPatientComponent from "../patient-management/pages/add-patient.component.vue";
 import PatientInfoComponent from "../patient-management/pages/patient-info.component.vue";
-import LoginContentComponentn from "../pages/login/login-content.component.vue";
-import LoginContentComponent from "../pages/login/login-content.component.vue";
+import LoginComponent from "../pages/login/login.component.vue";
+import RegisterComponent from "../pages/register/register.component.vue";
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
-const ChatComponent = () => import('../chat/pages/chat.vue');
+const ChatComponent = () => import('../chat/pages/chat.page.vue');
 const HealthMonitoringComponent = () => import('../health-monitoring/pages/health-monitoring.component.vue')
 
 const MedicationsComponent = () => import('../medications/pages/medications.component.vue');
@@ -22,7 +22,8 @@ const routes = [
 
     { path: '/', name: 'default', redirect: '/home' },
 
-    {path: '/login',name: 'Login',component: LoginContentComponent},
+    {path: '/login',name: 'Login',component: LoginComponent},
+    {path: '/register',name: 'Register',component: RegisterComponent},
     { path: '/appointments', name: 'appointments', component: AppointmentComponent, meta: { title: 'Medical Appointments' } },
     { path: '/my-appointments', name: 'patient-appointments', component: AppointmentsPatient, meta: { title: 'My appointments' } },
     { path: '/all-appointments', name: 'all-appointments', component: AllAppointmentsComponent, meta: { title: 'All Appointments'} },
