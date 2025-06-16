@@ -14,21 +14,16 @@ export default defineComponent({
     IconOxygen,
   },
   setup() {
-    const healthData = ref({
-      heartRate: 72,
-      temperature: 37.0,
-      weight: 150,
-      oxygen: 98
-    });
 
-    const updatedData = ref({ ...healthData.value });
+    const healthData = ref({}); // se declara antes de usarla
+    const updatedData = ref({});
 
     const fetchHealthData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/health');
-        if (response.data) {
-          healthData.value = response.data;
-          updatedData.value = { ...response.data };
+        const response = await axios.get('http://localhost:3000/healthData');
+        if (response.data && response.data.length > 0) {
+          healthData.value = response.data[0]; // obtiene el primer (y único) registro
+          updatedData.value = { ...response.data[0] };
         }
       } catch (error) {
         console.error('Error fetching health data:', error);
@@ -61,6 +56,8 @@ export default defineComponent({
       newMedication.value = { name: '', dosage: '', schedule: '' };
       showAddMedicationForm.value = false;
     };
+
+    fetchHealthData();
 
     return {
       IconHeart,

@@ -2,7 +2,7 @@
   "healthData": [
     {
       "id": 1,
-      "heartRate": "72",
+      "heartRate": "50",
       "temperature": "36.5",
       "weight": "8.5",
       "oxygen": "98"
