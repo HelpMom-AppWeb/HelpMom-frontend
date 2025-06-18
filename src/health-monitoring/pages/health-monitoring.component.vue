@@ -20,7 +20,7 @@ export default defineComponent({
 
     const fetchHealthData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/healthData');
+        const response = await axios.get('http://localhost:5128/api/v1/health-data');
         if (response.data && response.data.length > 0) {
           healthData.value = response.data[0]; // obtiene el primer (y único) registro
           updatedData.value = { ...response.data[0] };
