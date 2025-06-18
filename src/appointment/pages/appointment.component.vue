@@ -11,7 +11,7 @@ const doctors = ref([]);
 
 const fetchAppointments = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/appointments');
+    const response = await axios.get('http://localhost:5128/api/v1/appointment');
     appointments.value = response.data;
   } catch (error) {
     console.error('Error fetching appointments:', error);

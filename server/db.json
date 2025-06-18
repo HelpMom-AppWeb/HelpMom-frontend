@@ -3,7 +3,6 @@
     {
       "id": "1",
       "doctor": "Dr. Smith",
-      "specialty": "Pediatrics",
       "date": "2025-05-15",
       "time": "10:00",
       "description": "Anual control",
@@ -13,7 +12,6 @@
     {
       "id": "7370",
       "doctor": "Dr. Williams",
-      "specialty": "Cardiology",
       "date": "2025-06-10",
       "time": "09:00",
       "description": "Check up",
@@ -22,7 +20,6 @@
     {
       "id": "ce93",
       "doctor": "Dr. Smith",
-      "specialty": "Pediatrics",
       "date": "2025-06-18",
       "time": "09:00",
       "description": "Check up",
@@ -31,7 +28,6 @@
     {
       "id": "d01d",
       "doctor": "Dr. Johnson",
-      "specialty": "Gynecology",
       "date": "2025-06-11",
       "time": "09:00",
       "description": "",
@@ -41,7 +37,6 @@
     {
       "id": "3c85",
       "doctor": "Dr. Martinez",
-      "specialty": "Dermatology",
       "date": "2025-06-10",
       "time": "09:00",
       "description": "",
