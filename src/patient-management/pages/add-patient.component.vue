@@ -54,7 +54,7 @@ import { useToast } from "primevue/usetoast";
 const toast = useToast();
 
 const onSubmit = () => {
-    toast.add({ severity: 'success', summary: 'Successful operation', detail: 'Patient data was saved', life: 3000 });
+  toast.add({ severity: 'success', summary: 'Successful operation', detail: 'Patient data was saved', life: 3000 });
 };
 
 const form = ref({

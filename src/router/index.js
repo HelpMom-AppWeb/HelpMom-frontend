@@ -9,7 +9,7 @@ import PatientInfoComponent from "../patient-management/pages/patient-info.compo
 import LoginComponent from "../pages/login/login.component.vue";
 import RegisterComponent from "../pages/register/register.component.vue";
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
-const ChatComponent = () => import('../chat/pages/chat.page.vue');
+const ChatComponent = () => import('../chat/pages/chat.vue');
 const HealthMonitoringComponent = () => import('../health-monitoring/pages/health-monitoring.component.vue')
 
 const MedicationsComponent = () => import('../medications/pages/medications.component.vue');

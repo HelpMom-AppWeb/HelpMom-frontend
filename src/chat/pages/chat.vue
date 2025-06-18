@@ -1,5 +1,6 @@
 <script>
-import { ChatService } from '../services/chat.service';
+import axios from 'axios';
+import { watch } from 'vue';
 
 export default {
   props: {
@@ -24,9 +25,9 @@ export default {
       async handler(newId) {
         this.selectedPatientId = newId;
         if (newId) {
-          await this.loadMessages();
+          await this.fetchMessages();
         } else {
-          await this.loadPatients();
+          await this.fetchPatients();
         }
       }
     }
@@ -38,31 +39,65 @@ export default {
     document.addEventListener('click', this.closeMenuOutside);
   },
   methods: {
-    async loadPatients() {
-      this.patients = await ChatService.getPatients();
+    async fetchPatients() {
+      const res = await axios.get('http://localhost:3000/patients');
+      this.patients = res.data;
     },
-    async loadMessages() {
-      this.messages = await ChatService.getMessages(this.selectedPatientId);
-      const patient = await ChatService.getPatient(this.selectedPatientId);
-      this.patientName = patient.name;
+
+    async fetchMessages() {
+      try {
+        const res = await axios.get(`http://localhost:5053/api/Chat/messages/${this.selectedPatientId}`);
+
+        this.messages = res.data.map(msg => ({
+          ...msg,
+          from: typeof msg.from === 'object'
+              ? msg.from
+              : { role: msg.fromRole || msg.from, userId: msg.fromUserId || null }
+        }));
+
+
+        const patientRes = await axios.get(`http://localhost:3000/patients/${this.selectedPatientId}`);
+        this.patientName = patientRes.data.name;
+      } catch (error) {
+        console.error('Error al obtener mensajes o paciente:', error);
+      }
     },
+
+
+
     async sendMessage() {
       if (!this.newMessage.trim()) return;
-      await ChatService.sendMessage({
-        from: 'doctor',
+
+      const message = {
+        from: {
+          userId: 1, // o el ID real
+          role: 'doctor'
+        },
         text: this.newMessage,
-        timestamp: Date.now(),
-        patientId: this.selectedPatientId
-      });
-      this.newMessage = '';
-      await this.loadMessages();
+        timestamp: Date.now()
+        // patientId ya no va en el body
+      };
+
+      try {
+        await axios.post('http://localhost:5053/api/Chat/messages', {
+          fromUserId: message.from.userId,
+          fromRole: message.from.role,
+          text: message.text,
+          timestamp: message.timestamp,
+          patientId: parseInt(this.selectedPatientId)
+        });
+        this.newMessage = '';
+        await this.fetchMessages();
+      } catch (error) {
+        console.error('Error al enviar el mensaje al backend:', error);
+      }
     },
     toggleMenu(id) {
       this.menuOpen = this.menuOpen === id ? null : id;
     },
     async deleteMessage(id) {
       try {
-        await ChatService.deleteMessage(id);
+        await axios.delete(`http://localhost:3000/messages/${id}`);
         this.messages = this.messages.filter(msg => msg.id !== id);
         this.menuOpen = null;
       } catch (error) {
@@ -92,6 +127,7 @@ export default {
       <span v-else>Selecciona un paciente para iniciar chat</span>
     </div>
 
+    <!-- Lista de pacientes -->
     <div v-if="!selectedPatientId" class="patient-list">
       <ul>
         <li v-for="p in patients" :key="p.id" class="patient-item">
@@ -101,21 +137,23 @@ export default {
       </ul>
     </div>
 
+    <!-- Mensajes -->
     <div v-else class="chat-body">
       <div
           v-for="msg in messages"
           :key="msg.id"
-          :class="['chat-message', msg.from === 'doctor' ? 'doctor' : 'patient']"
+          :class="['chat-message', msg.from?.role === 'doctor' ? 'doctor' : 'patient']"
       >
         <img
-            :src="msg.from === 'doctor'
-            ? 'https://i.postimg.cc/59Z15zxP/obstetra.avif'
-            : 'https://i.postimg.cc/T3MS1qR6/madre.avif'"
+            :src="msg.from?.role === 'doctor'
+  ? 'https://i.postimg.cc/59Z15zxP/obstetra.avif'
+  : 'https://i.postimg.cc/T3MS1qR6/madre.avif'"
+
             class="avatar"
         />
         <div class="bubble">{{ msg.text }}</div>
 
-        <div v-if="msg.from === 'doctor'" class="menu-container" @click.stop="toggleMenu(msg.id)">
+        <div v-if="msg.from?.role === 'doctor'" class="menu-container" @click.stop="toggleMenu(msg.id)">
           ⋮
           <div v-if="menuOpen === msg.id" class="menu-dropdown">
             <button @click="deleteMessage(msg.id)">Eliminar</button>
@@ -124,6 +162,7 @@ export default {
       </div>
     </div>
 
+    <!-- Input solo si hay paciente -->
     <div v-if="selectedPatientId" class="chat-input">
       <input
           v-model="newMessage"
@@ -283,4 +322,5 @@ export default {
   border-radius: 12px;
   font-size: 18px;
   cursor: pointer;
-}</style>
+}
+</style>

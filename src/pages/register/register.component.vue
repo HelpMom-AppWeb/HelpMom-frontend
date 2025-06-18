@@ -7,27 +7,23 @@
 
     <div class="card flex">
       <span class="title font-normal text-xl" style="color: #B8578D;">
-        ¡Bienvenida a HelpMom!
+        ¡Crea tu cuenta en HelpMom!
       </span>
       <p class="text-center mb-4 text-gray-600 text-sm">
-        Plataforma para madres gestantes y primerizas: accede a atención médica especializada y lleva el control de tu salud y la de tu bebé.
+        Completa el siguiente formulario para comenzar a cuidar tu salud y la de tu bebé.
       </p>
 
-      <form class="flex flex-column gap-3" @submit.prevent="handleSubmitLogin">
-        <input
-            type="email"
-            placeholder="Correo electrónico"
-            class="input-field p-3"
-            v-model="email"
-            @input="validateForm"
-        />
+      <form class="flex flex-column gap-3" @submit.prevent="handleSubmit">
+        <input v-model="firstName" type="text" placeholder="Nombre" class="input-field p-3" />
+        <input v-model="lastName" type="text" placeholder="Apellido" class="input-field p-3" />
+        <input v-model="email" type="email" placeholder="Correo electrónico" class="input-field p-3" />
+
         <div class="password-field">
           <input
               :type="passwordFieldType"
+              v-model="password"
               placeholder="Contraseña"
               class="input-field p-3"
-              v-model="password"
-              @input="validateForm"
           />
           <i
               :class="passwordFieldType === 'password' ? 'pi pi-eye' : 'pi pi-eye-slash'"
@@ -36,25 +32,60 @@
           ></i>
         </div>
 
-        <a class="link" href="#" style="color: #B8578D; font-style:italic; font-size: 0.8rem;">
-          ¿Olvidaste tu contraseña?
-        </a>
+        <div class="password-field">
+          <input
+              :type="passwordFieldType"
+              v-model="confirmPassword"
+              placeholder="Confirmar contraseña"
+              class="input-field p-3"
+          />
+          <i
+              :class="passwordFieldType === 'password' ? 'pi pi-eye' : 'pi pi-eye-slash'"
+              @click="togglePasswordFieldType"
+              class="toggle-icon"
+          ></i>
+        </div>
 
-        <button :disabled="!formValid" type="submit" class="button p-3" style="color: #fff; margin-top:30px">
-          Iniciar sesión
+        <!-- Selector de rol (sin texto, solo botones) -->
+        <div class="flex justify-center gap-4 my-3">
+          <div class="flex align-items-center gap-2">
+            <input
+                type="radio"
+                id="madre"
+                value="madre"
+                v-model="role"
+                class="accent-[#B8578D]"
+            />
+            <label for="madre" class="text-gray-700 text-sm">Madre</label>
+          </div>
+          <div class="flex align-items-center gap-2">
+            <input
+                type="radio"
+                id="obstetra"
+                value="obstetra"
+                v-model="role"
+                class="accent-[#B8578D]"
+            />
+            <label for="obstetra" class="text-gray-700 text-sm">Obstetra</label>
+          </div>
+        </div>
+
+        <button :disabled="!formValid" type="submit" class="button p-3 mt-4" style="color: white">
+          Registrarse
         </button>
       </form>
     </div>
 
     <h3 class="card-footer">
-      ¿Eres nueva en HelpMom?
-      <a class="link" href="#" style="font-weight: 600">Crea una cuenta</a>
+      ¿Ya tienes cuenta?
+      <router-link to="/login" class="link" style="font-weight: 600">Iniciar Sesion</router-link>
+
     </h3>
 
     <div v-if="showDialog" class="error-modal p-5 flex flex-column align-items-center gap-5 text-center">
       <i class="text-7xl pi pi-exclamation-circle text-red-500"></i>
-      <h1>¡Inicio de sesión fallido!</h1>
-      <p class="text-md">{{ message_error }}</p>
+      <h1>Error de registro</h1>
+      <p class="text-md">{{ messageError }}</p>
       <button class="py-2 px-4 bg-red-500 text-white rounded" @click="showDialog = false">OK</button>
     </div>
   </div>
@@ -62,29 +93,41 @@
 
 <script>
 export default {
-  name: "login-content",
   data() {
     return {
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
+      confirmPassword: '',
+      role: '',
       passwordFieldType: 'password',
-      formValid: false,
       showDialog: false,
-      message_error: ''
+      messageError: ''
     };
   },
+  computed: {
+    formValid() {
+      return (
+          this.firstName &&
+          this.lastName &&
+          this.email &&
+          this.password &&
+          this.confirmPassword &&
+          this.password === this.confirmPassword &&
+          this.role
+      );
+    }
+  },
   methods: {
-    handleSubmitLogin() {
-      if (!this.email || !this.password) {
-        this.message_error = "Por favor, completa todos los campos.";
+    handleSubmit() {
+      if (!this.formValid) {
+        this.messageError = "Por favor completa todos los campos correctamente.";
         this.showDialog = true;
-      } else {
-        // Simulación de login exitoso
-        alert("Inicio de sesión simulado. Aquí iría la navegación a la plataforma.");
+        return;
       }
-    },
-    validateForm() {
-      this.formValid = this.email !== '' && this.password !== '';
+
+      alert(`Cuenta creada para ${this.firstName} como ${this.role}.`);
     },
     togglePasswordFieldType() {
       this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
@@ -151,6 +194,11 @@ export default {
   background-color: #99436F;
 }
 
+.card-footer {
+  font-weight: normal;
+  font-size: 1rem;
+}
+
 .link {
   width: 90%;
   align-self: center;
@@ -159,22 +207,12 @@ export default {
   text-decoration: none;
 }
 
-.card-footer {
-  font-weight: normal;
-  font-size: 1rem;
-}
-
 .password-field {
   align-self: center;
   position: relative;
   width: 90%;
   display: flex;
   align-items: center;
-}
-
-.input-field {
-  flex: 1;
-  padding-right: 2.5rem;
 }
 
 .toggle-icon {

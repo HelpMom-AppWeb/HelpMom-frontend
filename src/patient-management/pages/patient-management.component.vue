@@ -72,13 +72,13 @@ export default {
   methods: {
     getPatients() {
       this.patientsApi.getAll()
-        .then((response) => {
-          console.log(response);
-          //this.patients = PatientAssembler.toEntitiesFromResponse(response);
-        })
-        .catch((error) => {
-        this.errors.push(error);
-       });
+          .then((response) => {
+            console.log(response);
+            //this.patients = PatientAssembler.toEntitiesFromResponse(response);
+          })
+          .catch((error) => {
+            this.errors.push(error);
+          });
     }
   },
   created() {
