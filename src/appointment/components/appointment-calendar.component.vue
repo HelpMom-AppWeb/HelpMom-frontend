@@ -32,11 +32,12 @@ const calendarOptions = ref({
   },
   events: computed(() => {
     return props.appointments.map(appointment => ({
-      id: appointment.id,
+      id: appointment.id || `${appointment.doctorId}-${appointment.date}-${appointment.time}`,
+      title: appointment.doctorName || appointment.doctor,
       start: `${appointment.date}T${appointment.time}`,
       extendedProps: {
         description: appointment.description,
-        doctor: appointment.doctor,
+        doctor: appointment.doctorName || appointment.doctor,
         patientName: appointment.patientName
       }
     }));
@@ -47,16 +48,15 @@ const calendarOptions = ref({
       summary: 'Detalles de la cita',
       detail: `
         Doctor: ${info.event.extendedProps.doctor}
-        Date: ${info.event.start.toLocaleDateString()}
-        Time: ${info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-        Description: ${info.event.extendedProps.description || 'N/A'}
+        Fecha: ${info.event.start.toLocaleDateString()}
+        Hora: ${info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+        Paciente: ${info.event.extendedProps.patientName}
+        Descripción: ${info.event.extendedProps.description || 'N/A'}
       `,
       life: 5000
     });
   }
 });
-
-
 </script>
 
 <template>
@@ -72,6 +72,4 @@ const calendarOptions = ref({
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
-
 </style>
