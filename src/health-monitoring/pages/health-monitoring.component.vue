@@ -21,14 +21,20 @@ export default defineComponent({
     const fetchHealthData = async () => {
       try {
         const response = await axios.get('http://localhost:5128/api/v1/health-data');
+        console.log("Health data response:", response.data);
+
         if (response.data && response.data.length > 0) {
-          healthData.value = response.data[0]; // obtiene el primer (y único) registro
-          updatedData.value = { ...response.data[0] };
+          const data = response.data[0];
+
+          // Mapear oxygenSaturation (si ese es el nombre correcto) a oxygen
+          healthData.value = { ...data, oxygen: data.oxygenSaturation };
+          updatedData.value = { ...data, oxygen: data.oxygenSaturation };
         }
       } catch (error) {
         console.error('Error fetching health data:', error);
       }
     };
+
 
     const updateHealthData = async () => {
       try {
