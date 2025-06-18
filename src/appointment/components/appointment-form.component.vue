@@ -10,7 +10,6 @@ const emit = defineEmits(['appointment-created', 'cancel']);
 
 const form = ref({
   doctorId: '',
-  specialty: '',
   date: props.selectedDate.toISOString().split('T')[0],
   time: '09:00',
   description: ''
@@ -25,16 +24,16 @@ const fetchDoctors = async () => {
   try {
     loading.value = true;
     error.value = null;
-    const response = await axios.get('http://localhost:3000/doctors');
+    const response = await axios.get('http://localhost:5128/doctors');
     doctors.value = response.data;
   } catch (err) {
     console.error('Error al cargar doctores:', err);
     error.value = 'Failed to load doctors. Please try again later.';
     // Datos de prueba por si falla la API
     doctors.value = [
-      { id: 1, name: "Dr. Smith", specialty: "Pediatría" },
-      { id: 2, name: "Dr. Johnson", specialty: "Ginecología" },
-      { id: 3, name: "Dr. Williams", specialty: "Cardiología" }
+      { id: 1, name: "Dr. Smith" },
+      { id: 2, name: "Dr. Johnson" },
+      { id: 3, name: "Dr. Williams"}
     ];
   } finally {
     loading.value = false;
@@ -45,16 +44,8 @@ onMounted(() => {
   fetchDoctors();
 });
 
-const specialties = computed(() => {
-  const uniqueSpecialties = new Set();
-  doctors.value.forEach(doctor => uniqueSpecialties.add(doctor.specialty));
-  return Array.from(uniqueSpecialties);
-});
 
-const filteredDoctors = computed(() => {
-  if (!form.value.specialty) return doctors.value;
-  return doctors.value.filter(doctor => doctor.specialty === form.value.specialty);
-});
+
 
 const timeSlots = ref([
   '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
@@ -72,7 +63,6 @@ const submitAppointment = async () => {
 
     const appointmentData = {
       doctor: selectedDoctor.name,
-      specialty: form.value.specialty,
       date: form.value.date,
       time: form.value.time,
       description: form.value.description,
@@ -80,7 +70,7 @@ const submitAppointment = async () => {
       patientId: 1 // Esto debería venir de la autenticación en una app real
     };
 
-    await axios.post('http://localhost:3000/appointments', appointmentData);
+    await axios.post('http://localhost:5128/api/v1/appointment', appointmentData);
     emit('appointment-created');
   } catch (error) {
     console.error('Error creating appointment:', error);
@@ -94,22 +84,13 @@ const submitAppointment = async () => {
     <h2>Schedule New Appointment</h2>
 
     <form @submit.prevent="submitAppointment">
-      <div class="form-group">
-        <label>Specialty</label>
-        <select v-model="form.specialty" required>
-          <option value="">Select a specialty</option>
-          <option v-for="specialty in specialties" :key="specialty" :value="specialty">
-            {{ specialty }}
-          </option>
-        </select>
-      </div>
 
       <div class="form-group">
         <label>Doctor</label>
-        <select v-model="form.doctorId" required :disabled="!form.specialty">
+        <select v-model="form.doctorId" required>
           <option value="">Select a doctor</option>
-          <option v-for="doctor in filteredDoctors" :key="doctor.id" :value="doctor.id">
-            {{ doctor.name }} ({{ doctor.specialty }})
+          <option v-for="doctor in doctors" :key="doctor.id" :value="doctor.id">
+            {{ doctor.name }}
           </option>
         </select>
       </div>

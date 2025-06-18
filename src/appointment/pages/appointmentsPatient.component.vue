@@ -23,7 +23,7 @@
           <div class="appointment-details">
             <div class="detail">
               <i class="pi pi-user-md"></i>
-              <span>{{ appointment.doctor }} ({{ appointment.specialty }})</span>
+              <span>{{ appointment.doctor }}</span>
             </div>
             <div class="detail">
               <i class="pi pi-info-circle"></i>
@@ -59,7 +59,6 @@ const dummyAppointments = [
   {
     id: 1,
     doctor: "Dr. Smith",
-    specialty: "Pediatrics",
     date: "2025-05-15",
     time: "10:00",
     description: "Annual checkup",
@@ -69,7 +68,6 @@ const dummyAppointments = [
   {
     id: 2,
     doctor: "Dr. Johnson",
-    specialty: "Gynecology",
     date: "2025-05-20",
     time: "14:30",
     description: "Routine consultation",
@@ -81,7 +79,7 @@ const dummyAppointments = [
 const fetchAppointments = async () => {
   try {
     loading.value = true;
-    const response = await axios.get('http://localhost:3000/appointments', {
+    const response = await axios.get('http://localhost:5128/api/v1/appointment', {
       params: { patientId: patientId.value }
     });
 
@@ -128,7 +126,7 @@ const deleteAppointment = async (id) => {
       });
     } else {
       // Eliminar la cita del backend real
-      await axios.delete(`http://localhost:3000/appointments/${id}`);
+      await axios.delete(`http://localhost:5128/api/v1/appointment/${id}`);
       toast.add({
         severity: 'success',
         summary: 'Success',
