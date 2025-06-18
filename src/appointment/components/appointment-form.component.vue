@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref } from 'vue';
 import axios from 'axios';
 
 const props = defineProps({
@@ -10,42 +10,21 @@ const emit = defineEmits(['appointment-created', 'cancel']);
 
 const form = ref({
   doctorId: '',
+  doctorName:'',
   date: props.selectedDate.toISOString().split('T')[0],
   time: '09:00',
-  description: ''
+  description: '',
+  patientId: '',
+  patientName: ''
 });
 
-const doctors = ref([]);
-const loading = ref(false);
-const error = ref(null);
-
-// Cargar doctores desde db.json
-const fetchDoctors = async () => {
-  try {
-    loading.value = true;
-    error.value = null;
-    const response = await axios.get('http://localhost:5128/doctors');
-    doctors.value = response.data;
-  } catch (err) {
-    console.error('Error al cargar doctores:', err);
-    error.value = 'Failed to load doctors. Please try again later.';
-    // Datos de prueba por si falla la API
-    doctors.value = [
-      { id: 1, name: "Dr. Smith" },
-      { id: 2, name: "Dr. Johnson" },
-      { id: 3, name: "Dr. Williams"}
-    ];
-  } finally {
-    loading.value = false;
-  }
-};
-
-onMounted(() => {
-  fetchDoctors();
-});
-
-
-
+const doctors = ref([
+  { id: 1, name: "Dr. Smith" },
+  { id: 2, name: "Dr. Johnson" },
+  { id: 3, name: "Dr. Williams" },
+  { id: 4, name: "Dr. Brown" },
+  { id: 5, name: "Dr. Garcia" }
+]);
 
 const timeSlots = ref([
   '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
@@ -58,23 +37,33 @@ const submitAppointment = async () => {
     const selectedDoctor = doctors.value.find(d => d.id == form.value.doctorId);
 
     if (!selectedDoctor) {
-      throw new Error('Please select a valid doctor');
+      throw new Error('Por favor selecciona un doctor válido');
+    }
+    if (!form.value.patientName) {
+      throw new Error('Por favor ingresa el nombre del paciente');
     }
 
     const appointmentData = {
       doctor: selectedDoctor.name,
+      DoctorName: selectedDoctor.name, // <- Agregado para cumplir con la validación del backend
       date: form.value.date,
       time: form.value.time,
       description: form.value.description,
-      doctorId: form.value.doctorId,
-      patientId: 1 // Esto debería venir de la autenticación en una app real
+      doctorId: Number(form.value.doctorId),
+      patientName: form.value.patientName
     };
 
+
     await axios.post('http://localhost:5128/api/v1/appointment', appointmentData);
+    alert('Cita creada exitosamente');
     emit('appointment-created');
   } catch (error) {
-    console.error('Error creating appointment:', error);
-    alert('Error creating appointment: ' + error.message);
+    console.error('Error creando cita:', error);
+    if (error.response && error.response.data) {
+      alert('Error creando cita: ' + JSON.stringify(error.response.data));
+    } else {
+      alert('Error creando cita: ' + error.message);
+    }
   }
 };
 </script>
@@ -82,9 +71,7 @@ const submitAppointment = async () => {
 <template>
   <div class="appointment-form">
     <h2>Schedule New Appointment</h2>
-
     <form @submit.prevent="submitAppointment">
-
       <div class="form-group">
         <label>Doctor</label>
         <select v-model="form.doctorId" required>
@@ -94,12 +81,14 @@ const submitAppointment = async () => {
           </option>
         </select>
       </div>
-
+      <div class="form-group">
+        <label>Patient Name</label>
+        <input type="text" v-model="form.patientName" required>
+      </div>
       <div class="form-group">
         <label>Date</label>
         <input type="date" v-model="form.date" required>
       </div>
-
       <div class="form-group">
         <label>Time</label>
         <select v-model="form.time" required>
@@ -108,33 +97,15 @@ const submitAppointment = async () => {
           </option>
         </select>
       </div>
-
       <div class="form-group">
         <label>Description</label>
         <textarea v-model="form.description" placeholder="Brief description of the reason for the appointment"></textarea>
       </div>
-
       <div class="form-actions">
         <button type="button" class="cancel" @click="emit('cancel')">Cancel</button>
         <button type="submit" class="submit">Schedule Appointment</button>
       </div>
     </form>
-
-    <!-- Sección para mostrar y eliminar citas existentes -->
-    <div class="existing-appointments" v-if="appointments && appointments.length > 0">
-      <h3>Existing Appointments</h3>
-      <ul>
-        <li v-for="appointment in appointments" :key="appointment.id">
-          <div class="appointment-info">
-            <p><strong>Doctor:</strong> {{ appointment.doctor }}</p>
-            <p><strong>Date:</strong> {{ appointment.date }}</p>
-            <p><strong>Time:</strong> {{ appointment.time }}</p>
-            <p><strong>Description:</strong> {{ appointment.description }}</p>
-          </div>
-          <button class="delete-btn" @click="deleteAppointment(appointment.id)">Delete</button>
-        </li>
-      </ul>
-    </div>
   </div>
 </template>
 
