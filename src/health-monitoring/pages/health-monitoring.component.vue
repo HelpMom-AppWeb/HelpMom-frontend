@@ -5,8 +5,6 @@ import IconTemperature from "../../assets/IconTemperature.vue";
 import IconWeight from "../../assets/IconWeight.vue";
 import IconOxygen from "../../assets/IconOxygen.vue";
 import axios from 'axios';
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   components: {
@@ -16,28 +14,27 @@ export default defineComponent({
     IconOxygen,
   },
   setup() {
-    const healthData = ref({
-      heartRate: 72,
-      temperature: 37.0,
-      weight: 150,
-      oxygen: 98
-    });
 
-    const { t } = useI18n();
-
-    const updatedData = ref({ ...healthData.value });
+    const healthData = ref({}); // se declara antes de usarla
+    const updatedData = ref({});
 
     const fetchHealthData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/health');
-        if (response.data) {
-          healthData.value = response.data;
-          updatedData.value = { ...response.data };
+        const response = await axios.get('http://localhost:5128/api/v1/health-data');
+        console.log("Health data response:", response.data);
+
+        if (response.data && response.data.length > 0) {
+          const data = response.data[0];
+
+          // Mapear oxygenSaturation (si ese es el nombre correcto) a oxygen
+          healthData.value = { ...data, oxygen: data.oxygenSaturation };
+          updatedData.value = { ...data, oxygen: data.oxygenSaturation };
         }
       } catch (error) {
         console.error('Error fetching health data:', error);
       }
     };
+
 
     const updateHealthData = async () => {
       try {
@@ -66,12 +63,7 @@ export default defineComponent({
       showAddMedicationForm.value = false;
     };
 
-    const router = useRouter();
-
-    const goToMedications = () => {
-      router.push({ name: 'medications' });
-    };
-
+    fetchHealthData();
 
     return {
       IconHeart,
@@ -87,8 +79,7 @@ export default defineComponent({
       showAddMedicationForm,
       medications,
       newMedication,
-      addMedication,
-      goToMedications,
+      addMedication
     };
   }
 });
@@ -96,14 +87,14 @@ export default defineComponent({
 
 <template>
   <div class="health-monitoring">
-    <h1 class="page-title">{{$t("healthMonitoring.title")}}</h1>
+    <h1 class="page-title">Health Monitoring</h1>
 
     <div class="dashboard-layout">
       <div class="metrics-panel">
         <div class="panel-header">
-          <h2>{{$t("healthMonitoring.title")}}</h2>
+          <h2>Health Monitoring</h2>
           <button class="update-button" @click="showUpdateForm = true">
-            {{$t("healthMonitoring.updateValues")}}
+            Update Values
           </button>
         </div>
 
@@ -113,7 +104,7 @@ export default defineComponent({
               <IconHeart />
             </div>
             <div class="metric-value">
-              {{ healthData.heartRate }} {{ $t("healthMonitoring.metrics.heartRate.unit") }}
+              {{ healthData.heartRate }} pulse/min
             </div>
           </div>
 
@@ -122,7 +113,7 @@ export default defineComponent({
               <IconTemperature />
             </div>
             <div class="metric-value">
-              {{ healthData.temperature }} {{ $t("healthMonitoring.metrics.temperature.unit") }}
+              {{ healthData.temperature }} degrees C
             </div>
           </div>
 
@@ -131,7 +122,7 @@ export default defineComponent({
               <IconWeight />
             </div>
             <div class="metric-value">
-              {{ healthData.weight }} {{ $t("healthMonitoring.metrics.weight.unit") }}
+              {{ healthData.weight }} pounds
             </div>
           </div>
 
@@ -146,32 +137,31 @@ export default defineComponent({
         </div>
 
         <div class="metric-actions">
-          <button class="action-button medication-list"  @click="goToMedications">
-            {{ $t("healthMonitoring.actions.medications") }}
+          <button class="action-button medication-list" @click="showMedicationModal = true">
+            List of medications
           </button>
         </div>
       </div>
 
-
       <div class="info-panels">
         <div class="info-panel">
-          <h3>{{ $t("healthMonitoring.metrics.heartRate.label") }}</h3>
-          <p>{{ $t("healthMonitoring.metrics.heartRate.info") }}</p>
+          <h3>Information about heart rate</h3>
+          <p>Heart rate is the speed of the heartbeat measured by the number of contractions of the heart per minute. A normal resting heart rate for adults ranges from 60 to 100 beats per minute.</p>
         </div>
 
         <div class="info-panel">
-          <h3>{{ $t("healthMonitoring.metrics.temperature.label") }}</h3>
-          <p>{{ $t("healthMonitoring.metrics.temperature.info") }}</p>
+          <h3>Information about temperature</h3>
+          <p>Body temperature is a measure of the body's ability to generate and get rid of heat. Normal body temperature ranges from 97.8°F (36.5°C) to 99°F (37.2°C).</p>
         </div>
 
         <div class="info-panel">
-          <h3>{{ $t("healthMonitoring.metrics.weight.label") }}</h3>
-          <p>{{ $t("healthMonitoring.metrics.weight.info") }}</p>
+          <h3>Information about weight</h3>
+          <p>Body weight is a measurement of the force exerted by gravity on an object. Weight is commonly measured in pounds in the US and kilograms in most other countries.</p>
         </div>
 
         <div class="info-panel">
-          <h3>{{ $t("healthMonitoring.metrics.oxygen.label") }}</h3>
-          <p>{{ $t("healthMonitoring.metrics.oxygen.info") }}</p>
+          <h3>Information about oxygen saturation</h3>
+          <p>Oxygen saturation is a measure of how much oxygen the blood is carrying as a percentage of the maximum it could carry. Normal SpO2 levels are between 95% and 100%.</p>
         </div>
       </div>
     </div>
@@ -180,13 +170,13 @@ export default defineComponent({
     <div v-if="showUpdateForm" class="modal-overlay" @click="showUpdateForm = false">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
-          <h2>{{ $t("healthMonitoring.modals.updateHealthData.title") }}</h2>
+          <h2>Update Health Data</h2>
           <button class="close-button" @click="showUpdateForm = false">×</button>
         </div>
 
         <form @submit.prevent="updateHealthData" class="update-form">
           <div class="form-group">
-            <label for="heartRate">{{ $t("healthMonitoring.modals.updateHealthData.fields.heartRate") }}</label>
+            <label for="heartRate">Heart Rate (pulse/min)</label>
             <input
                 type="number"
                 id="heartRate"
@@ -198,7 +188,7 @@ export default defineComponent({
           </div>
 
           <div class="form-group">
-            <label for="temperature">{{ $t("healthMonitoring.modals.updateHealthData.fields.temperature") }}</label>
+            <label for="temperature">Temperature (°C)</label>
             <input
                 type="number"
                 id="temperature"
@@ -211,7 +201,7 @@ export default defineComponent({
           </div>
 
           <div class="form-group">
-            <label for="weight">{{ $t("healthMonitoring.modals.updateHealthData.fields.weight") }}</label>
+            <label for="weight">Weight (pounds)</label>
             <input
                 type="number"
                 id="weight"
@@ -223,7 +213,7 @@ export default defineComponent({
           </div>
 
           <div class="form-group">
-            <label for="oxygen">{{ $t("healthMonitoring.modals.updateHealthData.fields.oxygen") }}</label>
+            <label for="oxygen">Oxygen Saturation (%)</label>
             <input
                 type="number"
                 id="oxygen"
@@ -236,10 +226,10 @@ export default defineComponent({
 
           <div class="form-actions">
             <button type="button" class="cancel-button" @click="showUpdateForm = false">
-              {{ $t("healthMonitoring.modals.updateHealthData.buttons.cancel") }}
+              Cancel
             </button>
             <button type="submit" class="save-button">
-              {{ $t("healthMonitoring.modals.updateHealthData.buttons.save") }}
+              Save Changes
             </button>
           </div>
         </form>
@@ -248,77 +238,83 @@ export default defineComponent({
 
     <!-- Medication Modal -->
     <div v-if="showMedicationModal" class="modal-overlay" @click="showMedicationModal = false">
-    <div class="modal-content" @click.stop>
-      <div class="modal-header">
-        <h2>{{ $t("healthMonitoring.modals.medications.title") }}</h2>
-        <button class="close-button" @click="showMedicationModal = false">×</button>
-      </div>
+      <div class="modal-content" @click.stop>
+        <div class="modal-header">
+          <h2>Medications</h2>
+          <button class="close-button" @click="showMedicationModal = false">×</button>
+        </div>
 
-      <div class="medications-list">
-        <div v-for="(med, index) in medications" :key="index" class="medication-item">
-          <div class="medication-info">
-            <h4>{{ med.name }}</h4>
-            <p>{{ med.dosage }}</p>
-            <p class="medication-schedule">{{ med.schedule }}</p>
+        <div class="medications-list">
+          <div v-for="(med, index) in medications" :key="index" class="medication-item">
+            <div class="medication-info">
+              <h4>{{ med.name }}</h4>
+              <p>{{ med.dosage }}</p>
+              <p class="medication-schedule">{{ med.schedule }}</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="modal-footer">
-        <button class="add-medication-button" @click="showAddMedicationForm = true">
-          {{ $t("healthMonitoring.modals.medications.addMedication") }}
-        </button>
+        <div class="modal-footer">
+          <button class="add-medication-button" @click="showAddMedicationForm = true">
+            Add Medication
+          </button>
+        </div>
       </div>
-    </div>
     </div>
 
     <!-- Add Medication Form -->
     <div v-if="showAddMedicationForm" class="modal-overlay">
-    <div class="modal-content form-modal">
-      <div class="modal-header">
-        <h2>{{ $t("healthMonitoring.modals.addMedication.title") }}</h2>
-        <button class="close-button" @click="showAddMedicationForm = false">×</button>
+      <div class="modal-content form-modal">
+        <div class="modal-header">
+          <h2>Add New Medication</h2>
+          <button class="close-button" @click="showAddMedicationForm = false">×</button>
+        </div>
+
+        <form @submit.prevent="addMedication" class="medication-form">
+          <div class="form-group">
+            <label for="med-name">Medication Name</label>
+            <input
+                type="text"
+                id="med-name"
+                v-model="newMedication.name"
+                required
+                placeholder="Enter medication name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="med-dosage">Dosage</label>
+            <input
+                type="text"
+                id="med-dosage"
+                v-model="newMedication.dosage"
+                required
+                placeholder="e.g., 50mg"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="med-schedule">Schedule</label>
+            <input
+                type="text"
+                id="med-schedule"
+                v-model="newMedication.schedule"
+                required
+                placeholder="e.g., Twice daily with meals"
+            />
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="cancel-button" @click="showAddMedicationForm = false">
+              Cancel
+            </button>
+            <button type="submit" class="save-button">
+              Save Medication
+            </button>
+          </div>
+        </form>
       </div>
-
-      <form @submit.prevent="addMedication" class="medication-form">
-        <div class="form-group">
-          <label for="med-name">{{ $t("healthMonitoring.modals.addMedication.fields.name") }}</label>
-          <input 
-            type="text" 
-            id="med-name" 
-            v-model="newMedication.name" 
-            required placeholder="Enter medication name" />
-        </div>
-
-        <div class="form-group">
-          <label for="med-dosage">{{ $t("healthMonitoring.modals.addMedication.fields.dosage") }}</label>
-          <input 
-            type="text" 
-            id="med-dosage" 
-            v-model="newMedication.dosage" 
-            required placeholder="e.g., 50mg" />
-        </div>
-
-        <div class="form-group">
-          <label for="med-schedule">{{ $t("healthMonitoring.modals.addMedication.fields.schedule") }}</label>
-          <input 
-            type="text" 
-            id="med-schedule" 
-            v-model="newMedication.schedule" 
-            required placeholder="e.g., Twice daily with meals" />
-        </div>
-
-        <div class="form-actions">
-          <button type="button" class="cancel-button" @click="showAddMedicationForm = false">
-            {{ $t("healthMonitoring.modals.addMedication.buttons.cancel") }}
-          </button>
-          <button type="submit" class="save-button">
-            {{ $t("healthMonitoring.modals.addMedication.buttons.save") }}
-          </button>
-        </div>
-      </form>
     </div>
-  </div>
   </div>
 </template>
 
