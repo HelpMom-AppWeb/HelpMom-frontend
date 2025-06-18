@@ -23,7 +23,7 @@
           <div class="appointment-details">
             <div class="detail">
               <i class="pi pi-user-md"></i>
-              <span>{{ appointment.doctor }}</span>
+              <span>{{ appointment.doctorName || appointment.doctor }}</span>
             </div>
             <div class="detail">
               <i class="pi pi-info-circle"></i>
