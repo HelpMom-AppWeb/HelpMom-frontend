@@ -1,9 +1,8 @@
 export class Baby{
-    constructor({id = '', motherId = '', name = '', birthDate = '', gender = ''}){
+    constructor({id = 0, name = '', dateOfBirth = '', gender = ''}){
         this.id = id;
-        this.motherId = motherId;
         this.name = name;
-        this.birthDate = birthDate;
+        this.dateOfBirth = dateOfBirth;
         this.gender = gender;
     }
 }
