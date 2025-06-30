@@ -8,12 +8,12 @@ const httpInstance = axios.create({
 export class PatientApiService{
     resourceEndpoint = import.meta.env.PATIENTS_PATH;
 
-    getAll(){
-        return httpInstance.get(this.resourceEndpoint);
-    }
-
     getById(id) {
         return httpInstance.get(`${this.resourceEndpoint}/${id}`);
+    }
+
+    createPatient(patient) {
+        return httpInstance.post(this.resourceEndpoint, patient);
     }
 
 }
