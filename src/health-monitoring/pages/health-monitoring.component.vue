@@ -42,22 +42,35 @@ export default defineComponent({
 
     const updateHealthData = async () => {
       try {
-        await axios.put(
-            `http://localhost:5128/api/v1/health-data/${updatedData.value.id}`,
-            {
-              heartRate: updatedData.value.heartRate,
-              temperature: updatedData.value.temperature,
-              weight: updatedData.value.weight,
-              oxygenSaturation: updatedData.value.oxygen
-            }
-        );
+        if (isCreating.value) {
+          // POST para nuevo registro
+          await axios.post('http://localhost:5128/api/v1/health-data', {
+            heartRate: updatedData.value.heartRate,
+            temperature: updatedData.value.temperature,
+            weight: updatedData.value.weight,
+            oxygenSaturation: updatedData.value.oxygen,
+            patientId: 1 // <- fija el ID por ahora (puedes hacer dinámico luego)
+          });
+        } else {
+          // PUT para actualizar el último
+          await axios.put(
+              `http://localhost:5128/api/v1/health-data/${updatedData.value.id}`,
+              {
+                heartRate: updatedData.value.heartRate,
+                temperature: updatedData.value.temperature,
+                weight: updatedData.value.weight,
+                oxygenSaturation: updatedData.value.oxygen
+              }
+          );
+        }
 
-        showUpdateForm.value = false; // cerrar modal
-        await fetchHealthData();      // recargar datos actualizados
+        showUpdateForm.value = false;
+        await fetchHealthData();
       } catch (error) {
-        console.error('Error updating health data:', error);
+        console.error('Error updating/creating health data:', error);
       }
     };
+
 
 
     const showUpdateForm = ref(false);
@@ -77,6 +90,32 @@ export default defineComponent({
       showAddMedicationForm.value = false;
     };
 
+    const prepareLatestForUpdate = () => {
+      const latest = healthHistory.value[healthHistory.value.length - 1];
+      if (!latest) return;
+      isCreating.value = false;
+      updatedData.value = {
+        id: latest.id,
+        heartRate: latest.heartRate,
+        temperature: latest.temperature,
+        weight: latest.weight,
+        oxygen: latest.oxygenSaturation
+      };
+      showUpdateForm.value = true;
+    };
+
+    const prepareNewRecord = () => {
+      isCreating.value = true;
+      updatedData.value = {
+        heartRate: null,
+        temperature: null,
+        weight: null,
+        oxygen: null
+      };
+      showUpdateForm.value = true;
+    };
+
+
     fetchHealthData();
 
     return {
@@ -90,6 +129,8 @@ export default defineComponent({
       showUpdateForm,
       fetchHealthData,
       updateHealthData,
+      prepareLatestForUpdate,
+      prepareNewRecord,
       showMedicationModal,
       showAddMedicationForm,
       medications,
