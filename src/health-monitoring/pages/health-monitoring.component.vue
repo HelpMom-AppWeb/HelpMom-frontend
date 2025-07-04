@@ -136,11 +136,12 @@ export default defineComponent({
           </div>
         </div>
 
-        <div class="metric-actions">
-          <button class="action-button medication-list" @click="showMedicationModal = true">
+        <router-link to="/medications">
+          <button class="action-button medication-list">
             List of medications
           </button>
-        </div>
+        </router-link>
+
       </div>
 
       <div class="info-panels">
