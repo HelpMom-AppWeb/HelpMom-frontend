@@ -15,20 +15,23 @@ export default defineComponent({
   },
   setup() {
 
+    const isCreating = ref(false);
+
+    const healthHistory = ref([]);
+
     const healthData = ref({}); // se declara antes de usarla
     const updatedData = ref({});
 
     const fetchHealthData = async () => {
       try {
         const response = await axios.get('http://localhost:5128/api/v1/health-data');
-        console.log("Health data response:", response.data);
-
         if (response.data && response.data.length > 0) {
-          const data = response.data[0];
-
-          // Mapear oxygenSaturation (si ese es el nombre correcto) a oxygen
-          healthData.value = { ...data, oxygen: data.oxygenSaturation };
-          updatedData.value = { ...data, oxygen: data.oxygenSaturation };
+          const data = response.data;
+          console.log("Nuevo historial:", data);
+          healthHistory.value = data;
+          const latest = data[data.length - 1];
+          healthData.value = { ...latest, oxygen: latest.oxygenSaturation };
+          updatedData.value = { ...latest, oxygen: latest.oxygenSaturation };
         }
       } catch (error) {
         console.error('Error fetching health data:', error);
@@ -36,15 +39,26 @@ export default defineComponent({
     };
 
 
+
     const updateHealthData = async () => {
       try {
-        await axios.put('http://localhost:3000/health', updatedData.value);
-        healthData.value = { ...updatedData.value };
-        showUpdateForm.value = false;
+        await axios.put(
+            `http://localhost:5128/api/v1/health-data/${updatedData.value.id}`,
+            {
+              heartRate: updatedData.value.heartRate,
+              temperature: updatedData.value.temperature,
+              weight: updatedData.value.weight,
+              oxygenSaturation: updatedData.value.oxygen
+            }
+        );
+
+        showUpdateForm.value = false; // cerrar modal
+        await fetchHealthData();      // recargar datos actualizados
       } catch (error) {
         console.error('Error updating health data:', error);
       }
     };
+
 
     const showUpdateForm = ref(false);
     const showMedicationModal = ref(false);
@@ -66,6 +80,7 @@ export default defineComponent({
     fetchHealthData();
 
     return {
+      healthHistory,
       IconHeart,
       IconTemperature,
       IconWeight,
@@ -93,8 +108,11 @@ export default defineComponent({
       <div class="metrics-panel">
         <div class="panel-header">
           <h2>Health Monitoring</h2>
-          <button class="update-button" @click="showUpdateForm = true">
-            Update Values
+          <button class="update-button" @click="prepareLatestForUpdate">
+            Update Latest
+          </button>
+          <button class="create-button" @click="prepareNewRecord">
+            New Record
           </button>
         </div>
 
@@ -131,7 +149,7 @@ export default defineComponent({
               <IconOxygen />
             </div>
             <div class="metric-value">
-              {{ healthData.oxygen }} %
+              {{ healthData.oxygenSaturation }} %
             </div>
           </div>
         </div>
@@ -166,6 +184,20 @@ export default defineComponent({
         </div>
       </div>
     </div>
+
+    <div class="health-history">
+      <h2>Health Records</h2>
+      <div class="card-container">
+        <div class="health-card" v-for="record in healthHistory" :key="record.id">
+          <p><strong>Date:</strong> {{ new Date(record.createdAt).toLocaleString() }}</p>
+          <p><strong>Heart Rate:</strong> {{ record.heartRate }} bpm</p>
+          <p><strong>Temperature:</strong> {{ record.temperature }} °C</p>
+          <p><strong>Weight:</strong> {{ record.weight }} lbs</p>
+          <p><strong>Oxygen:</strong> {{ record.oxygenSaturation }} %</p>
+        </div>
+      </div>
+    </div>
+
 
     <!-- Update Health Data Modal -->
     <div v-if="showUpdateForm" class="modal-overlay" @click="showUpdateForm = false">
@@ -657,4 +689,23 @@ export default defineComponent({
     width: 95%;
   }
 }
+
+.health-history {
+  margin-top: 2rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.health-card {
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 220px;
+}
+
 </style>
