@@ -7,20 +7,34 @@ import AppointmentForm from '../components/appointment-form.component.vue';
 const appointments = ref([]);
 const showForm = ref(false);
 const selectedDate = ref(new Date());
-const doctors = ref([]);
+const backendAvailable = ref(true);
 
 const fetchAppointments = async () => {
   try {
+    // Primero intentamos con el backend real
     const response = await axios.get('http://localhost:5128/api/v1/appointment');
     appointments.value = response.data;
+    backendAvailable.value = true;
   } catch (error) {
-    console.error('Error fetching appointments:', error);
+    console.error('Error fetching from backend, using dummy data:', error);
+    backendAvailable.value = false;
+
+    // Si falla, cargamos datos dummy del db.json
+    try {
+      const dummyResponse = await axios.get('/server/db.json'); // Ajusta la ruta según tu estructura
+      appointments.value = dummyResponse.data.appointments || [];
+      console.log('Using dummy data:', appointments.value);
+    } catch (dummyError) {
+      console.error('Error loading dummy data:', dummyError);
+      appointments.value = [];
+    }
   }
 };
 
 const handleDateSelect = (date) => {
+  console.log('Fecha recibida en parent:', date); // Verificar en consola
   selectedDate.value = date;
-  showForm.value = true;
+  showForm.value = true; // Asegurarse de mostrar el formulario
 };
 
 const onDateClick = (info) => {
@@ -40,6 +54,9 @@ onMounted(() => {
 <template>
   <div class="appointment-page">
     <h1 class="page-title">Medical Appointments</h1>
+    <div v-if="!backendAvailable" class="warning-banner">
+      ⚠️ Currently using dummy data (backend unavailable)
+    </div>
 
     <div class="appointment-container">
       <AppointmentCalendar
@@ -50,7 +67,7 @@ onMounted(() => {
       <AppointmentForm
           v-if="showForm"
           :selectedDate="selectedDate"
-          :doctors="doctors"
+          :backendAvailable="backendAvailable"
           @appointment-created="handleAppointmentCreated"
           @cancel="showForm = false"
       />
@@ -64,6 +81,17 @@ onMounted(() => {
 
 
 <style scoped>
+
+
+.warning-banner {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  text-align: center;
+  border: 1px solid #ffeeba;
+}
 .appointment-page {
   padding: 20px;
   max-width: 1200px;
