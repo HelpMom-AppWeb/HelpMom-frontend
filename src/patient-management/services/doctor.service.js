@@ -8,8 +8,8 @@ const httpInstance = axios.create({
 export class DoctorService {
     resourceEndpoint = import.meta.env.DOCTORS_PATH;
 
-    getAllPatients(){
-        return httpInstance.get(`${this.resourceEndpoint}/patients`);
+    getAllDoctors(){
+        return httpInstance.get(this.resourceEndpoint);
     }
 
 }

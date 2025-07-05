@@ -16,4 +16,8 @@ export class PatientApiService{
         return httpInstance.post(this.resourceEndpoint, patient);
     }
 
+    getAllPatientsByDoctorId(doctorId){
+        return httpInstance.get(`/doctors${doctorId}${this.resourceEndpoint}`);
+    }
+
 }
