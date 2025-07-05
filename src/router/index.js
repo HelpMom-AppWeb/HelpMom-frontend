@@ -1,6 +1,6 @@
 import HomeComponent from "../public/pages/home.component.vue";
 import {createRouter, createWebHistory} from "vue-router";
-import AppointmentComponent from "../appointment/pages/appointment.component.vue";
+import AppointmentComponent from "../appointment/pages/appointmentCreation.component.vue";
 import AppointmentsPatient from '../appointment/pages/appointmentsPatient.component.vue';
 
 
