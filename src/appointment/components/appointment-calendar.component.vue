@@ -7,14 +7,12 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { useToast } from 'primevue/usetoast';
 
 const toast = useToast();
-
+const emit = defineEmits(['date-selected']);
 const props = defineProps({
-  appointments: Array,
-  selectedDate: Date
+  appointments: Array
 });
 
-const emit = defineEmits(['date-selected']);
-
+// Configuración del calendario
 const calendarOptions = ref({
   plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
   initialView: 'dayGridMonth',
@@ -27,14 +25,22 @@ const calendarOptions = ref({
   selectMirror: true,
   dayMaxEvents: true,
   weekends: true,
-  select: (arg) => {
-    emit('date-selected', arg.start);
+
+  // Manejo del clic en fechas (nivel raíz de las opciones)
+  dateClick: (arg) => {
+    emit('date-selected', arg.date);
+    // Asegurarse de que la fecha se emite correctamente
+    console.log('Fecha seleccionada:', arg.date);
   },
+
   events: computed(() => {
     return props.appointments.map(appointment => ({
-      id: appointment.id || `${appointment.doctorId}-${appointment.date}-${appointment.time}`,
-      title: appointment.doctorName || appointment.doctor,
+      id: appointment.id,
+      title: `${appointment.doctorName || appointment.doctor} - ${appointment.patientName}`,
       start: `${appointment.date}T${appointment.time}`,
+      backgroundColor: '#ff98a8',
+      borderColor: '#0c0c0c',
+      textColor: '#ffffff',
       extendedProps: {
         description: appointment.description,
         doctor: appointment.doctorName || appointment.doctor,
@@ -42,6 +48,7 @@ const calendarOptions = ref({
       }
     }));
   }),
+
   eventClick: (info) => {
     toast.add({
       severity: 'info',
@@ -67,9 +74,21 @@ const calendarOptions = ref({
 
 <style>
 .calendar-container {
-  background: #ffe7ef;
+  background: #ffc8da;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los eventos del calendario */
+.fc-event {
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 1px 2px;
+  padding: 0 4px;
+}
+
+.fc-daygrid-event-dot {
+  display: none;
 }
 </style>
