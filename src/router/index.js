@@ -1,44 +1,48 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth.store'
-// Componentes principales
+
+// Pages
 import Login from '@/public/pages/login.component.vue'
-
-
+import RegisterComponent from '@/pages/register/register.component.vue'
 // Layouts
 import DoctorLayout from '@/layouts/DoctorLayout.vue'
 import PatientLayout from '@/layouts/PatientLayout.vue'
-import PatientManagementComponent from "../patient-management/pages/patient-management.component.vue";
-import AddPatientComponent from "../patient-management/pages/add-patient.component.vue";
-import LoginComponent from "../pages/login/login.component.vue";
-import RegisterComponent from "../pages/register/register.component.vue";
-
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {
-            path: '/',
-            redirect: '/login'
-        },
+        { path: '/', redirect: '/login' },
         {
             path: '/login',
             name: 'login',
             component: Login,
             meta: { title: 'Login' }
         },
+
+
+        {
+            path: '/doctor/add-patient',
+            name: 'add patient',
+            component: () => import('@/patient-management/pages/add-patient.component.vue'),
+            meta: { title: 'add patient' }
+        },
+
+        {
+            path: '/doctor/patient-management/:id',
+            name: 'patient-info',
+            component: () => import('@/patient-management/pages/patient-info.component.vue'),
+            props: true,
+            meta: { title: 'Patient Info' }
+        },
+
         {
             path: '/register',
-            name:'Register',
-            component:RegisterComponent
-        },
-        {
-            path: '/loginTest',
-            name: 'LoginTest',
-            component: LoginComponent
+            name: 'register',
+            component: RegisterComponent,
+            meta: { title: 'Register' }
         },
 
-
-        // Rutas para Doctor
+        // Doctor
         {
             path: '/doctor',
             component: DoctorLayout,
@@ -51,7 +55,7 @@ const router = createRouter({
                 {
                     path: 'appointments',
                     name: 'doctor-appointments',
-                    component: () => import('../appointment/pages/appointmentCreation.component.vue'),
+                    component: () => import('@/appointment/pages/appointmentCreation.component.vue'),
                     meta: { title: 'Appointments Management' }
                 },
                 {
@@ -66,25 +70,7 @@ const router = createRouter({
                     component: () => import('@/patient-management/pages/patient-management.component.vue'),
                     meta: { title: 'Patient Management' }
                 },
-                {
-                    path: '/patient-management/patients',
-                    name: 'patient-management',
-                    component: PatientManagementComponent,
-                    meta: { title: 'Patient Management'}
-                },
-                {
-                    path: '/add-patient',
-                    name: 'add-patient',
-                    component: AddPatientComponent,
-                    meta: { title: 'Add Patient' }
-                },
-                {
-                    path: 'patients/:id',
-                    name: 'patient-info',
-                    component: () => import('@/patient-management/pages/patient-info.component.vue'),
-                    meta: { title: 'Patient Info' },
-                    props: true
-                },
+
                 {
                     path: 'health',
                     name: 'doctor-health',
@@ -101,13 +87,13 @@ const router = createRouter({
                     path: 'chat/:patientId?',
                     name: 'doctor-chat',
                     component: () => import('@/chat/pages/chat.vue'),
-                    meta: { title: 'Chat' },
-                    props: true
+                    props: true,
+                    meta: { title: 'Chat' }
                 }
             ]
         },
 
-        // Rutas para Paciente
+        // Patient
         {
             path: '/patient',
             component: PatientLayout,
@@ -119,26 +105,26 @@ const router = createRouter({
                 },
                 {
                     path: 'appointments',
-                    name: 'appointmentsPatient',
-                    component: () => import('../appointment/pages/appointmentsPatient.component.vue'),
+                    name: 'appointments-patient',
+                    component: () => import('@/appointment/pages/appointmentsPatient.component.vue'),
                     meta: { title: 'My Appointments' }
                 },
                 {
                     path: 'health',
                     name: 'patient-health',
-                    component: () => import('../health-monitoring/pages/health-monitoring.component.vue'),
+                    component: () => import('@/health-monitoring/pages/health-monitoring.component.vue'),
                     meta: { title: 'My Health' }
                 },
                 {
                     path: 'chat',
                     name: 'patient-chat',
-                    component: () => import('../chat/pages/chat.vue'),
+                    component: () => import('@/chat/pages/chat.vue'),
                     meta: { title: 'Chat with Doctor' }
                 }
             ]
         },
 
-        // Ruta para página no encontrada
+        // Not Found
         {
             path: '/:pathMatch(.*)*',
             name: 'not-found',
@@ -151,28 +137,19 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const authStore = useAuthStore()
     const baseTitle = 'HelpMom'
-
-    // Establecer título
     document.title = `${baseTitle} | ${to.meta.title || 'App'}`
 
-    // Páginas públicas
     if (to.meta.public) return next()
 
-    // Verificar autenticación
     if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-        return next({
-            name: 'login',
-            query: { redirect: to.fullPath }
-        })
+        return next({ name: 'login', query: { redirect: to.fullPath } })
     }
 
-    // Verificar rol
     if (to.meta.role && authStore.user?.role !== to.meta.role) {
-        const fallbackRoute = authStore.isDoctor ? '/doctor' : '/patient'
-        return next(fallbackRoute)
+        const fallback = authStore.isDoctor ? '/doctor' : '/patient'
+        return next(fallback)
     }
 
-    // Redirigir si ya está autenticado
     if (to.name === 'login' && authStore.isAuthenticated) {
         const defaultRoute = authStore.isDoctor ? '/doctor' : '/patient'
         return next(defaultRoute)

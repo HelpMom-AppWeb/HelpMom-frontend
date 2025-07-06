@@ -43,9 +43,9 @@
         </router-link>
         <router-link
             v-if="isDoctor"
-            :to="`${baseRoute}/patients`"
+            :to="`${baseRoute}/patient-management`"
             class="menu-item"
-            :class="{ active: isActive(`${baseRoute}/patient-management/patients`) }"
+            :class="{ active: isActive(`${baseRoute}/patient-management`) }"
         >
           <i class="pi pi-list-check menu-icon"></i> {{ $t("sidebar.doctor.patientList") }}
         </router-link>

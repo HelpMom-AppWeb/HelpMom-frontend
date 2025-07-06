@@ -30,7 +30,7 @@
 
 
         <!-- Gestión de Pacientes -->
-        <div class="action-card" @click="$router.push('/doctor/patients')">
+        <div class="action-card" @click="$router.push('/doctor/patient-management')">
           <div class="action-icon">
             <i class="pi pi-users"></i>
           </div>
@@ -39,7 +39,7 @@
         </div>
 
         <!-- Añadir Paciente -->
-        <div class="action-card" @click="$router.push('/doctor/patients/add')">
+        <div class="action-card" @click="$router.push('/doctor/add-patient')">
           <div class="action-icon">
             <i class="pi pi-user-plus"></i>
           </div>
@@ -75,7 +75,7 @@
         </div>
 
         <!-- Información del Paciente -->
-        <div class="action-card" @click="$router.push(`/doctor/patients/${currentPatientId}`)">
+        <div class="action-card" @click="$router.push(`/doctor/patient-management/${currentPatientId}`)">
           <div class="action-icon">
             <i class="pi pi-id-card"></i>
           </div>
