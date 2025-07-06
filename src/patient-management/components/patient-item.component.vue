@@ -8,6 +8,9 @@ export default {
       type: Patient,
       required: true
     }
+  },
+  created() {
+      const patientId = this.$route.params.id;
   }
 }
 </script>
@@ -21,10 +24,9 @@ export default {
             {{ patient.name }}
           </div>
           <div class="flex gap-4 mt-1">
-            <router-link to="/patient-management/patients/patient-info">
-              <pv-button
-                  style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
-                  label="About"></pv-button>
+            <router-link :to="`/patient-management/patients/${patient.id}`">
+              <pv-button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
+                  label="About" />
             </router-link>
             <router-link to="/chat">
               <pv-button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"

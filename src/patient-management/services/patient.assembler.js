@@ -6,12 +6,12 @@ export class PatientAssembler {
     }
 
     static toEntitiesFromResponse(response) {
-        if (response.data.status !== 'ok') {
-            console.error(`${response.status} ${response.code} ${response.message}`);
+        const data = response.data;
+        if (!Array.isArray(data)) {
+            console.error("Error: Se recibió:", data);
             return [];
         }
-        const patientsResponse = response.data;
-        return patientsResponse.patients.map((patient) => {
+        return data.map((patient, index) => {
             return this.toEntityFromResource(patient);
         });
     }

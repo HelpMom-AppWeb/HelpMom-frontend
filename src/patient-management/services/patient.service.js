@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const httpInstance = axios.create({
-    baseURL: import.meta.env.API_BASE_URL,
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
 });
 
-export class PatientApiService{
-    resourceEndpoint = import.meta.env.PATIENTS_PATH;
+export class PatientService {
+    resourceEndpoint = import.meta.env.VITE_PATIENTS_PATH;
 
-    getById(id) {
+    getPatientById(id) {
         return httpInstance.get(`${this.resourceEndpoint}/${id}`);
     }
 
@@ -16,8 +16,9 @@ export class PatientApiService{
         return httpInstance.post(this.resourceEndpoint, patient);
     }
 
-    getAllPatientsByDoctorId(doctorId){
-        return httpInstance.get(`/doctors${doctorId}${this.resourceEndpoint}`);
+    getAllPatientsByDoctorId(doctorId) {
+        console.log(this.resourceEndpoint);
+        return httpInstance.get(`/doctors/${doctorId}${this.resourceEndpoint}`);
     }
 
 }

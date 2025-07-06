@@ -1,27 +1,42 @@
-<script>
+<script setup>
+import { useRoute } from 'vue-router';
+import { onMounted, ref } from 'vue';
+import {PatientService} from "../services/patient.service.js";
+import {Patient} from "../model/patient.entity.js";
+import {DoctorService} from "../services/doctor.service.js";
 
-export default {
-  name: "patient-info",
-  data() {
-    return {
-      patient:
-          {
-            "id": "1",
-            "name": "Lucia Camaro Valenzuela Ramirez",
-            "email": "lcvr@hotmail.com",
-            "phone": "555-1234",
-            "baby": {
-              "id": "1111",
-              "motherId": "1",
-              "name": "Andres Cardenas Valenzuela",
-              "birthDate": "2025-05-01",
-              "gender": "Male"
-            },
-            "assignedDoctor": "Maria Perez"
-          },
-    }
+const route = useRoute();
+const patientId = route.params.patientId;
+const patientService = new PatientService();
+const doctorService = new DoctorService();
+const patient = ref({
+  name: '',
+  email: '',
+  phone: '',
+  assignedDoctorId: null,
+  baby: {
+    name: '',
+    birthDate: '',
+    gender: ''
   }
-}
+});
+const doctorName = ref("");
+
+onMounted(() => {
+  patientService.getPatientById(patientId)
+      .then(response => {
+        patient.value = response.data;
+        return doctorService.getDoctorById(patient.value.assignedDoctorId);
+      })
+      .then(response => {
+        const doctor = response.data;
+        doctorName.value = doctor.name;
+      })
+      .catch(error => {
+        console.error('Error al cargar datos:', error);
+      });
+});
+
 </script>
 
 <template>
@@ -49,7 +64,7 @@ export default {
       </div>
       <div class="col-12 md:col-6">
         <label for="assigned-doctor" class="block font-medium mb-2">Assigned Doctor</label>
-        <pv-input-text id="assigned-doctor" v-model="patient.assignedDoctor" disabled placeholder="Assigned Doctor" type="text" class="w-full" />
+        <pv-input-text id="assigned-doctor" v-model="doctorName" disabled placeholder="Assigned Doctor" type="text" class="w-full" />
       </div>
     </div>
     <router-link to="/patient-management/patients">

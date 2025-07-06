@@ -1,6 +1,6 @@
 <script>
 import PatientListComponent from "../components/patient-list.component.vue";
-import {PatientApiService} from "../services/patient-api.service.js";
+import {PatientService} from "../services/patient.service.js";
 import {PatientAssembler} from "../services/patient.assembler.js";
 import {DoctorService} from "../services/doctor.service.js";
 
@@ -10,14 +10,14 @@ export default {
   data() {
     return {
       patients: [],
-      patientsApi: new PatientApiService(),
+      patientsApi: new PatientService(),
       doctorsApi: new DoctorService(),
       doctorId: 1
     }
   },
   methods: {
     getPatientsByActiveDoctorId(doctorId) {
-      this.patientsApi.getAll()
+      this.patientsApi.getAllPatientsByDoctorId(doctorId)
           .then((response) => {
             console.log(response);
             this.patients = PatientAssembler.toEntitiesFromResponse(response);
@@ -29,6 +29,11 @@ export default {
   },
   created() {
     this.getPatientsByActiveDoctorId(this.doctorId);
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.getPatientsByActiveDoctorId(vm.doctorId);
+    });
   }
 }
 </script>
@@ -39,6 +44,14 @@ export default {
     <div class="">
       <patient-list v-model:patients="patients"></patient-list>
     </div>
+  </div>
+  <div style="position: fixed; bottom: 50px; right: 90px;">
+    <router-link to="/patient-management/patients/add-patient">
+      <pv-button label="Agregar paciente"
+                 style="background-color: #BDFFB3; border-color: #000000; color: #000000;
+              width: 200px; height: 80px; border-radius: 20px"
+                 icon="pi pi-plus" iconPos="right" />
+    </router-link>
   </div>
 
 
