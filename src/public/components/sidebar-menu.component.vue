@@ -1,12 +1,9 @@
 <template>
   <div class="sidebar-container">
-    <Sidebar v-model:visible="visible" position="left" class="custom-sidebar">
-      <!-- Language Switcher -->
-      <language-switcher />
 
-      <!-- Profile Section -->
+
+    <Sidebar v-model:visible="visible" position="left" class="custom-sidebar">
       <div class="profile-section">
-        <img src="/src/assets/logo.jpeg" class="avatar" alt="avatar" />
       </div>
 
       <!-- Menu Groups -->
