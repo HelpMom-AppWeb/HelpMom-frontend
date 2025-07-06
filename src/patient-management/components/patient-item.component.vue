@@ -24,23 +24,23 @@ export default {
             {{ patient.name }}
           </div>
           <div class="flex gap-4 mt-1">
-            <router-link :to="`/patient-management/patients/${patient.id}`">
+            <router-link :to="`/doctor/patient-management/${patient.id}`">
               <pv-button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
                   label="About" />
             </router-link>
-            <router-link to="/chat">
+            <router-link to="/doctor/chat">
               <pv-button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
                          label="Chat"></pv-button>
             </router-link>
-            <router-link to="/health">
+            <router-link to="/doctor/health">
               <pv-button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
                          label="Health"></pv-button>
             </router-link>
-            <router-link to="/appointments">
+            <router-link to="/doctor/appointments">
               <pv-button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
                          label="Appointments"></pv-button>
             </router-link>
-            <router-link to="/medication">
+            <router-link to="/doctor/medications">
               <pv-button style="background-color: #FFB3BF; border-color: #FFB3BF; color: #000000; width: 120px"
                          label="Medication"></pv-button>
             </router-link>

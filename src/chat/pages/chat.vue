@@ -1,16 +1,6 @@
 <script>
 import axios from 'axios';
 import { watch } from 'vue';
-import {PatientService} from "../services/patient.service.js";
-import {PatientAssembler} from "../../patient-management/services/patient.assembler.js";
-
-const httpInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  }
-});
 
 export default {
   props: {
@@ -26,9 +16,7 @@ export default {
       patients: [],
       messages: [],
       newMessage: '',
-      menuOpen: null,
-      doctorId: 1, //ID del doctor activo
-      patientsService: new PatientService()
+      menuOpen: null
     };
   },
   watch: {
@@ -51,19 +39,14 @@ export default {
     document.addEventListener('click', this.closeMenuOutside);
   },
   methods: {
-    async fetchPatients(doctorId) {
-      this.patientsService.getAllPatientsByDoctorId(this.doctorId)
-        .then((response) => {
-          console.log(response);
-          this.patients = PatientAssembler.toEntitiesFromResponse(response);
-        });
+    async fetchPatients() {
+      const res = await axios.get('http://localhost:3000/patients');
+      this.patients = res.data;
     },
 
     async fetchMessages() {
       try {
-        console.log("📡 Solicitando mensajes para paciente:", this.selectedPatientId);
-        const res = await httpInstance.get(`/chat/messages/${this.selectedPatientId}`);
-        console.log("✅ Mensajes recibidos:", res.data);
+        const res = await axios.get(`http://localhost:5053/api/Chat/messages/${this.selectedPatientId}`);
 
         this.messages = res.data.map(msg => ({
           ...msg,
@@ -72,13 +55,11 @@ export default {
               : { role: msg.fromRole || msg.from, userId: msg.fromUserId || null }
         }));
 
-        const patientRes = await this.patientsService.getPatientById(this.selectedPatientId);
 
+        const patientRes = await axios.get(`http://localhost:3000/patients/${this.selectedPatientId}`);
         this.patientName = patientRes.data.name;
-
       } catch (error) {
         console.error('Error al obtener mensajes o paciente:', error);
-        console.error('Detalles del error:', error?.response?.data || error.message);
       }
     },
 
@@ -98,7 +79,7 @@ export default {
       };
 
       try {
-        await httpInstance.post('/chat/messages', {
+        await axios.post('http://localhost:5053/api/Chat/messages', {
           fromUserId: message.from.userId,
           fromRole: message.from.role,
           text: message.text,
@@ -116,7 +97,7 @@ export default {
     },
     async deleteMessage(id) {
       try {
-        await httpInstance.delete(`/messages/${id}`);
+        await axios.delete(`http://localhost:3000/messages/${id}`);
         this.messages = this.messages.filter(msg => msg.id !== id);
         this.menuOpen = null;
       } catch (error) {
@@ -129,7 +110,7 @@ export default {
       }
     },
     goBack() {
-      this.$router.push('/patient-management/patients');
+      this.$router.push('/doctor/patient-management');
     },
     selectPatient(id) {
       this.$router.push(`/chat/${id}`);
