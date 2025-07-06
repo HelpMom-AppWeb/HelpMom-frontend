@@ -1,5 +1,4 @@
 import {Baby} from "./baby.entity.js";
-import {Doctor} from "./doctor.entity.js";
 
 export class Patient{
     constructor({
