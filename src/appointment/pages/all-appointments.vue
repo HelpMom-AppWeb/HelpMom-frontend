@@ -13,7 +13,7 @@ export default {
 
       <div class="flex flex-col sm:flex-row justify-center gap-4">
         <router-link
-            to="/appointments"
+            to="/doctor/appointments"
             class="btn px-8 py-3 bg-pink-200 text-white rounded-lg hover:bg-pink-300 transition-all
                  transform hover:scale-105 shadow-md hover:shadow-lg flex items-center justify-center
                  space-x-2"
@@ -25,7 +25,7 @@ export default {
         </router-link>
 
         <router-link
-            to="/my-appointments"
+            to="/patient/appointments"
             class="px-8 py-3 bg-white border-2 border-pink-200 text-indigo-600 rounded-lg hover:bg-pink-200
                  transition-all transform hover:scale-105 shadow-md hover:shadow-lg flex items-center
                  justify-center space-x-2"

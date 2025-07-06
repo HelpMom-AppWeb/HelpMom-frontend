@@ -9,7 +9,6 @@ import DoctorLayout from '@/layouts/DoctorLayout.vue'
 import PatientLayout from '@/layouts/PatientLayout.vue'
 import PatientManagementComponent from "../patient-management/pages/patient-management.component.vue";
 import AddPatientComponent from "../patient-management/pages/add-patient.component.vue";
-import PatientInfoComponent from "../patient-management/pages/patient-info.component.vue";
 import LoginComponent from "../pages/login/login.component.vue";
 import RegisterComponent from "../pages/register/register.component.vue";
 
@@ -62,7 +61,7 @@ const router = createRouter({
                     meta: { title: 'All Appointments' }
                 },
                 {
-                    path: 'patients',
+                    path: 'patient-management',
                     name: 'patient-management',
                     component: () => import('@/patient-management/pages/patient-management.component.vue'),
                     meta: { title: 'Patient Management' }
@@ -74,15 +73,10 @@ const router = createRouter({
                     meta: { title: 'Patient Management'}
                 },
                 {
-                    path: '/patient-management/patients/add-patient',
+                    path: '/add-patient',
                     name: 'add-patient',
                     component: AddPatientComponent,
                     meta: { title: 'Add Patient' }
-                },
-                { path: '/patient-management/patients/:patientId',
-                    name: 'patient-info',
-                    component: PatientInfoComponent,
-                    meta: { title: 'About Patient'}
                 },
                 {
                     path: 'patients/:id',

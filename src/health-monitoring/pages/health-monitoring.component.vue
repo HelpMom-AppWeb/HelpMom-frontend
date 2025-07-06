@@ -195,7 +195,7 @@ export default defineComponent({
           </div>
         </div>
 
-        <router-link to="/medications">
+        <router-link to="/doctor/medications">
           <button class="action-button medication-list">
             List of medications
           </button>

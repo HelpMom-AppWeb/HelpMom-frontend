@@ -45,7 +45,7 @@
             v-if="isDoctor"
             :to="`${baseRoute}/patients`"
             class="menu-item"
-            :class="{ active: isActive(`${baseRoute}/patients`) }"
+            :class="{ active: isActive(`${baseRoute}/patient-management/patients`) }"
         >
           <i class="pi pi-list-check menu-icon"></i> {{ $t("sidebar.doctor.patientList") }}
         </router-link>
@@ -111,26 +111,17 @@ const handleLogout = async () => {
 
 
 <style scoped>
-
 .language-position {
   margin-top: auto;
   display: flex;
   justify-content: center;
   padding-bottom: 1rem;
 }
+
 .sidebar-container {
-  position: fixed;      /* Fijo en pantalla */
-  top: 0;
-  left: 0;
-  height: 100vh;        /* altura total del viewport */
-  width: 180px;         /* o el ancho que quieras */
   background-color: var(--color-primary-light);
   height: 100vh;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  z-index: 1000;        /* para que quede encima */
 }
 
 .custom-sidebar {
@@ -140,17 +131,12 @@ const handleLogout = async () => {
   flex-direction: column;
   background-color: white;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-.menu-button {
-  margin: 1rem;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding-bottom: 4rem;
 }
 
-.custom-sidebar{
-  flex: 1 1 auto;     /* que crezca para llenar espacio */
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;   /* scroll vertical dentro del sidebar */
-  padding-bottom: 4rem; /* espacio para logout e idioma */
-}
+
 
 .profile-section {
   display: flex;
@@ -189,7 +175,7 @@ const handleLogout = async () => {
 }
 
 .menu-item.active {
-  background-color: #fca5a5; /* rosado */
+  background-color: #fca5a5;
   color: white;
   font-weight: bold;
 }
