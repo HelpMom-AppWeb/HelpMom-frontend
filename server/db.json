@@ -7,7 +7,8 @@
       "time": "10:00",
       "description": "Anual control",
       "patientId": 1,
-      "patientName": "Juan Pérez"
+      "patientName": "Juan Pérez",
+      "specialty": "Pediatrics"
     },
     {
       "id": "7370",
@@ -17,7 +18,8 @@
       "description": "Check up",
       "doctorId": 3,
       "patientName": "Juan Pérez",
-        "patientId": 1
+      "patientId": 1,
+      "specialty": "Cardiology"
     },
     {
       "id": "ce93",
@@ -26,8 +28,9 @@
       "time": "09:00",
       "description": "Check up",
       "doctorId": 1,
-        "patientId": 1,
-        "patientName": "Juan Pérez"
+      "patientId": 1,
+      "patientName": "Juan Pérez",
+      "specialty": "Pediatrics"
     },
     {
       "id": "d01d",
@@ -37,7 +40,8 @@
       "description": "Anual control",
       "doctorId": 2,
       "patientId": 1,
-        "patientName": "Juan Pérez"
+      "patientName": "Juan Pérez",
+      "specialty": "Gynecology"
     },
     {
       "id": "3c85",
@@ -47,7 +51,8 @@
       "description": "Anual control",
       "doctorId": 6,
       "patientId": 1,
-        "patientName": "Juan Pérez"
+      "patientName": "Juan Pérez",
+      "specialty": "Dermatology"
     }
   ],
   "doctors": [
@@ -143,7 +148,7 @@
   "healthData": [
     {
       "id": 1,
-      "heartRate": "50",
+      "heartRate": "72",
       "temperature": "36.5",
       "weight": "8.5",
       "oxygen": "98"
@@ -151,6 +156,12 @@
   ],
   "medications": [],
   "messages": [
+    {
+      "id": 1,
+      "user": "Ana",
+      "text": "Hola!",
+      "timestamp": 1715382000000
+    },
     {
       "from": "doctor",
       "text": "adwafaqgweag",
@@ -171,6 +182,63 @@
       "timestamp": 1748805517374,
       "patientId": "4",
       "id": 6
+    },
+    {
+      "from": "doctor",
+      "text": "a",
+      "timestamp": 1750046901235,
+      "patientId": "4",
+      "id": 4
+    },
+    {
+      "from": {
+        "userId": 1,
+        "role": "doctor"
+      },
+      "text": "w",
+      "timestamp": 1750047870319,
+      "patientId": "2",
+      "id": 6
+    },
+    {
+      "from": {
+        "userId": 1,
+        "role": "doctor"
+      },
+      "text": "ssss",
+      "timestamp": 1750191541741,
+      "patientId": "3",
+      "id": 8
+    },
+    {
+      "from": {
+        "userId": 1,
+        "role": "doctor"
+      },
+      "text": "back con front",
+      "timestamp": 1750217284344,
+      "patientId": "2",
+      "id": 9
+    },
+    {
+      "from": {
+        "userId": 1,
+        "role": "doctor"
+      },
+      "text": "ae",
+      "timestamp": 1750217318458,
+      "patientId": "2",
+      "id": 10
+    },
+    {
+      "from": {
+        "userId": 1,
+        "role": "doctor"
+      },
+      "text": "dadwadawda",
+      "timestamp": 1750217342734,
+      "patientId": "3",
+      "id": 11
     }
   ]
 }

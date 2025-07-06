@@ -518,7 +518,9 @@ export default defineComponent({
 .medication-list:hover {
   background-color: #97d9c0;
 }
-
+.main-content {
+  margin-left: 280px; /* igual que el ancho del sidebar */
+}
 .info-panels {
   display: flex;
   flex-direction: column;

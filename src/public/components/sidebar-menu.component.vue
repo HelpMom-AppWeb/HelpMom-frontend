@@ -20,6 +20,7 @@
         </router-link>
       </div>
 
+      <!-- Analytics -->
       <div class="menu-group">
         <p class="section-title">{{ $t(isDoctor ? "sidebar.doctor.analytics.label" : "sidebar.patient.analytics.label") }}</p>
         <router-link :to="`${baseRoute}/health`" class="menu-item" :class="{ active: isActive(`${baseRoute}/health`) }">
@@ -27,6 +28,7 @@
         </router-link>
       </div>
 
+      <!-- Schedule -->
       <div class="menu-group">
         <p class="section-title">{{ $t("sidebar.menu.schedule.label") }}</p>
         <router-link :to="`${baseRoute}/chat`" class="menu-item" :class="{ active: isActive(`${baseRoute}/chat`) }">
@@ -107,11 +109,28 @@ const handleLogout = async () => {
 }
 </script>
 
+
 <style scoped>
+
+.language-position {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
 .sidebar-container {
+  position: fixed;      /* Fijo en pantalla */
+  top: 0;
+  left: 0;
+  height: 100vh;        /* altura total del viewport */
+  width: 180px;         /* o el ancho que quieras */
   background-color: var(--color-primary-light);
   height: 100vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;        /* para que quede encima */
 }
 
 .custom-sidebar {
@@ -121,6 +140,16 @@ const handleLogout = async () => {
   flex-direction: column;
   background-color: white;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+.menu-button {
+  margin: 1rem;
+}
+
+.custom-sidebar{
+  flex: 1 1 auto;     /* que crezca para llenar espacio */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;   /* scroll vertical dentro del sidebar */
+  padding-bottom: 4rem; /* espacio para logout e idioma */
 }
 
 .profile-section {
@@ -133,7 +162,6 @@ const handleLogout = async () => {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover;
 }
 
 .section-title {
@@ -154,11 +182,6 @@ const handleLogout = async () => {
   font-size: 0.95rem;
   margin-bottom: 0.25rem;
   transition: background 0.3s;
-  background: none;
-  border: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
 }
 
 .menu-item:hover {
@@ -166,15 +189,9 @@ const handleLogout = async () => {
 }
 
 .menu-item.active {
-  background-color: #fca5a5;
+  background-color: #fca5a5; /* rosado */
   color: white;
   font-weight: bold;
-}
-
-.menu-icon {
-  margin-right: 0.75rem;
-  width: 20px;
-  height: 20px;
 }
 
 .logout {
@@ -186,9 +203,5 @@ const handleLogout = async () => {
 
 .logout-btn {
   color: #ef4444;
-}
-
-.logout-btn:hover {
-  background-color: #fee2e2;
 }
 </style>

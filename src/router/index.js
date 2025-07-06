@@ -7,6 +7,11 @@ import Login from '@/public/pages/login.component.vue'
 // Layouts
 import DoctorLayout from '@/layouts/DoctorLayout.vue'
 import PatientLayout from '@/layouts/PatientLayout.vue'
+import PatientManagementComponent from "../patient-management/pages/patient-management.component.vue";
+import AddPatientComponent from "../patient-management/pages/add-patient.component.vue";
+import PatientInfoComponent from "../patient-management/pages/patient-info.component.vue";
+import LoginComponent from "../pages/login/login.component.vue";
+import RegisterComponent from "../pages/register/register.component.vue";
 
 
 const router = createRouter({
@@ -22,6 +27,17 @@ const router = createRouter({
             component: Login,
             meta: { title: 'Login' }
         },
+        {
+            path: '/register',
+            name:'Register',
+            component:RegisterComponent
+        },
+        {
+            path: '/loginTest',
+            name: 'LoginTest',
+            component: LoginComponent
+        },
+
 
         // Rutas para Doctor
         {
@@ -52,10 +68,21 @@ const router = createRouter({
                     meta: { title: 'Patient Management' }
                 },
                 {
-                    path: 'patients/add',
+                    path: '/patient-management/patients',
+                    name: 'patient-management',
+                    component: PatientManagementComponent,
+                    meta: { title: 'Patient Management'}
+                },
+                {
+                    path: '/patient-management/patients/add-patient',
                     name: 'add-patient',
-                    component: () => import('@/patient-management/pages/add-patient.component.vue'),
+                    component: AddPatientComponent,
                     meta: { title: 'Add Patient' }
+                },
+                { path: '/patient-management/patients/:patientId',
+                    name: 'patient-info',
+                    component: PatientInfoComponent,
+                    meta: { title: 'About Patient'}
                 },
                 {
                     path: 'patients/:id',
