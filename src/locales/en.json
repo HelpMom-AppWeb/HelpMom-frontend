@@ -1,72 +1,163 @@
 {
-  "sidebar": {
+  "title": "Login",
+  "subtitle": "Please sign in",
+  "role": "Role",
+  "patient": "Patient",
+  "doctor": "Doctor",
+  "username": "Username",
+  "usernamePlaceholder": "Enter your username",
+  "password": "Password",
+  "passwordPlaceholder": "Enter your password",
+  "submit": "Login",
+  "errors": {
+    "invalidCredentials": "Invalid username or password"
+  },
+
+  "dashboard": {
+    "doctor": {
+      "welcome": "Welcome",
+      "subtitle": "Here are your daily stats and quick tools.",
+      "title": "Doctor Dashboard"
+    },
     "patient": {
-      "menu": {
-        "label": "Menu",
-        "dashboard": "Dashboard",
-        "profile": "Profile"
+      "welcome": "Welcome",
+      "subtitle": "Here is your pregnancy tracking and next steps.",
+      "title": "Patient Dashboard"
+    },
+    "currentPatient": "Current Patient",
+    "weeks": "Gestational Weeks",
+    "lastAppointment": "Last Appointment",
+    "yourDoctor": "Your Doctor",
+    "nextAppointment": "Next Appointment",
+    "gestationalWeeks": "Gestational Weeks",
+    "nextAppointmentShort": "Next Appointment",
+    "quickActions": "Quick Actions",
+    "baby": {
+      "weight": {
+        "label": "Fetal Weight Growth",
+        "data": "Weight (g)",
+        "weekAxis": "Gestational Week",
+        "weightAxis": "Weight (grams)"
       },
-      "analytics": {
-        "label": "Analytics",
-        "healthMonitoring": "Health Monitoring"
+      "heartRate": {
+        "label": "Fetal Heart Rate",
+        "data": "Heart Rate (bpm)",
+        "bpmAxis": "Beats per Minute",
+        "weekAxis": "Week of gestation"
       },
+      "parameters": {
+        "label": "Fetal Development",
+        "measurements": "Fetal Measurements",
+        "movement": "Movement",
+        "growth": "Growth",
+        "heartRate": "Heart Rate",
+        "fluid": "Amniotic Fluid",
+        "position": "Position",
+        "lengthAxis": "Length (cm)"
+      }
+    },
+    "patientProgress": {
+      "label": "Patient Progress",
+      "weight": "Weight (kg)",
+      "bloodPressure": "Blood Pressure",
+      "monthAxis": "Month",
+      "valueAxis": "Value"
+    },
+    "actions": {
+      "manageAppointments": "Manage Appointments",
+      "manageAppointmentsDesc": "View and manage your appointments",
+      "viewAllPatients": "View All Patients",
+      "myAppointments": "My Appointments",
+      "chatWithDoctor": "Chat with Doctor",
+      "viewAllAppointments": "All Appointments",
+      "viewAllAppointmentsDesc": "View and manage all scheduled appointments",
+      "patientManagement": "Patient Management",
+      "patientManagementDesc": "Manage your patients list and information",
+      "addPatient": "Add Patient",
+      "addPatientDesc": "Register a new patient in the system",
+      "healthMonitoring": "Health Monitoring",
+      "healthMonitoringDesc": "Track patient health metrics",
+      "medications": "Medications",
+      "medicationsDesc": "Prescribe and manage medications",
+      "chat": "Chat with Patients",
+      "chatDesc": "Communicate with your patients",
+      "patientInfo": "Patient Information",
+      "patientInfoDesc": "View detailed patient records",
+      "myAppointmentsDesc": "View and manage your upcoming appointments",
+      "chatWithDoctorDesc": "Send messages to your healthcare provider",
+      "myHealth": "My Health",
+      "myHealthDesc": "View your health records and measurements",
+      "doctorInfo": "Doctor Info",
+      "doctorInfoDesc": "View your doctor's contact information",
+      "prenatalControls": "Prenatal Controls",
+      "prenatalControlsDesc": "Track your prenatal checkups",
+      "myMedications": "My Medications",
+      "myMedicationsDesc": "View prescribed medications",
+      "myDocuments": "My Documents",
+      "myDocumentsDesc": "Access your medical documents"
+    },
+    "stats": {
+      "patients": "Total Patients",
+      "appointmentsToday": "Today's Appointments",
+      "activeCases": "Active Cases"
+    }
+  },
+
+  "profile": {
+    "title": "Profile",
+    "personalInfo": "Personal Information",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "role": "Role",
+    "updateButton": "Update Profile",
+    "updateSuccess": "Profile updated successfully"
+  },
+
+  "sidebar": {
+    "logout": "Log Out",
+    "menu": {
+      "dashboard": "Dashboard",
+      "profile": "Profile",
+      "healthMonitoring": "Health Monitoring",
+      "chat": "Chat",
+      "appointments": "Appointments",
+      "logout": "Log Out",
       "schedule": {
-        "label": "Schedule",
-        "chat": "Chat",
-        "appointments": "Appointments"
-      },
-      "help": {
-        "label": "Help",
-        "notifications": "Notifications",
-        "settings": "Settings"
-      },
-      "logout": "Logout"
+        "label": "Schedule"
+      }
     },
     "doctor": {
       "menu": {
-        "label": "Menu",
-        "dashboard": "Dashboard",
-        "profile": "Profile"
+        "label": "Doctor Menu"
       },
-      "patientMenu": {
-        "label": "Patients",
-        "patientList": "Patient List"
+      "analytics": {
+        "label": "Medical Analytics"
       },
-      "help": {
-        "label": "Help",
-        "notifications": "Notifications",
-        "settings": "Settings"
+      "patientList": "Patient Management",
+      "medications": "Medications",
+      "allAppointments": "All Appointments"
+    },
+    "patient": {
+      "menu": {
+        "label": "My Menu"
       },
-      "logout": "Logout"
+      "analytics": {
+        "label": "My Analytics"
+      }
+    },
+    "schedule": {
+      "label": "Schedule"
     }
   },
+
   "pageNotFound": {
     "title": "Page Not Found",
     "message1": "The path ",
     "message2": " is not available.",
     "backToHome": "Back to Home"
   },
-  "dashboard": {
-    "babyWeight": {
-      "label": "Fetal Development",
-      "weightData": "Estimated weight (g)",
-      "weekAxis": "Week of gestation",
-      "weightAxis": "Weight (g)"
-    },
-    "babyHeartRate": {
-      "label": "Fetal Heart Rate",
-      "heartRateData": "Heart rate (bpm)",
-      "weekAxis": "Week of gestation",
-      "heartRateAxis": "Beats per minute"
-    },
-    "babyParameters": {
-      "label": "Parameter Summary",
-      "parameterData": "Week 24",
-      "weightAxis": "Weight (g)",
-      "heartRateAxis": "Heart Rate (bpm)",
-      "lengthAxis": "Length (cm)"
-    }
-  },
+
   "healthMonitoring": {
     "title": "Health Monitoring",
     "updateValues": "Update Values",
@@ -149,27 +240,38 @@
       }
     }
   },
+
   "chat": {
     "placeholder": "Write a message..."
   },
+
   "appointments": {
     "welcomeTitle": "Welcome",
     "welcomeMessage": "Welcome to HelpMom",
     "goToAppointments": "Go to Appointments",
     "myAppointments": "My Appointments",
     "medicalAppointments": "Medical Appointments",
-    "myMedicalAppointments": { 
+    "myMedicalAppointments": {
       "title": "My Medical Appointments",
       "filter": "Filter by Month",
       "listView": "List View",
       "calendarView": "Calendar View",
-      "showAll": "Show All"
+      "showAll": "Show All",
+      "noAppointments": "No appointments scheduled",
+      "appointmentDetails": {
+        "doctor": "Doctor",
+        "date": "Date",
+        "time": "Time",
+        "patient": "Patient",
+        "description": "Description"
+      }
     },
     "appointmentForm": {
       "title": "Schedule an Appointment",
       "labels": {
         "specialty": "Specialty",
         "doctor": "Doctor",
+        "patientName": "Patient Name",
         "date": "Date",
         "time": "Time",
         "description": "Description"
@@ -181,10 +283,38 @@
       "placeholders": {
         "specialty": "Select a Specialty",
         "doctor": "Select a Doctor",
+        "patientName": "Enter patient name",
         "description": "Brief description of the reason for the appointment"
+      },
+      "errors": {
+        "required": "This field is required",
+        "invalidDate": "Invalid date",
+        "invalidTime": "Invalid time"
       }
+    },
+    "calendar": {
+      "monthView": "Month",
+      "weekView": "Week",
+      "dayView": "Day",
+      "today": "Today",
+      "previous": "Previous",
+      "next": "Next",
+      "eventClickMessage": "Appointment Details"
+    },
+    "notifications": {
+      "appointmentCreated": "Appointment created successfully",
+      "appointmentDeleted": "Appointment deleted successfully",
+      "demoMode": "Using demo data due to connection issues",
+      "validationError": "Please fill all required fields correctly"
+    },
+    "confirmation": {
+      "deleteTitle": "Confirm Deletion",
+      "deleteMessage": "Are you sure you want to delete this appointment?",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
     }
   },
+
   "patientManagement": {
     "title": "Patient List",
     "buttons": {
