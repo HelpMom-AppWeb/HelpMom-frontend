@@ -32,7 +32,7 @@ const routes = [
     { path: '/:pathMatch(.*)*', name: 'not-found', component: PageNotFoundComponent, meta: { title: 'Page not found' } },
     { path: '/patient-management/patients', name: 'patient-management', component: PatientManagementComponent, meta: { title: 'Patient Management'}},
     { path: '/patient-management/patients/add-patient', name: 'add-patient', component: AddPatientComponent, meta: { title: 'Add Patient' }},
-    { path: '/patient-management/patients/patient-info', name: 'about', component: PatientInfoComponent, meta: { title: 'About Patient'}},
+    { path: '/patient-management/patients/:patientId', name: 'patient-info', component: PatientInfoComponent, meta: { title: 'About Patient'}},
 ];
 
 
