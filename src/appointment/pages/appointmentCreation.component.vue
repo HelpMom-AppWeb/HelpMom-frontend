@@ -12,11 +12,10 @@ const backendAvailable = ref(true);
 const fetchAppointments = async () => {
   try {
     // Primero intentamos con el backend real
-    const response = await axios.get('https://help-mom-platform.azurewebsites.net/api/v1/appointment');
+    const response = await axios.get('http://localhost:5128/api/v1/appointment');
     appointments.value = response.data;
     backendAvailable.value = true;
   } catch (error) {
-    console.error('Error fetching from backend, using dummy data:', error);
     backendAvailable.value = false;
 
     // Si falla, cargamos datos dummy del db.json
@@ -54,9 +53,6 @@ onMounted(() => {
 <template>
   <div class="appointment-page">
     <h1 class="page-title">Medical Appointments</h1>
-    <div v-if="!backendAvailable" class="warning-banner">
-      ⚠️ Currently using dummy data (backend unavailable)
-    </div>
 
     <div class="appointment-container">
       <AppointmentCalendar

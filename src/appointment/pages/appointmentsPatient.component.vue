@@ -79,37 +79,45 @@ const dummyAppointments = [
 const fetchAppointments = async () => {
   try {
     loading.value = true;
-    const response = await axios.get('https://help-mom-platform.azurewebsites.net/api/v1/appointment', {
+    // Primero intenta con la API real
+    const response = await axios.get('http://localhost:5128/api/v1/appointment', {
       params: { patientId: patientId.value }
     });
 
     if (response.data && response.data.length > 0) {
       appointments.value = response.data;
     } else {
-      // Si no hay datos o la API falla, usar datos dummy
-      appointments.value = dummyAppointments;
-      toast.add({
-        severity: 'info',
-        summary: 'Info',
-        detail: 'Using demo data as no appointments were found',
-        life: 5000
-      });
+      // Si no hay datos en la API, carga desde db.json
+      await loadDummyData();
     }
   } catch (error) {
     console.error('Error:', error);
-    appointments.value = dummyAppointments;
-    toast.add({
-      severity: 'warn',
-      summary: 'Warning',
-      detail: 'Using demo data due to connection issues',
-      life: 5000
-    });
+    // Si hay error, carga desde db.json
+    await loadDummyData();
   } finally {
     loading.value = false;
   }
 };
 
+const loadDummyData = async () => {
+  try {
+    const response = await axios.get('/server/db.json');
+    if (response.data && response.data.appointments) {
+      appointments.value = response.data.appointments.filter(
+          app => app.patientId === patientId.value
+      );
 
+    }
+  } catch (error) {
+    console.error('Error loading dummy data:', error);
+    toast.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Could not load any appointment data',
+      life: 5000
+    });
+  }
+};
 const deleteAppointment = async (id) => {
   try {
     // Verificar si estamos usando datos dummy
@@ -126,7 +134,7 @@ const deleteAppointment = async (id) => {
       });
     } else {
       // Eliminar la cita del backend real
-      await axios.delete(`https://help-mom-platform.azurewebsites.net/api/v1/appointment/${id}`);
+      await axios.delete(`http://localhost:5128/api/v1/appointment/${id}`);
       toast.add({
         severity: 'success',
         summary: 'Success',
