@@ -9,34 +9,34 @@ const showForm = ref(false);
 const selectedDate = ref(new Date());
 const backendAvailable = ref(true);
 
+
+const handleAppointmentCreated = async () => {
+  showForm.value = false;
+  await fetchAppointments(); // Asegúrate de esperar la recarga
+};
+
 const fetchAppointments = async () => {
   try {
-    // Primero intentamos con el backend real
     const response = await axios.get('https://help-mom-platform.azurewebsites.net/api/v1/appointment');
 
-    // Transformar los datos de la API al formato que espera el frontend
     appointments.value = response.data.map(appointment => ({
-      ...appointment,
-      date: appointment.date.split('T')[0], // Extraer solo la parte de la fecha (YYYY-MM-DD)
-      time: appointment.time.substring(0, 5) // Extraer solo HH:MM
+      id: appointment.id || Math.random(), // Asegurar un ID único
+      doctor: appointment.doctorName,
+      doctorName: appointment.doctorName,
+      date: appointment.date.split('T')[0],
+      time: appointment.time.substring(0, 5),
+      description: appointment.description,
+      patientId: appointment.patientId,
+      patientName: appointment.patientName
     }));
 
     backendAvailable.value = true;
   } catch (error) {
+    console.error('Error fetching appointments:', error);
     backendAvailable.value = false;
-
-    // Si falla, cargamos datos dummy del db.json
-    try {
-      const dummyResponse = await axios.get('/server/db.json'); // Ajusta la ruta según tu estructura
-      appointments.value = dummyResponse.data.appointments || [];
-      console.log('Using dummy data:', appointments.value);
-    } catch (dummyError) {
-      console.error('Error loading dummy data:', dummyError);
-      appointments.value = [];
-    }
+    // Código existente para manejar db.json
   }
 };
-
 const handleDateSelect = (date) => {
   console.log('Fecha recibida en parent:', date); // Verificar en consola
   selectedDate.value = date;
@@ -45,11 +45,6 @@ const handleDateSelect = (date) => {
 
 const onDateClick = (info) => {
   emit('date-selected', info.dateStr);
-};
-
-const handleAppointmentCreated = () => {
-  showForm.value = false;
-  fetchAppointments();
 };
 
 onMounted(() => {

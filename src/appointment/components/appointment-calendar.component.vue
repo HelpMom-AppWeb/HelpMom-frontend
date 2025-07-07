@@ -34,19 +34,28 @@ const calendarOptions = ref({
   },
 
   events: computed(() => {
-    return props.appointments.map(appointment => ({
-      id: appointment.id,
-      title: `${appointment.doctorName} - ${appointment.patientName}`,
-      start: `${appointment.date}T${appointment.time}:00`, // Añadir segundos para FullCalendar
-      backgroundColor: '#ff98a8',
-      borderColor: '#0c0c0c',
-      textColor: '#ffffff',
-      extendedProps: {
-        description: appointment.description,
-        doctor: appointment.doctorName || appointment.doctor,
-        patientName: appointment.patientName
-      }
-    }));
+    if (!props.appointments) return [];
+
+    return props.appointments.map(appointment => {
+      // Asegurar formato correcto de fecha+hora
+      const timePart = appointment.time.includes(':') ?
+          appointment.time :
+          `${appointment.time.substring(0, 2)}:${appointment.time.substring(2)}`;
+
+      return {
+        id: appointment.id,
+        title: `${appointment.doctorName} - ${appointment.patientName}`,
+        start: `${appointment.date}T${timePart}:00`,
+        backgroundColor: '#ff98a8',
+        borderColor: '#0c0c0c',
+        textColor: '#ffffff',
+        extendedProps: {
+          description: appointment.description,
+          doctor: appointment.doctorName,
+          patientName: appointment.patientName
+        }
+      };
+    });
   }),
 
   eventClick: (info) => {
