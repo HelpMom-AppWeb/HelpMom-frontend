@@ -16,7 +16,7 @@ onMounted(() => {
 
 const fetchAllMedications = async () => {
   try {
-    const response = await axios.get("http://localhost:5128/api/medication");
+    const response = await axios.get("https://help-mom-platform.azurewebsites.net/api/medication");
     medications.value = response.data;
   } catch (error) {
     console.error("Error fetching medications:", error);

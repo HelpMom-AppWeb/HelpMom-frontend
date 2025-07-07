@@ -81,7 +81,7 @@ const submitAppointment = async () => {
     };
 
 
-    await axios.post('http://localhost:5128/api/v1/appointment', appointmentData);
+    await axios.post('https://help-mom-platform.azurewebsites.net/api/v1/appointment', appointmentData);
     alert('Cita creada exitosamente');
     emit('appointment-created');
   } catch (error) {

@@ -79,7 +79,7 @@ const dummyAppointments = [
 const fetchAppointments = async () => {
   try {
     loading.value = true;
-    const response = await axios.get('http://localhost:5128/api/v1/appointment', {
+    const response = await axios.get('https://help-mom-platform.azurewebsites.net/api/v1/appointment', {
       params: { patientId: patientId.value }
     });
 
@@ -126,7 +126,7 @@ const deleteAppointment = async (id) => {
       });
     } else {
       // Eliminar la cita del backend real
-      await axios.delete(`http://localhost:5128/api/v1/appointment/${id}`);
+      await axios.delete(`https://help-mom-platform.azurewebsites.net/api/v1/appointment/${id}`);
       toast.add({
         severity: 'success',
         summary: 'Success',

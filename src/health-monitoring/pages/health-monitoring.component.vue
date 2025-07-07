@@ -24,7 +24,7 @@ export default defineComponent({
 
     const fetchHealthData = async () => {
       try {
-        const response = await axios.get('http://localhost:60454/api/v1/health-data');
+        const response = await axios.get('https://help-mom-platform.azurewebsites.net/api/v1/health-data');
         if (response.data && response.data.length > 0) {
           const data = response.data;
           console.log("Nuevo historial:", data);
@@ -44,7 +44,7 @@ export default defineComponent({
       try {
         if (isCreating.value) {
           // POST para nuevo registro
-          await axios.post('http://localhost:60454/api/v1/health-data', {
+          await axios.post('https://help-mom-platform.azurewebsites.net/api/v1/health-data', {
             heartRate: updatedData.value.heartRate,
             temperature: updatedData.value.temperature,
             weight: updatedData.value.weight,
@@ -54,7 +54,7 @@ export default defineComponent({
         } else {
           // PUT para actualizar el último
           await axios.put(
-              `http://localhost:60454/api/v1/health-data/${updatedData.value.id}`,
+              `https://help-mom-platform.azurewebsites.net/api/v1/health-data/${updatedData.value.id}`,
               {
                 heartRate: updatedData.value.heartRate,
                 temperature: updatedData.value.temperature,
