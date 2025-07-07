@@ -6,10 +6,10 @@ import AllAppointmentsComponent from "../appointment/pages/all-appointments.vue"
 import PatientManagementComponent from "../patient-management/pages/patient-management.component.vue";
 import AddPatientComponent from "../patient-management/pages/add-patient.component.vue";
 import PatientInfoComponent from "../patient-management/pages/patient-info.component.vue";
-
+import LoginComponent from "../pages/login/login.component.vue";
+import RegisterComponent from "../pages/register/register.component.vue";
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
 const ChatComponent = () => import('../chat/pages/chat.vue');
-
 const HealthMonitoringComponent = () => import('../health-monitoring/pages/health-monitoring.component.vue')
 
 const MedicationsComponent = () => import('../medications/pages/medications.component.vue');
@@ -21,6 +21,9 @@ const routes = [
     { path: '/chat/:patientId?', name: 'Chat', component: ChatComponent, props: true, meta: { title: 'Chat' } },
 
     { path: '/', name: 'default', redirect: '/home' },
+
+    {path: '/login',name: 'Login',component: LoginComponent},
+    {path: '/register',name: 'Register',component: RegisterComponent},
     { path: '/appointments', name: 'appointments', component: AppointmentComponent, meta: { title: 'Medical Appointments' } },
     { path: '/my-appointments', name: 'patient-appointments', component: AppointmentsPatient, meta: { title: 'My appointments' } },
     { path: '/all-appointments', name: 'all-appointments', component: AllAppointmentsComponent, meta: { title: 'All Appointments'} },
@@ -29,7 +32,7 @@ const routes = [
     { path: '/:pathMatch(.*)*', name: 'not-found', component: PageNotFoundComponent, meta: { title: 'Page not found' } },
     { path: '/patient-management/patients', name: 'patient-management', component: PatientManagementComponent, meta: { title: 'Patient Management'}},
     { path: '/patient-management/patients/add-patient', name: 'add-patient', component: AddPatientComponent, meta: { title: 'Add Patient' }},
-    { path: '/patient-management/patients/patient-info', name: 'about', component: PatientInfoComponent, meta: { title: 'About Patient'}},
+    { path: '/patient-management/patients/:patientId', name: 'patient-info', component: PatientInfoComponent, meta: { title: 'About Patient'}},
 ];
 
 

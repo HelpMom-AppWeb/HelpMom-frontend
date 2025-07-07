@@ -1,33 +1,31 @@
 <template>
   <div class="sidebar-container">
-
-
     <Sidebar v-model:visible="visible" position="left" class="custom-sidebar">
 
-      <language-switcher/>
-
       <div class="profile-section">
-
         <img src="/src/assets/logo.jpeg" class="avatar" alt="avatar" />
       </div>
 
+      <!-- Menú principal -->
       <div class="menu-group">
-        <p class="section-title">  {{ $t("sidebar.patient.menu.label") }}</p>
+        <p class="section-title">{{ $t("sidebar.patient.menu.label") }}</p>
         <router-link to="/home" class="menu-item" :class="{ active: isActive('/home') }">
-          <IconDashboard class="mr-2" />   {{ $t("sidebar.patient.menu.dashboard") }}
+          <IconDashboard class="mr-2" /> {{ $t("sidebar.patient.menu.dashboard") }}
         </router-link>
         <router-link to="/profile" class="menu-item" :class="{ active: isActive('/profile') }">
-          <IconProfile class="mr-2" />    {{ $t("sidebar.patient.menu.profile") }}
+          <IconProfile class="mr-2" /> {{ $t("sidebar.patient.menu.profile") }}
         </router-link>
       </div>
 
+      <!-- Analytics -->
       <div class="menu-group">
-        <p class="section-title">  {{ $t("sidebar.patient.analytics.label") }}</p>
+        <p class="section-title">{{ $t("sidebar.patient.analytics.label") }}</p>
         <router-link to="/health" class="menu-item" :class="{ active: isActive('/health') }">
           <IconHealth class="mr-2" /> {{ $t("sidebar.patient.analytics.healthMonitoring") }}
         </router-link>
       </div>
 
+      <!-- Schedule -->
       <div class="menu-group">
         <p class="section-title">{{ $t("sidebar.patient.schedule.label") }}</p>
         <router-link to="/chat" class="menu-item" :class="{ active: isActive('/chat') }">
@@ -41,6 +39,7 @@
         </router-link>
       </div>
 
+      <!-- Ayuda -->
       <div class="menu-group">
         <p class="section-title">{{ $t("sidebar.patient.help.label") }}</p>
         <router-link to="/notifications" class="menu-item" :class="{ active: isActive('/notifications') }">
@@ -51,11 +50,18 @@
         </router-link>
       </div>
 
+      <!-- Selector de idioma abajo centrado -->
+      <div class="language-position">
+        <language-switcher />
+      </div>
+
+      <!-- Botón logout abajo del todo -->
       <div class="logout">
         <a class="menu-item logout-btn" href="#">
           <IconLogout class="mr-2" /> {{ $t("sidebar.patient.logout") }}
         </a>
       </div>
+
     </Sidebar>
   </div>
 </template>
@@ -70,6 +76,7 @@ import IconNotification from "../../assets/IconNotification.vue";
 import IconSettings from "../../assets/IconSettings.vue";
 import IconLogout from "../../assets/IconLogout.vue";
 import LanguageSwitcher from "./language-switcher.component.vue";
+
 export default {
   name: 'sidebar-menu',
   components: {
@@ -90,16 +97,32 @@ export default {
   },
   methods: {
     isActive(path) {
-      return this.$route.path === path
+      return this.$route.path === path;
     }
   }
 }
 </script>
 
+
 <style scoped>
+
+.language-position {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
 .sidebar-container {
+  position: fixed;      /* Fijo en pantalla */
+  top: 0;
+  left: 0;
+  height: 100vh;        /* altura total del viewport */
+  width: 180px;         /* o el ancho que quieras */
   background-color: var(--color-primary-light);
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;        /* para que quede encima */
 }
 
 .menu-button {
@@ -107,7 +130,11 @@ export default {
 }
 
 .custom-sidebar{
-  width: 4000px;
+  flex: 1 1 auto;     /* que crezca para llenar espacio */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;   /* scroll vertical dentro del sidebar */
+  padding-bottom: 4rem; /* espacio para logout e idioma */
 }
 
 .profile-section {
@@ -158,7 +185,6 @@ export default {
   left: 1rem;
   right: 1rem;
 }
-
 .logout-btn {
   color: #ef4444;
 }
