@@ -13,7 +13,14 @@ const fetchAppointments = async () => {
   try {
     // Primero intentamos con el backend real
     const response = await axios.get('https://help-mom-platform.azurewebsites.net/api/v1/appointment');
-    appointments.value = response.data;
+
+    // Transformar los datos de la API al formato que espera el frontend
+    appointments.value = response.data.map(appointment => ({
+      ...appointment,
+      date: appointment.date.split('T')[0], // Extraer solo la parte de la fecha (YYYY-MM-DD)
+      time: appointment.time.substring(0, 5) // Extraer solo HH:MM
+    }));
+
     backendAvailable.value = true;
   } catch (error) {
     backendAvailable.value = false;

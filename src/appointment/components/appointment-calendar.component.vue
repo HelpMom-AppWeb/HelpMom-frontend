@@ -36,8 +36,8 @@ const calendarOptions = ref({
   events: computed(() => {
     return props.appointments.map(appointment => ({
       id: appointment.id,
-      title: `${appointment.doctorName || appointment.doctor} - ${appointment.patientName}`,
-      start: `${appointment.date}T${appointment.time}`,
+      title: `${appointment.doctorName} - ${appointment.patientName}`,
+      start: `${appointment.date}T${appointment.time}:00`, // Añadir segundos para FullCalendar
       backgroundColor: '#ff98a8',
       borderColor: '#0c0c0c',
       textColor: '#ffffff',
