@@ -12,7 +12,7 @@ const backendAvailable = ref(true);
 const fetchAppointments = async () => {
   try {
     // Primero intentamos con el backend real
-    const response = await axios.get('http://localhost:5128/api/v1/appointment');
+    const response = await axios.get('https://help-mom-platform.azurewebsites.net/api/v1/appointment');
     appointments.value = response.data;
     backendAvailable.value = true;
   } catch (error) {
