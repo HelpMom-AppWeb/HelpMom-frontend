@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue';
 import axios from 'axios';
+import { ref, watch, onMounted } from 'vue';
+
 
 const props = defineProps({
   selectedDate: Date
@@ -10,13 +11,39 @@ const emit = defineEmits(['appointment-created', 'cancel']);
 
 const form = ref({
   doctorId: '',
-  doctorName:'',
-  date: props.selectedDate.toISOString().split('T')[0],
+  doctorName: '',
+  date: '',
   time: '09:00',
   description: '',
   patientId: '',
   patientName: ''
 });
+
+onMounted(() => {
+  form.value.date = formatDate(props.selectedDate);
+});
+
+function formatDate(date) {
+  if (!date) return '';
+
+  const d = new Date(date);
+  // Asegurarse de que la fecha es válida
+  if (isNaN(d.getTime())) return '';
+
+  let month = '' + (d.getMonth() + 1);
+  let day = '' + d.getDate();
+  const year = d.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [year, month, day].join('-');
+}
+
+watch(() => props.selectedDate, (newDate) => {
+  console.log('Nueva fecha recibida:', newDate); // Verificar en consola
+  form.value.date = formatDate(newDate);
+}, { immediate: true });
 
 const doctors = ref([
   { id: 1, name: "Dr. Smith" },
